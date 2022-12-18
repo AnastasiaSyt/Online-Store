@@ -1,7 +1,7 @@
-import ErrorPage from "./components/error404/errorPage";
+import FilterPage from "./components/filter/filterPage";
 import './style.css';
 
 
 const content = document.getElementById("content");
 content?.childNodes.forEach((node) => content.removeChild(node));
-content?.append(new ErrorPage().getPage());
+content?.append(new FilterPage().getPage());
