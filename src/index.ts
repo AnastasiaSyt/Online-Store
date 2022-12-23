@@ -1,5 +1,6 @@
-import FilterPage from "./components/filter/filterPage";
+import FilterPage from "./components/filterPage/filterPage";
 import './style.css';
+
 
 
 const content = document.getElementById("content");
