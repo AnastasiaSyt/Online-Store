@@ -8,49 +8,99 @@ export default class Card implements ICard{
     getCard(): HTMLElement {
         const card = document.createElement('div');
         card.classList.add('card');
-
-        const thumbnail = document.createElement('img');
-        thumbnail.classList.add('thumbnail');
-        thumbnail.src = '../../img/flower.jpg';
-        card.appendChild(thumbnail);
-
-        const cardContent = document.createElement('div');
-        cardContent.classList.add('card_content');
-        card.appendChild(cardContent);
-        
-        const cardTitle = document.createElement('p');
-        cardTitle.classList.add('card_title');
-        cardTitle.textContent = 'Название букета';
-        cardContent.appendChild(cardTitle);
-
-        const cardText = document.createElement('div');
-        cardText.classList.add('card_text');
-        cardContent.appendChild(cardText);
-
-        const price = document.createElement('p');
-        price.classList.add('price');
-        price.textContent = '$120.00';
-        cardText.appendChild(price);
-
-        const cardIcon = document.createElement('img');
-        cardIcon.classList.add('card_icon');
-        cardIcon.src = '../../img/arrow-right.svg';
-        cardText.appendChild(cardIcon);
-
-        const cartTag = document.createElement('div');
-        cartTag.classList.add('cart_tag');
-        cardContent.appendChild(cartTag);
-
-        const cartIcon = document.createElement('img');
-        cartIcon.src = '../../img/add_cart.svg';
-        cartTag.appendChild(cartIcon);
-
-        const textTag= document.createElement('p');
-        textTag.classList.add('text_tag');
-        textTag.textContent = 'добавить';
-        cartTag.appendChild(textTag);
-
+        this.drawItems(card, cartDOMElements);
         return card;
+    }
+    
+    drawItems(parent: HTMLElement, configs: TElementConfig[]) {
+        configs.forEach((config) => {
+            const node = this.createElement(config);
+            if (config.children) {
+                this.drawItems(node, config.children);
+            }
+            parent.appendChild(node);
+        })
+    }
+
+    createElement(config: TElementConfig): HTMLElement {
+        const node = document.createElement(config.tag);
+        config.classes.forEach((className) => {
+            node.classList.add(className);
+        });
+        if (config.label) {
+            node.textContent = config.label;
+        }
+        if (config.src) {
+            (node as HTMLImageElement).src = config.src;
+        }
+        return node;
     }
 
 }
+
+type TElementConfig = {
+    tag: Tags,
+    classes: string[],
+    src?: string,
+    label?: string,
+    children?: TElementConfig[]
+
+}
+
+enum Tags {
+    IMG = 'img',
+    DIV = 'div',
+    P = 'p',
+}
+
+const cartDOMElements: TElementConfig[] =
+[
+    {
+        tag: Tags.IMG,
+        classes: ['thumbnail'],
+        src: '../../img/flower.jpg'
+    },
+    {
+        tag: Tags.DIV,
+        classes: ['card_content'],
+        children: [
+            {
+                tag: Tags.P,
+                classes: ['card_title'],
+                label: 'Название букета'
+            },
+            {
+                tag: Tags.DIV,
+                classes: ['card_text'],
+                children: [
+                    {
+                        tag: Tags.P,
+                        classes: ['price'],
+                        label: '$120.00'
+                    },
+                    {
+                        tag: Tags.IMG,
+                        classes: ['card_icon'],
+                        src: '../../img/arrow-right.svg'
+                    }
+                ]
+            },
+            {
+                tag: Tags.DIV,
+                classes: ['cart_tag'],
+                children: [
+                    {
+                        tag: Tags.IMG,
+                        classes: [],
+                        src: '../../img/add_cart.svg'
+                    },
+                    {
+                        tag: Tags.P,
+                        classes: ['text_tag'],
+                        label: 'добавить'
+                    }
+                ]
+            }
+        ]
+    }
+]
