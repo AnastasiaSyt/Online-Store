@@ -1,0 +1,92 @@
+.card {
+    width: 270px;
+    height: 398px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+
+    transition: ease-out 0.5s;
+}
+
+.thumbnail {
+    width: 230px;
+    height: 258px;
+    margin: 20px;
+}
+
+.card_title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    color: #4F4F4F;
+
+    margin-left: 10px;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 3.2rem;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    color: #333333;
+}
+
+.card_text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+}
+
+.cart_tag {
+    position: absolute;
+    width: 106px;
+    height: 30px;
+    left:162px;
+    top: 25px;
+    background: #C73153;
+    border-radius: 5px 0px 0px 5px;
+
+    padding: 4px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+}
+
+.text_tag {
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    color: #FFFFFF;
+
+    margin-left: 5px;
+}
+
+.card:hover {
+    border: none;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover .card_title{
+    color: #FFFFFF;
+}
+
+.card:hover .price{
+    color: #FFFFFF;
+}
+
+.card:hover .card_content {
+    background: #C73153;
+}
+
+.card:hover .card_content {
+    background: #C73153;
+}

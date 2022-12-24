@@ -1,0 +1,20 @@
+.tag {
+    width: 109px;
+    height: 32px;
+    background: #F2F2F2;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    font-weight: 500;
+    color: #828282;
+
+    margin-right: 15px;
+    margin-bottom: 25px;
+}
+
+.close_icon {
+    cursor: pointer;
+}
