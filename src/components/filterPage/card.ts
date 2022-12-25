@@ -9,7 +9,7 @@ export default class Card implements ICard{
     getCard(): HTMLElement {
         const card = document.createElement('div');
         card.classList.add('card');
-        this.drawItems(card, cartDOMElements);
+        this.drawItems(card, cardDOMElements);
         return card;
     }
     
@@ -39,7 +39,7 @@ export default class Card implements ICard{
 
 }
 
-const cartDOMElements: TElementConfig[] =
+const cardDOMElements: TElementConfig[] =
 [
     {
         tag: Tags.IMG,

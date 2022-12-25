@@ -1,11 +1,14 @@
 import "./cardProduct.css";
 import { TElementConfig, Tags } from "../types";
+import ColoredTags from "./coloredTags";
 
 export default class CardProduct {
     getCardProduct(): HTMLElement {
         const cardProduct = document.createElement('div');
         cardProduct.classList.add('card_product');
+        cardProduct.classList.add('wrapper');
         this.drawItems(cardProduct, cardProductDOMElements);
+
         return cardProduct;
     }
 
@@ -68,7 +71,7 @@ const cardProductDOMElements: TElementConfig[] =
                     {
                         tag: Tags.IMG,
                         classes: ['card_product_big_img'],
-                        src: '../../img/flowers_15_1'
+                        src: '../../img/flowers_15_1.jpg'
                     }
                 ]
             },
@@ -79,17 +82,16 @@ const cardProductDOMElements: TElementConfig[] =
                     {
                         tag: Tags.P,
                         classes: ['card_product_title'],
-                        label: 'сладкие ноты'
+                        label: 'красный бум'
                     },
                     {
                         tag: Tags.DIV,
-                        classes: ['card_product_tags'],
-                        //children: [getTags()]
+                        classes: ['card_product_tags']
                     },
                     {
                         tag: Tags.P,
                         classes: ['card_product_description'],
-                        label: 'Дайте человеку понять, что вы думаете о нем с помощью этой нежной, полностью белой композиции. Это утешительный жест, который говорит о многом, не говоря ни слова.'
+                        label: 'Начните новый год с этого роскошного букета анемонов, наполненного яркими красными и глубокими темно-синими оттенками. Этот букет  — потрясающий способ поднять настроение в этом сезоне.'
                     },
                     {
                         tag: Tags.P,

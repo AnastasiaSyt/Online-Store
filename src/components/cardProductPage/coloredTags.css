@@ -1,0 +1,8 @@
+.colored_tag {
+    background: #C73153;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.4rem;
+    padding: 0 10px;
+}
