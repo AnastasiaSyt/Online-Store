@@ -1,4 +1,5 @@
 import "./card.css";
+import { TElementConfig, Tags } from "../types";
 
 interface ICard {
     getCard: () => HTMLElement
@@ -36,21 +37,6 @@ export default class Card implements ICard{
         return node;
     }
 
-}
-
-type TElementConfig = {
-    tag: Tags,
-    classes: string[],
-    src?: string,
-    label?: string,
-    children?: TElementConfig[]
-
-}
-
-enum Tags {
-    IMG = 'img',
-    DIV = 'div',
-    P = 'p',
 }
 
 const cartDOMElements: TElementConfig[] =
