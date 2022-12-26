@@ -1,8 +1,18 @@
 import "./cardProduct.css";
 import { TElementConfig, Tags } from "../types";
 import ColoredTags from "./coloredTags";
+import Button from "../filterPage/button";
+import Counter from "./counter";
 
-export default class CardProduct {
+interface ICardProduct {
+    cardProduct: HTMLDivElement,
+    getCardProduct: () => HTMLElement,
+    addItems: () => void,
+    drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
+    createElement: (config: TElementConfig) => HTMLElement
+}
+
+export default class CardProduct implements ICardProduct {
     cardProduct: HTMLDivElement;
     constructor() {
         const cardProduct = document.createElement('div');
@@ -19,10 +29,20 @@ export default class CardProduct {
         const coloredTag = new ColoredTags().getColoredTag('Анемон');
         const tagContainer = this.cardProduct.querySelector('.card_product_tags');
         if (!tagContainer) {
-            alert('Container not found');
+            throw new Error ('Container not found');
         } else {
-            console.log(tagContainer);
             tagContainer?.appendChild(coloredTag);
+        }
+
+        const buttonsContainer = this.cardProduct.querySelector('.card_product_buttons');
+        const cardProductButton = new Button('добавить в корзину', 'card_product_button');
+        const counter = new Counter().getCounter();
+
+        if (!buttonsContainer) {
+            throw new Error ('Container not found');
+        } else {
+            cardProductButton.getButton(buttonsContainer);
+            buttonsContainer.appendChild(counter);
         }
     }
 
@@ -125,7 +145,6 @@ const cardProductDOMElements: TElementConfig[] =
                     {
                         tag: Tags.DIV,
                         classes: ['card_product_buttons'],
-                        //children: []
                     }
                 ]
             }

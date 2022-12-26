@@ -3,8 +3,8 @@ export type TElementConfig = {
     classes: string[],
     src?: string,
     label?: string,
-    children?: TElementConfig[]
-
+    children?: TElementConfig[],
+    id?: string
 }
 
 export enum Tags {
