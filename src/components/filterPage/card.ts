@@ -11,7 +11,7 @@ export default class Card implements ICard{
         this.drawItems(card, cartDOMElements);
         return card;
     }
-    
+
     drawItems(parent: HTMLElement, configs: TElementConfig[]) {
         configs.forEach((config) => {
             const node = this.createElement(config);
