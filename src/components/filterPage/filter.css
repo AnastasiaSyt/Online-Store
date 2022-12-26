@@ -134,3 +134,7 @@
 .custom-checkbox:not(:disabled):not(:checked)+label:hover::before {
     border-color: #C73153;
 }
+
+.filter_button {
+    margin: 45px 24px;
+}

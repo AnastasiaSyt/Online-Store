@@ -62,7 +62,7 @@ export default class Filter implements IFilter {
             const sliderHeight = new Slider().getSlider(height);
         }
 
-        const test = new Button('cбросить фильтры').getButton(filter);
+        const filterButton = new Button('cбросить фильтры', 'filter_button').getButton(filter);
 
         return filter;
     }

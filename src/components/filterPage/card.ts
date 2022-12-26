@@ -1,4 +1,5 @@
 import "./card.css";
+import { TElementConfig, Tags } from "../types";
 
 interface ICard {
     getCard: () => HTMLElement
@@ -8,7 +9,7 @@ export default class Card implements ICard{
     getCard(): HTMLElement {
         const card = document.createElement('div');
         card.classList.add('card');
-        this.drawItems(card, cartDOMElements);
+        this.drawItems(card, cardDOMElements);
         return card;
     }
     
@@ -38,22 +39,7 @@ export default class Card implements ICard{
 
 }
 
-type TElementConfig = {
-    tag: Tags,
-    classes: string[],
-    src?: string,
-    label?: string,
-    children?: TElementConfig[]
-
-}
-
-enum Tags {
-    IMG = 'img',
-    DIV = 'div',
-    P = 'p',
-}
-
-const cartDOMElements: TElementConfig[] =
+const cardDOMElements: TElementConfig[] =
 [
     {
         tag: Tags.IMG,

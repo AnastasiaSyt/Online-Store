@@ -1,0 +1,19 @@
+.colored_tag {
+    background: #C73153;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+    width: 60px;
+    padding: 0px 40px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.tag_text {
+    color: white;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-align: center;
+}
