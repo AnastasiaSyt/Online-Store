@@ -1,0 +1,6 @@
+.basket{
+  display: flex;
+  justify-content: space-between;
+  max-width: 1160px;
+  margin:65px auto 0;
+}

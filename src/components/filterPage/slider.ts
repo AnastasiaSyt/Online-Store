@@ -9,7 +9,7 @@ interface ISlider {
 
 export default class Slider implements ISlider {
     minGap = 0;
-    
+
     getSlider(target: Node) {
         const values = document.createElement('div');
         values.classList.add('values');
@@ -63,7 +63,7 @@ export default class Slider implements ISlider {
         const sliderFirst = document.getElementById('slider-1');
         const sliderSecond = document.getElementById('slider-2');
         const valueFirst = document.getElementById('range1');
-    
+
         // let minGap = 0;
         let firstVal = (sliderFirst as HTMLInputElement).value;
         let secondVal = (sliderSecond as HTMLInputElement).value;
@@ -72,12 +72,12 @@ export default class Slider implements ISlider {
         }
         (valueFirst as HTMLSpanElement).textContent = firstVal;
     }
-    
+
     slideTwo() {
         const sliderFirst = document.getElementById('slider-1');
         const sliderSecond = document.getElementById('slider-2');
         const valueSecond = document.getElementById('range2');
-        
+
         let firstVal = (sliderFirst as HTMLInputElement).value;
         let secondVal = (sliderSecond as HTMLInputElement).value;
         if (parseInt(secondVal) - parseInt(firstVal) <= this.minGap) {
