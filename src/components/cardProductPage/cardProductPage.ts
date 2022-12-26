@@ -3,13 +3,27 @@ import { TElementConfig, Tags } from "../types";
 import ColoredTags from "./coloredTags";
 
 export default class CardProduct {
-    getCardProduct(): HTMLElement {
+    cardProduct: HTMLDivElement;
+    constructor() {
         const cardProduct = document.createElement('div');
         cardProduct.classList.add('card_product');
         cardProduct.classList.add('wrapper');
         this.drawItems(cardProduct, cardProductDOMElements);
+        this.cardProduct = cardProduct;
+    }
+    getCardProduct(): HTMLElement {
+        return this.cardProduct;
+    }
 
-        return cardProduct;
+    addItems() {
+        const coloredTag = new ColoredTags().getColoredTag('Анемон');
+        const tagContainer = this.cardProduct.querySelector('.card_product_tags');
+        if (!tagContainer) {
+            alert('Container not found');
+        } else {
+            console.log(tagContainer);
+            tagContainer?.appendChild(coloredTag);
+        }
     }
 
     drawItems(parent: HTMLElement, configs: TElementConfig[]) {
@@ -86,7 +100,7 @@ const cardProductDOMElements: TElementConfig[] =
                     },
                     {
                         tag: Tags.DIV,
-                        classes: ['card_product_tags']
+                        classes: ['card_product_tags'],
                     },
                     {
                         tag: Tags.P,
