@@ -39,16 +39,6 @@ export default class BasketItems implements IBasketItems {
     itemsContent.appendChild(basketItem);
     const basketItem2 = new BItem().getItem();
     itemsContent.appendChild(basketItem2);
-    const basketItem3 = new BItem().getItem();
-    itemsContent.appendChild(basketItem3);
-    const basketItem4 = new BItem().getItem();
-    itemsContent.appendChild(basketItem4);
-    const basketItem5 = new BItem().getItem();
-    itemsContent.appendChild(basketItem5);
-    const basketItem6 = new BItem().getItem();
-    itemsContent.appendChild(basketItem6);
-    const basketItem7 = new BItem().getItem();
-    itemsContent.appendChild(basketItem7);
 
     return itemsContent;
   }
