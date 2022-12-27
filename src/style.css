@@ -99,7 +99,7 @@ body {
     flex-direction: column;
     height: 100%;
   }
-  .content {
+  .content_all {
     flex: 1 0 auto;
   }
 
