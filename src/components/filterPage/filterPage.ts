@@ -5,14 +5,16 @@ import Search from './searchForm';
 import Filter from './filter';
 import Tag from './tags';
 import Card from './card';
+import { IPage } from '../IPage';
 
-interface IFilterPage {
-    getPage: () => HTMLElement
-}
+// interface IFilterPage {
+//     getPage: () => HTMLElement
+// }
 
-export default class FilterPage implements IFilterPage {
+export default class FilterPage implements IPage {
     getPage() {
         const filterContent = document.createElement('div');
+        filterContent.id = 'filterPage';
         filterContent.classList.add('filter_content');
         filterContent.classList.add('wrapper');
 
@@ -67,8 +69,13 @@ export default class FilterPage implements IFilterPage {
         select.appendChild(optionTwo);
         select.appendChild(optionThree);
 
+        const cardLink = document.createElement('a');
+        cardLink.href = '#cardProductPage';
+        cardLink.classList.add('link_card');
+
         const card = new Card().getCard();
-        mainContent.appendChild(card);
+        cardLink.appendChild(card);
+        mainContent.appendChild(cardLink);
        
         return filterContent;
     }
