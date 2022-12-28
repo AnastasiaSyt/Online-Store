@@ -1,0 +1,30 @@
+.basket_items-head{
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr;
+  padding-bottom: 15px;
+  position: relative;
+  margin-bottom: 10px;
+  width: 94%;
+}
+
+.basket_items-head::after{
+  content: '';
+  width: 105%;
+  height: 1px;
+  background-color: #EFEFEF;
+  display: block;
+  position: absolute;
+  top: 40px;
+}
+
+.basket_items{
+  width: 100%;
+  max-width: 870px;
+  margin-bottom: 40px;
+}
+
+.basket_items-head p{
+  color: #828282;
+  font-size: 14px;
+  text-align: center;
+}
