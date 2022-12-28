@@ -22,6 +22,7 @@ export default class CardProduct implements ICardProduct {
         this.drawItems(cardProduct, cardProductDOMElements);
         this.cardProduct = cardProduct;
     }
+    
     getPage(): HTMLElement {
         return this.cardProduct;
     }

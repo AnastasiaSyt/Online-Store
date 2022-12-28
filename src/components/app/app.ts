@@ -1,3 +1,4 @@
+import Basket from "../basket/basket";
 import CardProduct from "../cardProductPage/cardProductPage";
 import ErrorPage from "../error404/errorPage";
 import FilterPage from "../filterPage/filterPage";
@@ -22,7 +23,7 @@ export default class App {
         } else if (id === PageIDs.CardProductPage) {
             newPage = new CardProduct();
         } else if (id === PageIDs.CartPage) {
-            console.log('Hello');
+            newPage = new Basket();
         } else if (id === PageIDs.ErrorPage) {
             newPage = new ErrorPage();
         }
