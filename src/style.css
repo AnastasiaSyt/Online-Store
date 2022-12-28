@@ -54,6 +54,18 @@ body {
     cursor: pointer;
 }
 
+.link_filterPage {
+    text-decoration: none;
+    color: #333333;
+
+    display: flex;
+    align-items: center;
+}
+
+.link_filterPage:hover {
+    color: #C73153;
+}
+
 .bg_cart {
     width: 170px;
     height: 32px;
@@ -62,6 +74,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.header_cart {
+    cursor: pointer;
 }
 
 .cart_logo {
@@ -99,8 +115,16 @@ body {
     flex-direction: column;
     height: 100%;
   }
+
   .content_all {
     flex: 1 0 auto;
+  }
+
+  .link_basketPage {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
 /*______________main____________*/
