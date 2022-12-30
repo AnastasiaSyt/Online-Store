@@ -2,10 +2,11 @@ import './basketItem.css'
 
 
 interface IItem {
-  getItem: () => HTMLElement
+  getItem: () => HTMLElement;
 }
 
 export default class BItem implements IItem {
+
   getItem() {
     const itemContent = document.createElement('div');
     itemContent.classList.add('basket-item')
@@ -41,7 +42,6 @@ export default class BItem implements IItem {
     itemNameBlock.appendChild(itemName);
     //==========
 
-    //==========
     const color = document.createElement('div');
     color.classList.add('item-color');
 
@@ -74,6 +74,8 @@ export default class BItem implements IItem {
     counterIncrease.classList.add('increase');
     counterIncrease.innerHTML='+';
 
+
+
     const counterNumber = document.createElement('div');
     counterNumber.classList.add('counter_number');
     counterNumber.innerHTML = '1';
@@ -82,11 +84,41 @@ export default class BItem implements IItem {
     counterBlock.appendChild(counterNumber);
     counterBlock.appendChild(counterIncrease);
 
-    //===========
+    counterIncrease.addEventListener('click', encreaseCounter)
+    counterDecrease.addEventListener('click', decreaseCounter)
 
     const price = document.createElement('p');
     price.classList.add('price');
     price.innerHTML = '$105'
+
+    function encreaseCounter(){
+      if(counterNumber.textContent!=null){
+        counterNumber.textContent = (+counterNumber.textContent+1).toString();
+      }
+      else{
+        counterNumber.textContent = '1';
+      }
+      priceRegulation(105);
+    }
+
+    function decreaseCounter(){
+      if(counterNumber.textContent!=null && +counterNumber.textContent>1){
+        counterNumber.textContent = (+counterNumber.textContent-1).toString();
+      }
+      else{
+        counterNumber.textContent = '1';
+      }
+      priceRegulation(105);
+    }
+
+    function priceRegulation(basePrice:number){
+      if (basePrice && counterNumber.textContent){
+        price.textContent ='$' + (basePrice * +counterNumber.textContent).toString();
+      }
+    }
+    //===========
+
+
 
     //==========
 
@@ -103,5 +135,9 @@ export default class BItem implements IItem {
     itemContent.appendChild(cross);
 
     return itemContent;
+  }
+
+  removeItem(){
+    return null;
   }
 }
