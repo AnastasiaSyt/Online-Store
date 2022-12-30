@@ -61,7 +61,7 @@ const cardDOMElements: TElementConfig[] =
                 children: [
                     {
                         tag: Tags.P,
-                        classes: ['price'],
+                        classes: ['price_card'],
                         label: '$120.00'
                     },
                     {
