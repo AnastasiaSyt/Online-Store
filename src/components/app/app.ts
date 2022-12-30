@@ -10,10 +10,26 @@ export default class App {
 
     constructor(content: HTMLElement) {
         this.container = content;
+        this.handlerGlobalRoutes();
         this.changeRouteHandler();
         this.run();
     }
     
+    handlerGlobalRoutes() {
+        const filterPage = document.getElementById('filterPage');
+        filterPage?.addEventListener('click', () => {
+            this.setLocation(PageIDs.FilterPage);
+        });
+        const basketPage = document.getElementById('basketPage');
+        basketPage?.addEventListener('click', () => {
+            this.setLocation(PageIDs.CartPage);
+        });
+        const cardProductPage = document.getElementById('cardProductPage');
+        cardProductPage?.addEventListener('click', () => {
+            this.setLocation(PageIDs.CardProductPage);
+        });
+    }
+
     renderNewPage(id: PageIDs) {
         this.container?.childNodes.forEach((node) => this.container.removeChild(node));
         let newPage: IPage | null = null; 
@@ -35,32 +51,46 @@ export default class App {
     }
 
     changeRouteHandler() {
-        window.addEventListener('hashchange', () => {
-            const hash = window.location.hash.slice(1);
-            console.log(hash);
-            this.renderNewPage(hash as PageIDs);
-        })
+        window.addEventListener('popstate', this.locationHandler.bind(this));
+    }
+
+    locationHandler() {
+        let location = window.location.pathname;
+        if (location.length === 0) {
+            location = "/";
+        }
+        const route = this.recognizeUrl(location);
+        this.renderNewPage(route);
+    }
+
+    recognizeUrl(url: string): PageIDs {
+        if (url === '/') {
+            return PageIDs.FilterPage;
+        }
+        url = url.substring(1);
+        if (url !== PageIDs.CardProductPage &&
+            url !== PageIDs.CartPage &&
+            url !== PageIDs.FilterPage
+        ) {
+            return PageIDs.ErrorPage;
+        }
+        return url as PageIDs;
     }
 
     run() {
-        let hash = window.location.hash.slice(1) as PageIDs;
-        if (hash !== PageIDs.CardProductPage &&
-            hash !== PageIDs.CartPage &&
-            hash !== PageIDs.FilterPage
+        const url = this.recognizeUrl(window.location.pathname);
+        if (url !== PageIDs.CardProductPage &&
+            url !== PageIDs.CartPage &&
+            url !== PageIDs.FilterPage
         ) {
             this.setLocation(PageIDs.ErrorPage);
         } else {
-            this.renderNewPage(hash);
+            this.renderNewPage(url);
         }
     }
 
     setLocation(page: PageIDs) {
-        try {
-          history.pushState(null, '', page);
-          return;
-        } catch(e) {
-            console.log(e);
-        }
-        location.hash = `#${page}`;
+        window.history.pushState({}, "", page);
+        this.locationHandler();
     }
 }
