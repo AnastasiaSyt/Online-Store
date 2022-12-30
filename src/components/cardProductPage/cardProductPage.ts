@@ -3,10 +3,10 @@ import { TElementConfig, Tags } from "../types";
 import ColoredTags from "./coloredTags";
 import Button from "../filterPage/button";
 import Counter from "./counter";
+import { IPage } from "../IPage";
 
-interface ICardProduct {
+interface ICardProduct extends IPage {
     cardProduct: HTMLDivElement,
-    getCardProduct: () => HTMLElement,
     addItems: () => void,
     drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
     createElement: (config: TElementConfig) => HTMLElement
@@ -16,12 +16,14 @@ export default class CardProduct implements ICardProduct {
     cardProduct: HTMLDivElement;
     constructor() {
         const cardProduct = document.createElement('div');
+        cardProduct.id = 'cardProductPage';
         cardProduct.classList.add('card_product');
         cardProduct.classList.add('wrapper');
         this.drawItems(cardProduct, cardProductDOMElements);
         this.cardProduct = cardProduct;
     }
-    getCardProduct(): HTMLElement {
+    
+    getPage(): HTMLElement {
         return this.cardProduct;
     }
 

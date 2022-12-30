@@ -39,3 +39,7 @@
 
     border: none;
 }
+
+.link_card {
+    text-decoration: none;
+}

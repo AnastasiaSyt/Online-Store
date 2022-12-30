@@ -12,3 +12,10 @@ export enum Tags {
     DIV = 'div',
     P = 'p',
 }
+
+export const enum PageIDs {
+    FilterPage = 'filterPage',
+    ErrorPage = 'errorPage',
+    CardProductPage = 'cardProductPage',
+    CartPage = 'basketPage'
+  }

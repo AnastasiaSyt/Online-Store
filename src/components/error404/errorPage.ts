@@ -1,9 +1,11 @@
+import { IPage } from '../IPage';
 import './errorPage.css';
 
 
-export default class ErrorPage {
+export default class ErrorPage implements IPage {
     getPage() {
         const item = document.createElement('div');
+        item.id = 'errorPage';
         item.classList.add('error');
         const text = document.createElement('p');
         text.classList.add('text_404');
