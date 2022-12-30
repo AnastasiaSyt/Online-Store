@@ -6,10 +6,8 @@ import Filter from './filter';
 import Tag from './tags';
 import Card from './card';
 import { IPage } from '../IPage';
+import { PageIDs } from '../types';
 
-// interface IFilterPage {
-//     getPage: () => HTMLElement
-// }
 
 export default class FilterPage implements IPage {
     getPage() {
@@ -70,7 +68,11 @@ export default class FilterPage implements IPage {
         select.appendChild(optionThree);
 
         const cardLink = document.createElement('a');
-        cardLink.href = '#cardProductPage';
+        cardLink.addEventListener('click', () => {
+            window.history.pushState({}, "", PageIDs.CardProductPage);
+            const event = new Event('popstate');
+            window.dispatchEvent(event);
+        });
         cardLink.classList.add('link_card');
 
         const card = new Card().getCard();
