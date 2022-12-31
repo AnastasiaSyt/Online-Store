@@ -2,6 +2,12 @@
   display: grid;
   grid-template-columns: 50px 1.7fr 1fr 1.5fr 1fr 50px;
   padding: 8px;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.basket-item.delete{
+  opacity: 0;
 }
 
 .basket-item:hover{

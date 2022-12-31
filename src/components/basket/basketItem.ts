@@ -136,8 +136,4 @@ export default class BItem implements IItem {
 
     return itemContent;
   }
-
-  removeItem(){
-    return null;
-  }
 }
