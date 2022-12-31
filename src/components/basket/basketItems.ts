@@ -37,7 +37,7 @@ export default class BasketItems implements IBasketItems {
 
 
 
-    const basketItems: HTMLElement[] = [];
+    let basketItems: HTMLElement[] = [];
 
     for(let i=0;i<5;i++){
       basketItems.push(new BItem().getItem('Сладкие ноты', i+1, 120));
@@ -50,7 +50,22 @@ export default class BasketItems implements IBasketItems {
     itemsContent.querySelectorAll('.cross').forEach(cross => {
       cross.addEventListener('click', e =>{
         e.preventDefault();
+        basketItems = basketItems.filter(e =>{
+          if(e!=cross.parentNode) return true;
+        } )
+
         cross.parentNode?.parentNode?.removeChild(cross.parentNode);
+
+        console.log(basketItems)
+
+        let sum = 0;
+        for(let i=0;i<basketItems.length;i++){
+          if(basketItems[i].querySelector('.price')!.textContent!.split('$')[1]!=undefined && (basketItems[i].querySelector('.checked') as HTMLInputElement)?.checked)
+          sum += +basketItems[i].querySelector('.price')!.textContent!.split('$')[1];
+        }
+
+        document.querySelector('.goods-price')!.textContent = '$' + sum;
+        document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
       })
     });
 
@@ -62,9 +77,7 @@ export default class BasketItems implements IBasketItems {
           sum += +basketItems[i].querySelector('.price')!.textContent!.split('$')[1];
         }
 
-        if((element as HTMLInputElement).checked) document.querySelector('.goods-price')!.textContent = '$' + sum;
-        else document.querySelector('.goods-price')!.textContent = '$' + sum;
-
+        document.querySelector('.goods-price')!.textContent = '$' + sum;
         document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
       }
     });
@@ -72,3 +85,5 @@ export default class BasketItems implements IBasketItems {
     return itemsContent;
   }
 }
+
+//TODO: connect with cross div
