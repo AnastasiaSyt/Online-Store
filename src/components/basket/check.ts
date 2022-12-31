@@ -3,11 +3,11 @@ import './../filterPage/button'
 
 
 interface ICheck {
-  getCheck: () => HTMLElement
+  getCheck: (defaultDeliveryState: number, defaultTax: number) => HTMLElement
 }
 
 export default class Check implements ICheck {
-  getCheck() {
+  getCheck(defaultDeliveryState: number, defaultTax: number) {
       const checkContent = document.createElement('div');
       checkContent.classList.add('check-content');
 
@@ -29,7 +29,7 @@ export default class Check implements ICheck {
       goodsPosition.classList.add('goods-position');
       goodsPosition.innerHTML = 'Товары';
       goodsPrice.classList.add('goods-price');
-      goodsPrice.innerHTML = '$200.00';
+      goodsPrice.innerHTML = '$0.00';
 
       target1.appendChild(goodsPosition);
       target1.appendChild(goodsPrice);
@@ -41,7 +41,7 @@ export default class Check implements ICheck {
       const taxPosition = document.createElement('span');
       const taxPrice = document.createElement('span');
       taxPosition.innerHTML = 'Налог';
-      taxPrice.innerHTML = '$0';
+      taxPrice.innerHTML = '$'+defaultTax;
       taxPosition.classList.add('tax-position');
       taxPrice.classList.add('tax-price');
 
@@ -55,7 +55,7 @@ export default class Check implements ICheck {
       const deliveryPosition = document.createElement('span');
       const deliveryPrice = document.createElement('span');
       deliveryPosition.innerHTML = 'Доставка';
-      deliveryPrice.innerHTML = '$8';
+      deliveryPrice.innerHTML = '$' + defaultDeliveryState;
       deliveryPosition.classList.add('delivery-position');
       deliveryPrice.classList.add('delivery-price');
 
@@ -70,7 +70,7 @@ export default class Check implements ICheck {
       const totalPosition = document.createElement('span');
       const totalPrice = document.createElement('span');
       totalPosition.innerHTML = 'Всего';
-      totalPrice.innerHTML = '$208';
+      totalPrice.innerHTML ='$' + (+deliveryPrice.textContent!.split('$')[1] + +taxPrice.textContent!.split('$')[1] + +goodsPrice.textContent!.split('$')[1]);
       totalPosition.classList.add('total-position');
       totalPrice.classList.add('total-price');
 

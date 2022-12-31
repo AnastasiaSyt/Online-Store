@@ -1,13 +1,14 @@
 import './basketItem.css'
+import './check'
 
 
 interface IItem {
-  getItem: () => HTMLElement;
+  getItem: (defaultName: string, defaultAccessNumber: number, defaultPrice: number) => HTMLElement;
 }
 
 export default class BItem implements IItem {
 
-  getItem() {
+  getItem(defaultName: string, defaultAccessNumber: number, defaultPrice: number) {
     const itemContent = document.createElement('div');
     itemContent.classList.add('basket-item')
 
@@ -31,11 +32,11 @@ export default class BItem implements IItem {
     itemName.classList.add('item-name');
 
     const h2Name = document.createElement('h2');
-    h2Name.innerHTML = 'Сладкие ноты';
+    h2Name.innerHTML = defaultName;
     itemName.appendChild(h2Name);
 
     const accessNumber = document.createElement('p');
-    accessNumber.innerHTML = 'Доступно: 3шт';
+    accessNumber.innerHTML = `Доступно: ${defaultAccessNumber}`;
     itemName.appendChild(accessNumber);
 
     //=======
@@ -89,35 +90,40 @@ export default class BItem implements IItem {
 
     const price = document.createElement('p');
     price.classList.add('price');
-    price.innerHTML = '$105'
+    price.innerHTML = "$" + defaultPrice;
 
     function encreaseCounter(){
       if(counterNumber.textContent!=null){
-        counterNumber.textContent = (+counterNumber.textContent+1).toString();
+        if(checkBox.checked && +counterNumber.textContent+1 <= defaultAccessNumber){
+          counterNumber.textContent = (+counterNumber.textContent+1).toString();
+          document.querySelector('.goods-price')!.textContent = '$' + (
+          +document.querySelector('.goods-price')!.textContent!.split('$')[1]
+          + defaultPrice);
+          document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+        }
       }
-      else{
-        counterNumber.textContent = '1';
-      }
-      priceRegulation(105);
+      priceRegulation();
     }
 
     function decreaseCounter(){
       if(counterNumber.textContent!=null && +counterNumber.textContent>1){
         counterNumber.textContent = (+counterNumber.textContent-1).toString();
+        if(checkBox.checked){
+          document.querySelector('.goods-price')!.textContent = '$' + (
+          +document.querySelector('.goods-price')!.textContent!.split('$')[1]
+          - defaultPrice);
+          if(+counterNumber.textContent < defaultAccessNumber) document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+        }
       }
-      else{
-        counterNumber.textContent = '1';
-      }
-      priceRegulation(105);
+      priceRegulation();
     }
 
-    function priceRegulation(basePrice:number){
-      if (basePrice && counterNumber.textContent){
-        price.textContent ='$' + (basePrice * +counterNumber.textContent).toString();
+    function priceRegulation(){
+      if (defaultPrice && counterNumber.textContent){
+        price.textContent ='$' + (defaultPrice * +counterNumber.textContent).toString();
       }
     }
     //===========
-
 
 
     //==========
