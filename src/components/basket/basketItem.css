@@ -96,11 +96,15 @@
   display: none;
 }
 
+.color{
+  cursor: pointer;
+}
+
 .colors_block.active{
   display: grid;
 }
 
-.red{  background-color: red;}
+.red{  background-color: rgb(255, 72, 72);}
 .yellow{  background-color: yellow;}
 .blue{  background-color: blue;}
 .pink{ background-color: pink;}

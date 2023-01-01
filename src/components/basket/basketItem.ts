@@ -97,12 +97,23 @@ export default class BItem implements IItem {
           break;
       }
       colors.appendChild(tempColor)
+
       tempColor.addEventListener('click', e=>{
         e.preventDefault();
         colors.classList.toggle('active');
         colorCircle.classList.remove(colorCircle.classList[2])
         colorCircle.classList.add(tempColor.classList[2])
+        colorP.textContent = colorCircle.classList.contains('white') ? 'Белый'
+                            : colorCircle.classList.contains('orange') ? 'Оранжевый'
+                            : colorCircle.classList.contains('pink') ? 'Розовый'
+                            : colorCircle.classList.contains('red') ? 'Красный'
+                            : colorCircle.classList.contains('yellow') ? 'Жёлтый'
+                            : colorCircle.classList.contains('purple') ? 'Фиолетовый'
+                            : colorCircle.classList.contains('lilac') ? 'Сиреневый'
+                            : 'Синий';
       })
+
+
     }
 
     colorA.addEventListener('click', e =>{
