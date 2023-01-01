@@ -53,12 +53,64 @@ export default class BItem implements IItem {
 
     const colorCircle = document.createElement('div');
     colorCircle.classList.add('color-chooser');
+    colorCircle.classList.add('base');
+    colorCircle.classList.add('white');
     color.appendChild(colorCircle)
 
     const colorA = document.createElement('a');
     colorA.classList.add('color-chooser_text');
     colorA.innerHTML = 'Изменить';
     color.appendChild(colorA);
+
+
+    const colors = document.createElement('div');
+    colors.classList.add('colors_block');
+
+    for(let i = 0;i<8;i++){
+      const tempColor = document.createElement('div');
+      tempColor.classList.add('color-chooser');
+      tempColor.classList.add('color');
+      switch(i){
+        case 0:
+          tempColor.classList.add('red');
+          break;
+        case 1:
+          tempColor.classList.add('yellow');
+          break;
+        case 2:
+          tempColor.classList.add('blue');
+          break;
+        case 3:
+          tempColor.classList.add('pink');
+          break;
+        case 4:
+          tempColor.classList.add('purple');
+          break;
+        case 5:
+          tempColor.classList.add('white');
+          break;
+        case 6:
+          tempColor.classList.add('lilac');
+          break;
+        case 7:
+          tempColor.classList.add('orange');
+          break;
+      }
+      colors.appendChild(tempColor)
+      tempColor.addEventListener('click', e=>{
+        e.preventDefault();
+        colors.classList.toggle('active');
+        colorCircle.classList.remove(colorCircle.classList[2])
+        colorCircle.classList.add(tempColor.classList[2])
+      })
+    }
+
+    colorA.addEventListener('click', e =>{
+      e.preventDefault();
+      colors.classList.toggle('active')
+    })
+
+    color.appendChild(colors)
 
     //==========
 
@@ -93,9 +145,9 @@ export default class BItem implements IItem {
     price.innerHTML = "$" + defaultPrice;
 
     function encreaseCounter(){
-      if(counterNumber.textContent!=null){
-        if(checkBox.checked && +counterNumber.textContent+1 <= defaultAccessNumber){
-          counterNumber.textContent = (+counterNumber.textContent+1).toString();
+      if(counterNumber.textContent!=null && +counterNumber.textContent+1 <= defaultAccessNumber){
+        counterNumber.textContent = (+counterNumber.textContent+1).toString();
+        if(checkBox.checked){
           document.querySelector('.goods-price')!.textContent = '$' + (
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
           + defaultPrice);

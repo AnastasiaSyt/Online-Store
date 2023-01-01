@@ -60,11 +60,14 @@
   align-items: center;
   height: 84px;
   align-self: center;
+  position: relative;
 }
 
 .color-chooser{
-  width: 24px;
-  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  max-width: 24px;
+  max-height: 24px;
   border: 1px solid #BDBDBD;
   border-radius: 50%;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
@@ -76,6 +79,37 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.colors_block{
+  min-width: 16px;
+  min-height: 16px;
+  grid-template-columns: repeat(3,1fr);
+  background-color: #fff;
+  box-shadow: 0px 0px 15px 0px #79041f22  ;
+  border: 1px solid #79041f33;
+  border-radius: 12px;
+  padding: 10px 15px;
+  gap: 5px 12px;
+  max-width: 140px;
+  position: absolute;
+  top: 0;
+  display: none;
+}
+
+.colors_block.active{
+  display: grid;
+}
+
+.red{  background-color: red;}
+.yellow{  background-color: yellow;}
+.blue{  background-color: blue;}
+.pink{ background-color: pink;}
+.purple{ background-color: purple;}
+.white{ background-color: #fff;}
+.lilac{ background-color: #d2afff;}
+.orange{ background-color: orange;}
+
+
 
 .checked{
   width: 24px;
