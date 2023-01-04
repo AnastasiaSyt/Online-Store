@@ -64,7 +64,7 @@ export default class BasketItems implements IBasketItems {
           sum += +basketItems[i].querySelector('.price')!.textContent!.split('$')[1];
         }
 
-        document.querySelector('.goods-price')!.textContent = '$' + sum;
+        document.querySelector('.goods-price')!.textContent  = `$${sum}`;
         document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
       })
     });
@@ -77,7 +77,7 @@ export default class BasketItems implements IBasketItems {
           sum += +basketItems[i].querySelector('.price')!.textContent!.split('$')[1];
         }
 
-        document.querySelector('.goods-price')!.textContent = '$' + sum;
+        document.querySelector('.goods-price')!.textContent = `$${sum}`;
         document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
       }
     });

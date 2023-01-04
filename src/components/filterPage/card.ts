@@ -3,15 +3,16 @@ import { TElementConfig, Tags } from "../types";
 import flowers from "../data/data";
 
 interface ICard {
-    getCard: (item: number) => HTMLElement
+    getCard: (item: number) => HTMLElement,
+    drawItems(parent: HTMLElement, configs: TElementConfig[]): void,
+    createElement(config: TElementConfig): HTMLElement,
+    getDOMElements(flowerNumber: number): TElementConfig[],
+
 }
-
-
 
 export default class Card implements ICard{
     getCard(item: number): HTMLElement {
             const elem = this.getDOMElements(item);
-            
             const card = document.createElement('div');
             card.classList.add('card');
             this.drawItems(card, elem);
@@ -41,6 +42,7 @@ export default class Card implements ICard{
         }
         return node;
     }
+
     getDOMElements(flowerNumber: number): TElementConfig[]{
         const thumbnailPath = flowers[flowerNumber]["thumbnail"];
         const flowerName = flowers[flowerNumber]["title"];
@@ -99,7 +101,6 @@ export default class Card implements ICard{
             ]
             return cardDOMElements;
     }
-
 }
 
 // let flowerNumber = 0;

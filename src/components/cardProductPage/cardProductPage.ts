@@ -4,12 +4,14 @@ import ColoredTags from "./coloredTags";
 import Button from "../filterPage/button";
 import Counter from "./counter";
 import { IPage } from "../IPage";
+import flowers from "../data/data";
 
 interface ICardProduct extends IPage {
     cardProduct: HTMLDivElement,
     addItems: () => void,
     drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
-    createElement: (config: TElementConfig) => HTMLElement
+    createElement: (config: TElementConfig) => HTMLElement,
+    getDOMCardPage: (id: number) => TElementConfig[],
 }
 
 export default class CardProduct implements ICardProduct {
@@ -19,10 +21,10 @@ export default class CardProduct implements ICardProduct {
         cardProduct.id = 'cardProductPage';
         cardProduct.classList.add('card_product');
         cardProduct.classList.add('wrapper');
-        this.drawItems(cardProduct, cardProductDOMElements);
+        this.drawItems(cardProduct, this.getDOMCardPage(0));
         this.cardProduct = cardProduct;
     }
-    
+
     getPage(): HTMLElement {
         return this.cardProduct;
     }
@@ -71,85 +73,86 @@ export default class CardProduct implements ICardProduct {
         }
         return node;
     }
-}
 
-const cardProductDOMElements: TElementConfig[] =
-[
-    {
-        tag: Tags.P,
-        classes: ['breadcrumbs'],
-        label: 'Магазин > Букеты > Название букета'
-    },
-    {
-        tag: Tags.DIV,
-        classes: ['card_product_content'],
-        children: [
+    getDOMCardPage(flowerID: number): TElementConfig[]{
+        return [
+            {
+                tag: Tags.P,
+                classes: ['breadcrumbs'],
+                label: 'Магазин > Букеты > Название букета'
+            },
             {
                 tag: Tags.DIV,
-                classes: ['card_product_images'],
+                classes: ['card_product_content'],
                 children: [
                     {
                         tag: Tags.DIV,
-                        classes: ['card_product_small_img'],
+                        classes: ['card_product_images'],
                         children: [
                             {
-                                tag: Tags.IMG,
-                                classes: ['small_img'],
-                                src: '../../img/flowers_15_1.jpg'
+                                tag: Tags.DIV,
+                                classes: ['card_product_small_img'],
+                                children: [
+                                    {
+                                        tag: Tags.IMG,
+                                        classes: ['small_img'],
+                                        src: flowers[flowerID]['images'][0]
+                                    },
+                                    {
+                                        tag: Tags.IMG,
+                                        classes: ['small_img'],
+                                        src: '../../img/flowers_15_2.jpg'
+                                    }
+                                ]
                             },
                             {
                                 tag: Tags.IMG,
-                                classes: ['small_img'],
-                                src: '../../img/flowers_15_2.jpg'
+                                classes: ['card_product_big_img'],
+                                src: flowers[flowerID]['thumbnail']
                             }
                         ]
                     },
                     {
-                        tag: Tags.IMG,
-                        classes: ['card_product_big_img'],
-                        src: '../../img/flowers_15_1.jpg'
-                    }
-                ]
-            },
-            {
-                tag: Tags.DIV,
-                classes: ['card_product_text'],
-                children: [
-                    {
-                        tag: Tags.P,
-                        classes: ['card_product_title'],
-                        label: 'красный бум'
-                    },
-                    {
                         tag: Tags.DIV,
-                        classes: ['card_product_tags'],
-                    },
-                    {
-                        tag: Tags.P,
-                        classes: ['card_product_description'],
-                        label: 'Начните новый год с этого роскошного букета анемонов, наполненного яркими красными и глубокими темно-синими оттенками. Этот букет  — потрясающий способ поднять настроение в этом сезоне.'
-                    },
-                    {
-                        tag: Tags.P,
-                        classes: ['card_product_sort'],
-                        label: 'В наличии: 3 шт'
-                    },
-                    {
-                        tag: Tags.P,
-                        classes: ['card_product_color'],
-                        label: 'Цвет: белый'
-                    },
-                    {
-                        tag: Tags.P,
-                        classes: ['card_product_price'],
-                        label: '$105.00'
-                    },
-                    {
-                        tag: Tags.DIV,
-                        classes: ['card_product_buttons'],
+                        classes: ['card_product_text'],
+                        children: [
+                            {
+                                tag: Tags.P,
+                                classes: ['card_product_title'],
+                                label: flowers[flowerID]['title'],
+                            },
+                            {
+                                tag: Tags.DIV,
+                                classes: ['card_product_tags'],
+                            },
+                            {
+                                tag: Tags.P,
+                                classes: ['card_product_description'],
+                                label:  flowers[flowerID]["description"]
+                            },
+                            {
+                                tag: Tags.P,
+                                classes: ['card_product_sort'],
+                                label: `В наличии: ${flowers[flowerID]["stock"]} шт.`
+                            },
+                            {
+                                tag: Tags.P,
+                                classes: ['card_product_color'],
+                                label: `Цвет: ${flowers[flowerID]["color"].join(', ')}`
+                            },
+                            {
+                                tag: Tags.P,
+                                classes: ['card_product_price'],
+                                label: `$${flowers[flowerID]["price"]}`
+                            },
+                            {
+                                tag: Tags.DIV,
+                                classes: ['card_product_buttons'],
+                            }
+                        ]
                     }
                 ]
             }
         ]
     }
-]
+}

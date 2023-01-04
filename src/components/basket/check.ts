@@ -41,7 +41,7 @@ export default class Check implements ICheck {
       const taxPosition = document.createElement('span');
       const taxPrice = document.createElement('span');
       taxPosition.textContent = 'Налог';
-      taxPrice.textContent = '$'+defaultTax;
+      taxPrice.textContent = `$${defaultTax}`
       taxPosition.classList.add('tax-position');
       taxPrice.classList.add('tax-price');
 
@@ -55,7 +55,7 @@ export default class Check implements ICheck {
       const deliveryPosition = document.createElement('span');
       const deliveryPrice = document.createElement('span');
       deliveryPosition.textContent = 'Доставка';
-      deliveryPrice.textContent = '$' + defaultDeliveryState;
+      deliveryPrice.textContent = `$${defaultDeliveryState}`;
       deliveryPosition.classList.add('delivery-position');
       deliveryPrice.classList.add('delivery-price');
 
@@ -70,7 +70,10 @@ export default class Check implements ICheck {
       const totalPosition = document.createElement('span');
       const totalPrice = document.createElement('span');
       totalPosition.textContent = 'Всего';
-      totalPrice.textContent ='$' + (+deliveryPrice.textContent?.split('$')[1] + +taxPrice.textContent?.split('$')[1] + +goodsPrice.textContent?.split('$')[1]);
+      totalPrice.textContent ='$'
+                                + (+deliveryPrice.textContent?.split('$')[1] +
+                                +taxPrice.textContent?.split('$')[1] +
+                                +goodsPrice.textContent?.split('$')[1]);
       totalPosition.classList.add('total-position');
       totalPrice.classList.add('total-price');
 

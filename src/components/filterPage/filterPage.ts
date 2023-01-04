@@ -80,13 +80,12 @@ export default class FilterPage implements IPage {
                 window.dispatchEvent(event);
             });
             cardLink.classList.add('link_card');
-    
+
             const card = new Card().getCard(item.id);
             cardLink.appendChild(card);
             allCards.appendChild(cardLink);
         })
 
-       
         return filterContent;
     }
 }
