@@ -112,8 +112,6 @@ export default class BItem implements IItem {
                             : colorCircle.classList.contains('lilac') ? 'Сиреневый'
                             : 'Синий';
       })
-
-
     }
 
     colorA.addEventListener('click', e =>{
@@ -139,7 +137,6 @@ export default class BItem implements IItem {
     counterIncrease.innerHTML='+';
 
 
-
     const counterNumber = document.createElement('div');
     counterNumber.classList.add('counter_number');
     counterNumber.innerHTML = '1';
@@ -162,7 +159,10 @@ export default class BItem implements IItem {
           document.querySelector('.goods-price')!.textContent = '$' + (
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
           + defaultPrice);
-          document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+          document.querySelector('.total-price')!.textContent = '$' +
+                                                                (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] +
+                                                                +document!.querySelector('.tax-price')!.textContent!.split('$')[1] +
+                                                                +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
         }
       }
       priceRegulation();
