@@ -43,3 +43,9 @@
 .link_card {
     text-decoration: none;
 }
+
+.all_cards {
+    width: 870px;
+    display: flex;
+    flex-wrap: wrap;
+}
