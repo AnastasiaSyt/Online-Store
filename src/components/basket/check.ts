@@ -70,7 +70,7 @@ export default class Check implements ICheck {
       const totalPosition = document.createElement('span');
       const totalPrice = document.createElement('span');
       totalPosition.textContent = 'Всего';
-      totalPrice.textContent ='$' + (+deliveryPrice.textContent!.split('$')[1] + +taxPrice.textContent!.split('$')[1] + +goodsPrice.textContent!.split('$')[1]);
+      totalPrice.textContent ='$' + (+deliveryPrice.textContent?.split('$')[1] + +taxPrice.textContent?.split('$')[1] + +goodsPrice.textContent?.split('$')[1]);
       totalPosition.classList.add('total-position');
       totalPrice.classList.add('total-price');
 
