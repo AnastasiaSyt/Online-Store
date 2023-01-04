@@ -7,6 +7,7 @@ import { IPage } from "../IPage";
 import flowers from "../data/data";
 
 interface ICardProduct extends IPage {
+    flowerID: number,
     cardProduct: HTMLDivElement,
     addItems: () => void,
     drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
@@ -15,17 +16,21 @@ interface ICardProduct extends IPage {
 }
 
 export default class CardProduct implements ICardProduct {
+    flowerID: number;
     cardProduct: HTMLDivElement;
-    constructor() {
+    constructor(id?: number) {
+        this.flowerID = id!==undefined ? id : -1;
+        if (this.flowerID === -1) throw new Error('invalid argument')
         const cardProduct = document.createElement('div');
         cardProduct.id = 'cardProductPage';
         cardProduct.classList.add('card_product');
         cardProduct.classList.add('wrapper');
-        this.drawItems(cardProduct, this.getDOMCardPage(0));
+        this.drawItems(cardProduct, this.getDOMCardPage(this.flowerID));
         this.cardProduct = cardProduct;
     }
 
-    getPage(): HTMLElement {
+    getPage(id?: number): HTMLElement {
+        this.drawItems(this.cardProduct, this.getDOMCardPage(this.flowerID));
         return this.cardProduct;
     }
 
@@ -92,18 +97,7 @@ export default class CardProduct implements ICardProduct {
                             {
                                 tag: Tags.DIV,
                                 classes: ['card_product_small_img'],
-                                children: [
-                                    {
-                                        tag: Tags.IMG,
-                                        classes: ['small_img'],
-                                        src: flowers[flowerID]['images'][0]
-                                    },
-                                    {
-                                        tag: Tags.IMG,
-                                        classes: ['small_img'],
-                                        src: '../../img/flowers_15_2.jpg'
-                                    }
-                                ]
+                                children: this.getImgs(flowerID),
                             },
                             {
                                 tag: Tags.IMG,
@@ -154,5 +148,19 @@ export default class CardProduct implements ICardProduct {
                 ]
             }
         ]
+    }
+
+    getImgs(id: number): TElementConfig[]{
+        const temp: TElementConfig[] = [];
+        for (let i = 0; i < flowers[id]['images'].length; i++){
+            temp[i] = {
+                tag: Tags.IMG,
+                classes: ['small_img'],
+                src: flowers[id]['images'][i],
+            }
+        }
+        console.log(temp)
+
+        return temp;
     }
 }
