@@ -32,11 +32,11 @@ export default class BItem implements IItem {
     itemName.classList.add('item-name');
 
     const h2Name = document.createElement('h2');
-    h2Name.innerHTML = defaultName;
+    h2Name.textContent = defaultName;
     itemName.appendChild(h2Name);
 
     const accessNumber = document.createElement('p');
-    accessNumber.innerHTML = `Доступно: ${defaultAccessNumber}`;
+    accessNumber.textContent = `Доступно: ${defaultAccessNumber}`;
     itemName.appendChild(accessNumber);
 
     //=======
@@ -48,7 +48,7 @@ export default class BItem implements IItem {
 
     const colorP = document.createElement('p');
     colorP.classList.add('color_text');
-    colorP.innerHTML = 'Белый';
+    colorP.textContent = 'Белый';
     color.appendChild(colorP);
 
     const colorCircle = document.createElement('div');
@@ -59,7 +59,7 @@ export default class BItem implements IItem {
 
     const colorA = document.createElement('a');
     colorA.classList.add('color-chooser_text');
-    colorA.innerHTML = 'Изменить';
+    colorA.textContent = 'Изменить';
     color.appendChild(colorA);
 
 
@@ -112,8 +112,6 @@ export default class BItem implements IItem {
                             : colorCircle.classList.contains('lilac') ? 'Сиреневый'
                             : 'Синий';
       })
-
-
     }
 
     colorA.addEventListener('click', e =>{
@@ -131,18 +129,17 @@ export default class BItem implements IItem {
     const counterDecrease = document.createElement('button');
     counterDecrease.classList.add('counter_button');
     counterDecrease.classList.add('decrease');
-    counterDecrease.innerHTML='&ndash;';
+    counterDecrease.textContent ='–';
 
     const counterIncrease = document.createElement('button');
     counterIncrease.classList.add('counter_button');
     counterIncrease.classList.add('increase');
-    counterIncrease.innerHTML='+';
-
+    counterIncrease.textContent ='+';
 
 
     const counterNumber = document.createElement('div');
     counterNumber.classList.add('counter_number');
-    counterNumber.innerHTML = '1';
+    counterNumber.textContent = '1';
 
     counterBlock.appendChild(counterDecrease);
     counterBlock.appendChild(counterNumber);
@@ -153,7 +150,7 @@ export default class BItem implements IItem {
 
     const price = document.createElement('p');
     price.classList.add('price');
-    price.innerHTML = "$" + defaultPrice;
+    price.textContent = `$${defaultPrice}`;
 
     function encreaseCounter(){
       if(counterNumber.textContent!=null && +counterNumber.textContent+1 <= defaultAccessNumber){
@@ -162,7 +159,10 @@ export default class BItem implements IItem {
           document.querySelector('.goods-price')!.textContent = '$' + (
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
           + defaultPrice);
-          document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+          document.querySelector('.total-price')!.textContent = '$' +
+                                                                (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] +
+                                                                +document!.querySelector('.tax-price')!.textContent!.split('$')[1] +
+                                                                +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
         }
       }
       priceRegulation();
