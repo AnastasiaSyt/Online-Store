@@ -3,16 +3,15 @@ import { TElementConfig, Tags } from "../types";
 import flowers from "../data/data";
 
 interface ICard {
-    getCard: (item: number) => HTMLElement,
-    drawItems(parent: HTMLElement, configs: TElementConfig[]): void,
-    createElement(config: TElementConfig): HTMLElement,
-    getDOMElements(flowerNumber: number): TElementConfig[],
-
+    getCard: (item: number) => HTMLElement
 }
+
+
 
 export default class Card implements ICard{
     getCard(item: number): HTMLElement {
             const elem = this.getDOMElements(item);
+
             const card = document.createElement('div');
             card.classList.add('card');
             this.drawItems(card, elem);
@@ -101,61 +100,5 @@ export default class Card implements ICard{
             ]
             return cardDOMElements;
     }
+
 }
-
-// let flowerNumber = 0;
-// const thumbnailPath = flowers[flowerNumber]["thumbnail"];
-// const flowerName = flowers[flowerNumber]["title"];
-// const flowerPrice = flowers[flowerNumber]["price"];
-
-// const cardDOMElements: TElementConfig[] =
-// [
-//     {
-//         tag: Tags.IMG,
-//         classes: ['thumbnail'],
-//         src: thumbnailPath
-//     },
-//     {
-//         tag: Tags.DIV,
-//         classes: ['card_content'],
-//         children: [
-//             {
-//                 tag: Tags.P,
-//                 classes: ['card_title'],
-//                 label: flowerName
-//             },
-//             {
-//                 tag: Tags.DIV,
-//                 classes: ['card_text'],
-//                 children: [
-//                     {
-//                         tag: Tags.P,
-//                         classes: ['price_card'],
-//                         label: flowerPrice
-//                     },
-//                     {
-//                         tag: Tags.IMG,
-//                         classes: ['card_icon'],
-//                         src: '../../img/arrow-right.svg'
-//                     }
-//                 ]
-//             },
-//             {
-//                 tag: Tags.DIV,
-//                 classes: ['cart_tag'],
-//                 children: [
-//                     {
-//                         tag: Tags.IMG,
-//                         classes: [],
-//                         src: '../../img/add_cart.svg'
-//                     },
-//                     {
-//                         tag: Tags.P,
-//                         classes: ['text_tag'],
-//                         label: 'добавить'
-//                     }
-//                 ]
-//             }
-//         ]
-//     }
-// ]

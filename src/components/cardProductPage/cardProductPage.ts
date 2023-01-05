@@ -7,52 +7,52 @@ import { IPage } from "../IPage";
 import flowers from "../data/data";
 
 interface ICardProduct extends IPage {
-    flowerID: number,
     cardProduct: HTMLDivElement,
     addItems: () => void,
     drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
-    createElement: (config: TElementConfig) => HTMLElement,
-    getDOMCardPage: (id: number) => TElementConfig[],
+    createElement: (config: TElementConfig) => HTMLElement
 }
 
 export default class CardProduct implements ICardProduct {
-    flowerID: number;
     cardProduct: HTMLDivElement;
-    constructor(id?: number) {
-        this.flowerID = id!==undefined ? id : -1;
-        if (this.flowerID === -1) throw new Error('invalid argument')
+    constructor(item?: number) {
         const cardProduct = document.createElement('div');
         cardProduct.id = 'cardProductPage';
         cardProduct.classList.add('card_product');
         cardProduct.classList.add('wrapper');
-        this.drawItems(cardProduct, this.getDOMCardPage(this.flowerID));
+
+        if (Number.isSafeInteger(item)) {
+            const elem = this.getCardProductDOMElements(item!);
+            this.drawItems(cardProduct, elem);
+        }
         this.cardProduct = cardProduct;
+        this.addItems();
     }
 
-    getPage(id?: number): HTMLElement {
-        this.drawItems(this.cardProduct, this.getDOMCardPage(this.flowerID));
+    getPage(): HTMLElement {
         return this.cardProduct;
     }
 
     addItems() {
         const coloredTag = new ColoredTags().getColoredTag('Анемон');
-        const tagContainer = this.cardProduct.querySelector('.card_product_tags');
-        if (!tagContainer) {
+        const tagContainer = this.cardProduct.getElementsByClassName('card_product_tags');
+        const container = tagContainer[0];
+        if (!container) {
             throw new Error ('Container not found');
         } else {
-            tagContainer?.appendChild(coloredTag);
+            container.appendChild(coloredTag);
         }
+        console.log(container);
+        // const buttonsContainer = this.cardProduct.getElementsByClassName('card_product_buttons');
+        // const cardProductButton = new Button('добавить в корзину', 'card_product_button');
+        // const counter = new Counter().getCounter();
 
-        const buttonsContainer = this.cardProduct.querySelector('.card_product_buttons');
-        const cardProductButton = new Button('добавить в корзину', 'card_product_button');
-        const counter = new Counter().getCounter();
-
-        if (!buttonsContainer) {
-            throw new Error ('Container not found');
-        } else {
-            cardProductButton.getButton(buttonsContainer);
-            buttonsContainer.appendChild(counter);
-        }
+        // if (!buttonsContainer) {
+        //     throw new Error ('Container not found');
+        // } else {
+        //     cardProductButton.getButton(buttonsContainer);
+        //     buttonsContainer.appendChild(counter);
+        // }
     }
 
     drawItems(parent: HTMLElement, configs: TElementConfig[]) {
@@ -78,13 +78,22 @@ export default class CardProduct implements ICardProduct {
         }
         return node;
     }
+    getCardProductDOMElements(flowerNumber: number): TElementConfig[]{
 
-    getDOMCardPage(flowerID: number): TElementConfig[]{
-        return [
+        const flowerName = flowers[flowerNumber]["title"];
+        const flowerPrice = flowers[flowerNumber]["price"];
+        const category = flowers[flowerNumber]["category"];
+        const photo = flowers[flowerNumber]["images"];
+        const description = flowers[flowerNumber]["description"];
+        const stock = flowers[flowerNumber]["stock"];
+        const color = flowers[flowerNumber]["color"];
+
+        const CardProductDOMElements: TElementConfig[] =
+        [
             {
                 tag: Tags.P,
                 classes: ['breadcrumbs'],
-                label: 'Магазин > Букеты > Название букета'
+                label: `Магазин > ${category} > ${flowerName}`
             },
             {
                 tag: Tags.DIV,
@@ -97,12 +106,12 @@ export default class CardProduct implements ICardProduct {
                             {
                                 tag: Tags.DIV,
                                 classes: ['card_product_small_img'],
-                                children: this.getImgs(flowerID),
+                                children: this.getImgs(flowerNumber),
                             },
                             {
                                 tag: Tags.IMG,
                                 classes: ['card_product_big_img'],
-                                src: flowers[flowerID]['thumbnail']
+                                src: photo[0]
                             }
                         ]
                     },
@@ -113,7 +122,7 @@ export default class CardProduct implements ICardProduct {
                             {
                                 tag: Tags.P,
                                 classes: ['card_product_title'],
-                                label: flowers[flowerID]['title'],
+                                label: flowerName
                             },
                             {
                                 tag: Tags.DIV,
@@ -122,22 +131,22 @@ export default class CardProduct implements ICardProduct {
                             {
                                 tag: Tags.P,
                                 classes: ['card_product_description'],
-                                label:  flowers[flowerID]["description"]
+                                label:  description
                             },
                             {
                                 tag: Tags.P,
                                 classes: ['card_product_sort'],
-                                label: `В наличии: ${flowers[flowerID]["stock"]} шт.`
+                                label: `В наличии: ${stock} шт`
                             },
                             {
                                 tag: Tags.P,
                                 classes: ['card_product_color'],
-                                label: `Цвет: ${flowers[flowerID]["color"].join(', ')}`
+                                label: `Цвет: ${color[0]}`
                             },
                             {
                                 tag: Tags.P,
                                 classes: ['card_product_price'],
-                                label: `$${flowers[flowerID]["price"]}`
+                                label: `$${flowerPrice}`
                             },
                             {
                                 tag: Tags.DIV,
@@ -148,6 +157,7 @@ export default class CardProduct implements ICardProduct {
                 ]
             }
         ]
+            return CardProductDOMElements;
     }
 
     getImgs(id: number): TElementConfig[]{

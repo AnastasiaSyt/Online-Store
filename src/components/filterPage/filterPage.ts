@@ -75,7 +75,7 @@ export default class FilterPage implements IPage {
         flowers.forEach(item => {
             const cardLink = document.createElement('a');
             cardLink.addEventListener('click', () => {
-                window.history.pushState({}, "", PageIDs.CardProductPage);
+                window.history.pushState({}, "", `${PageIDs.CardProductPage}_${item.id}`);
                 const event = new Event('popstate');
                 window.dispatchEvent(event);
             });

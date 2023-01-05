@@ -5,7 +5,18 @@ import FilterPage from "../filterPage/filterPage";
 import { IPage } from "../IPage";
 import { PageIDs } from "../types";
 
-export default class App {
+interface IApp {
+    container: HTMLElement,
+    handlerGlobalRoutes: () => void,
+    renderNewPage: (id: PageIDs) => void,
+    changeRouteHandler: () => void,
+    locationHandler: () => void,
+    recognizeUrl: (url: string) => PageIDs,
+    run: () => void,
+    setLocation: (page: PageIDs) => void
+}
+
+export default class App implements IApp {
     container: HTMLElement;
 
     constructor(content: HTMLElement) {
@@ -31,13 +42,18 @@ export default class App {
     }
 
     renderNewPage(id: PageIDs) {
+
         this.container?.childNodes.forEach((node) => this.container.removeChild(node));
         let newPage: IPage | null = null;
 
         if (id === PageIDs.FilterPage) {
             newPage = new FilterPage();
         } else if (id === PageIDs.CardProductPage) {
-            newPage = new CardProduct();
+            const pathName = window.location.pathname;
+            // console.log(pathName);
+            const itemId = Number(pathName.split('_').pop());
+            // console.log(itemId);
+            newPage = new CardProduct(itemId);
         } else if (id === PageIDs.CartPage) {
             newPage = new Basket();
         } else if (id === PageIDs.ErrorPage) {
@@ -68,6 +84,10 @@ export default class App {
             return PageIDs.FilterPage;
         }
         url = url.substring(1);
+        // console.log(url);
+        if (url.indexOf(PageIDs.CardProductPage) === 0) {
+            return PageIDs.CardProductPage;
+        }
         if (url !== PageIDs.CardProductPage &&
             url !== PageIDs.CartPage &&
             url !== PageIDs.FilterPage
