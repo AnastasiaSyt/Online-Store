@@ -12,7 +12,7 @@ export default class Check implements ICheck {
       checkContent.classList.add('check-content');
 
       const h2 = document.createElement('h2');
-      h2.innerHTML = 'Итог';
+      h2.textContent = 'Итог';
       checkContent.appendChild(h2);
 
 
@@ -27,9 +27,9 @@ export default class Check implements ICheck {
       const goodsPosition = document.createElement('span');
       const goodsPrice = document.createElement('span')
       goodsPosition.classList.add('goods-position');
-      goodsPosition.innerHTML = 'Товары';
+      goodsPosition.textContent= 'Товары';
       goodsPrice.classList.add('goods-price');
-      goodsPrice.innerHTML = '$0.00';
+      goodsPrice.textContent = '$0.00';
 
       target1.appendChild(goodsPosition);
       target1.appendChild(goodsPrice);
@@ -40,8 +40,8 @@ export default class Check implements ICheck {
 
       const taxPosition = document.createElement('span');
       const taxPrice = document.createElement('span');
-      taxPosition.innerHTML = 'Налог';
-      taxPrice.innerHTML = '$'+defaultTax;
+      taxPosition.textContent = 'Налог';
+      taxPrice.textContent = `$${defaultTax}`
       taxPosition.classList.add('tax-position');
       taxPrice.classList.add('tax-price');
 
@@ -54,8 +54,8 @@ export default class Check implements ICheck {
 
       const deliveryPosition = document.createElement('span');
       const deliveryPrice = document.createElement('span');
-      deliveryPosition.innerHTML = 'Доставка';
-      deliveryPrice.innerHTML = '$' + defaultDeliveryState;
+      deliveryPosition.textContent = 'Доставка';
+      deliveryPrice.textContent = `$${defaultDeliveryState}`;
       deliveryPosition.classList.add('delivery-position');
       deliveryPrice.classList.add('delivery-price');
 
@@ -69,8 +69,11 @@ export default class Check implements ICheck {
 
       const totalPosition = document.createElement('span');
       const totalPrice = document.createElement('span');
-      totalPosition.innerHTML = 'Всего';
-      totalPrice.innerHTML ='$' + (+deliveryPrice.textContent!.split('$')[1] + +taxPrice.textContent!.split('$')[1] + +goodsPrice.textContent!.split('$')[1]);
+      totalPosition.textContent = 'Всего';
+      totalPrice.textContent ='$'
+                                + (+deliveryPrice.textContent?.split('$')[1] +
+                                +taxPrice.textContent?.split('$')[1] +
+                                +goodsPrice.textContent?.split('$')[1]);
       totalPosition.classList.add('total-position');
       totalPrice.classList.add('total-price');
 
@@ -91,7 +94,7 @@ export default class Check implements ICheck {
       const button = document.createElement('button');
       button.classList.add('button');
       button.classList.add('order');
-      button.innerHTML = 'оформить заказ';
+      button.textContent = 'оформить заказ';
       checkContent.appendChild(button)
 
 

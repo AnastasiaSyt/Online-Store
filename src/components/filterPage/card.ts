@@ -1,16 +1,21 @@
 import "./card.css";
 import { TElementConfig, Tags } from "../types";
+import flowers from "../data/data";
 
 interface ICard {
-    getCard: () => HTMLElement
+    getCard: (item: number) => HTMLElement
 }
 
+
+
 export default class Card implements ICard{
-    getCard(): HTMLElement {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        this.drawItems(card, cardDOMElements);
-        return card;
+    getCard(item: number): HTMLElement {
+            const elem = this.getDOMElements(item);
+
+            const card = document.createElement('div');
+            card.classList.add('card');
+            this.drawItems(card, elem);
+            return card;
     }
 
     drawItems(parent: HTMLElement, configs: TElementConfig[]) {
@@ -37,56 +42,63 @@ export default class Card implements ICard{
         return node;
     }
 
-}
+    getDOMElements(flowerNumber: number): TElementConfig[]{
+        const thumbnailPath = flowers[flowerNumber]["thumbnail"];
+        const flowerName = flowers[flowerNumber]["title"];
+        const flowerPrice = flowers[flowerNumber]["price"];
 
-const cardDOMElements: TElementConfig[] =
-[
-    {
-        tag: Tags.IMG,
-        classes: ['thumbnail'],
-        src: '../../img/flower.jpg'
-    },
-    {
-        tag: Tags.DIV,
-        classes: ['card_content'],
-        children: [
-            {
-                tag: Tags.P,
-                classes: ['card_title'],
-                label: 'Название букета'
-            },
-            {
-                tag: Tags.DIV,
-                classes: ['card_text'],
-                children: [
-                    {
-                        tag: Tags.P,
-                        classes: ['price_card'],
-                        label: '$120.00'
-                    },
-                    {
-                        tag: Tags.IMG,
-                        classes: ['card_icon'],
-                        src: '../../img/arrow-right.svg'
-                    }
-                ]
-            },
-            {
-                tag: Tags.DIV,
-                classes: ['cart_tag'],
-                children: [
-                    {
-                        tag: Tags.IMG,
-                        classes: [],
-                        src: '../../img/add_cart.svg'
-                    },
-                    {
-                        tag: Tags.P,
-                        classes: ['text_tag'],
-                        label: 'добавить'
-                    }
-                ]
-            }
-        ]
+        const cardDOMElements: TElementConfig[] =
+            [
+                {
+                    tag: Tags.IMG,
+                    classes: ['thumbnail'],
+                    src: thumbnailPath
+                },
+                {
+                    tag: Tags.DIV,
+                    classes: ['card_content'],
+                    children: [
+                        {
+                            tag: Tags.P,
+                            classes: ['card_title'],
+                            label: flowerName
+                        },
+                        {
+                            tag: Tags.DIV,
+                            classes: ['card_text'],
+                            children: [
+                                {
+                                    tag: Tags.P,
+                                    classes: ['price_card'],
+                                    label: `$${flowerPrice}`
+                                },
+                                {
+                                    tag: Tags.IMG,
+                                    classes: ['card_icon'],
+                                    src: '../../img/arrow-right.svg'
+                                }
+                            ]
+                        },
+                        {
+                            tag: Tags.DIV,
+                            classes: ['cart_tag'],
+                            children: [
+                                {
+                                    tag: Tags.IMG,
+                                    classes: [],
+                                    src: '../../img/add_cart.svg'
+                                },
+                                {
+                                    tag: Tags.P,
+                                    classes: ['text_tag'],
+                                    label: 'добавить'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+            return cardDOMElements;
     }
-]
+
+}
