@@ -1,15 +1,34 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import "./filter.css";
 
 import Slider from './slider';
 import Button from "./button";
+import Filtration from "./filtration";
 
 interface IFilter {
+    filtration: Filtration;
+    callback: Function;
+    priceSlider: Slider;
+    sizeSlider: Slider;
     getFilter: () => HTMLElement,
+    resetFilters: () => void,
     getAccordion: (node: HTMLElement) => void,
-    getBodyItems: (arr: string[], target: Element, name: string) => void
+    getBodyItems: (arr: string[], target: Element, name: string, callback: Function) => void
 }
 
 export default class Filter implements IFilter {
+    filtration: Filtration;
+    callback: Function;
+    parent: HTMLElement;
+    priceSlider!: Slider;
+    sizeSlider!: Slider;
+
+    constructor(filtration: Filtration, callback: Function, parent: HTMLElement) {
+        this.filtration = filtration;
+        this.callback = callback;
+        this.parent = parent;
+    }
+
     getFilter() {
         const filter = document.createElement('div');
         filter.classList.add('filter');
@@ -17,11 +36,11 @@ export default class Filter implements IFilter {
         this.getAccordion(filter);
 
         const type = filter.querySelector('.num-1');
-        const typeItems = ['Все', 'Цветы', 'Букеты', 'Композиция', 'Свадебные букеты', 'Подарки с цветами'];
+        const typeItems = ['Все', 'цветы', 'букеты', 'композиция', 'свадебные букеты', 'подарки с цветами'];
         const typeName = type?.className;
 
         if (type && !!typeName) {
-            this.getBodyItems(typeItems, type, typeName);
+            this.getBodyItems(typeItems, type, typeName, this.filtration.changeType.bind(this.filtration));
         }
 
         const occasion = filter.querySelector('.num-2');
@@ -29,43 +48,90 @@ export default class Filter implements IFilter {
         const occasionName = occasion?.className;
 
         if (occasion && !!occasionName) {
-            this.getBodyItems(typeOccasion, occasion, occasionName);
+            this.getBodyItems(typeOccasion, occasion, occasionName, this.filtration.changeOccasion.bind(this.filtration));
         }
 
         const color = filter.querySelector('.num-3');
 
-        const colorItems = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink'];
-
+        const colorItems = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink', 'indigo'];
         colorItems.forEach((item) => {
             const ellipse = document.createElement('div');
             ellipse.classList.add('color_circle');
+            ellipse.classList.add(item);
             ellipse.style.background = item;
-
+            ellipse.addEventListener('click', e => {
+                e.preventDefault();
+                ellipsesClassRemove();
+                ellipse.classList.add('active');
+                this.filtration.changeColor(item);
+                this.callback();
+            });
             color?.appendChild(ellipse);
         })
+
+        function ellipsesClassRemove(){
+            document.querySelectorAll('.color_circle').forEach(e => { e.classList.remove('active') })
+        }
+
 
         const flower = filter.querySelector('.num-4');
         const flowerItems = ['роза', 'гербера', 'тюльпан', 'гвоздика', 'лилия', 'хризантема', 'пион'];
         const flowerName = flower?.className;
 
         if (flower && !!flowerName) {
-            this.getBodyItems(flowerItems, flower, flowerName);
+            this.getBodyItems(flowerItems, flower, flowerName, this.filtration.changeFlower.bind(this.filtration));
         }
 
         const price = filter.querySelector('.num-5');
         if (price) {
-            const sliderPrice = new Slider().getSlider(price);
+            this.priceSlider = new Slider((min: number, max: number) => {
+                this.filtration.changePrice(min, max);
+                this.callback();
+            });
+            this.priceSlider.getSlider(price);
         }
 
         const height = filter.querySelector('.num-6');
         if (height) {
-            const sliderHeight = new Slider().getSlider(height);
+            this.sizeSlider = new Slider((min: number, max: number) => {
+                this.filtration.changeSize(min, max);
+                this.callback();
+            });
+            this.sizeSlider.getSlider(height);
         }
 
-        const filterButton = new Button('cбросить фильтры', 'filter_button').getButton(filter);
+        const filterButton = new Button('cбросить фильтры', 'filter_button', 'reset').getButton(filter);
+        filterButton.addEventListener('click', this.resetFilters.bind(this));
 
         return filter;
     }
+
+    resetFilters(): void {
+        this.filtration.removeFilters();
+        this.callback();
+
+        this.uncheckCheckbox();
+        this.uncheckColors();
+
+        this.priceSlider.resetSlider();
+        this.sizeSlider.resetSlider();
+    }
+
+    uncheckCheckbox() {
+        const checkboxes = this.parent.getElementsByClassName('custom-checkbox');
+        for (let i = 0; i < checkboxes.length; i += 1) {
+            const item = checkboxes[i] as HTMLInputElement;
+            item.checked = false;
+        }
+    }
+
+    uncheckColors() {
+        const colors = this.parent.getElementsByClassName('color_circle');
+        for (let i = 0; i < colors.length; i += 1) {
+            colors[i].classList.remove('active');
+        }
+    }
+
     getAccordion(node: HTMLElement) {
         const accordionsItems = ['тип', 'повод', 'цвет', 'основной цветок', 'стоимость', 'высота'];
 
@@ -77,7 +143,7 @@ export default class Filter implements IFilter {
 
             const filterHeader = document.createElement('div');
             filterHeader.classList.add('filter_header');
-            
+
             filterHeader.textContent = item;
             filterItem.appendChild(filterHeader);
 
@@ -88,7 +154,7 @@ export default class Filter implements IFilter {
         })
     }
 
-    getBodyItems(arr: string[], target: Element, name: string) {
+    getBodyItems(arr: string[], target: Element, name: string, callback: Function) {
         arr.forEach((item, index) => {
             const typeGift = document.createElement('div');
 
@@ -96,6 +162,10 @@ export default class Filter implements IFilter {
             checkboxGift.type = 'checkbox';
             checkboxGift.classList.add('custom-checkbox');
             checkboxGift.id = `link${index}-${name}`;
+            checkboxGift.addEventListener('click', () => {
+                callback(item);
+                this.callback();
+            })
             typeGift.appendChild(checkboxGift);
 
             const labelGift = document.createElement('label');

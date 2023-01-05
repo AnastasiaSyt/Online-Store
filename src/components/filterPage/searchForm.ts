@@ -21,13 +21,23 @@ export default class Search implements ISearch {
         form.appendChild(searchField);
 
         const button = document.createElement('button');
+        const buttonImg = document.createElement('img');
         button.classList.add('search_button');
+        buttonImg.classList.add('search_button_img');
+        buttonImg.src = '../../img/Search.svg';
         button.type = "submit";
+        button.appendChild(buttonImg)
         form.appendChild(button);
 
         const copyButton = document.createElement('div');
         copyButton.classList.add('copy_button');
         searchContainer.appendChild(copyButton);
+
+        copyButton.addEventListener('click', e => {
+            e.preventDefault();
+            searchField.select();
+            document.execCommand("copy");
+        })
 
         const copyIcon = document.createElement('img');
         copyIcon.src = '../../img/icon_copy.svg';

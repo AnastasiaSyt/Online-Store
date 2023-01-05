@@ -16,18 +16,18 @@ interface ICardProduct extends IPage {
 
 export default class CardProduct implements ICardProduct {
     cardProduct: HTMLDivElement;
-    constructor(item?: number) {
+    constructor(item: number) {
         const cardProduct = document.createElement('div');
         cardProduct.id = 'cardProductPage';
         cardProduct.classList.add('card_product');
         cardProduct.classList.add('wrapper');
 
         if (Number.isSafeInteger(item)) {
-            const elem = this.getCardProductDOMElements(item!);
+            const elem = this.getCardProductDOMElements(item);
             this.drawItems(cardProduct, elem);
         }
         this.cardProduct = cardProduct;
-        this.addItems(item!);
+        this.addItems(item);
     }
 
     getPage(): HTMLElement {
@@ -47,7 +47,7 @@ export default class CardProduct implements ICardProduct {
                 container.appendChild(coloredTag);
             }
         })
-        
+
         const buttonsContainer = this.cardProduct.querySelector('.card_product_buttons');
         const cardProductButton = new Button('добавить в корзину', 'card_product_button');
         const counter = new Counter().getCounter();

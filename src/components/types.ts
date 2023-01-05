@@ -12,6 +12,15 @@ export type TElementConfig = {
     title?: string
 }
 
+export type SelectedFilter = {
+    type : {[type:string]: string},
+    occasion: {[occasion:string]: string},
+    color?: string,
+    flower: {[flower:string]: string},
+    price: {min: number, max: number},
+    size: {min: number, max: number}
+}
+
 export enum Tags {
     IMG = 'img',
     DIV = 'div',
