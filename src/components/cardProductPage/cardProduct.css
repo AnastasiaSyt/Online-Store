@@ -70,3 +70,6 @@
     margin: 0px 30px 0px 0;
 }
 
+.card_product_tags {
+    display: flex;
+}

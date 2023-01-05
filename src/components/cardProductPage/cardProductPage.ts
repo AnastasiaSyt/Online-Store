@@ -8,9 +8,10 @@ import flowers from "../data/data";
 
 interface ICardProduct extends IPage {
     cardProduct: HTMLDivElement,
-    addItems: () => void,
+    addItems: (flowerNumber: number) => void,
     drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
-    createElement: (config: TElementConfig) => HTMLElement
+    createElement: (config: TElementConfig) => HTMLElement,
+    getCardProductDOMElements: (flowerNumber: number) => TElementConfig[]
 }
 
 export default class CardProduct implements ICardProduct {
@@ -26,33 +27,37 @@ export default class CardProduct implements ICardProduct {
             this.drawItems(cardProduct, elem);
         }
         this.cardProduct = cardProduct;
-        this.addItems();
+        this.addItems(item!);
     }
 
     getPage(): HTMLElement {
         return this.cardProduct;
     }
 
-    addItems() {
-        const coloredTag = new ColoredTags().getColoredTag('Анемон');
-        const tagContainer = this.cardProduct.getElementsByClassName('card_product_tags');
-        const container = tagContainer[0];
-        if (!container) {
+    addItems(flowerNumber: number) {
+        const tags = flowers[flowerNumber]["flower"];
+        console.log(tags);
+        tags.forEach(item => {
+            const coloredTag = new ColoredTags().getColoredTag(item);
+            const tagContainer = this.cardProduct.getElementsByClassName('card_product_tags');
+            const container = tagContainer[0];
+            if (!container) {
+                throw new Error ('Container not found');
+            } else {
+                container.appendChild(coloredTag);
+            }
+        })
+        
+        const buttonsContainer = this.cardProduct.querySelector('.card_product_buttons');
+        const cardProductButton = new Button('добавить в корзину', 'card_product_button');
+        const counter = new Counter().getCounter();
+
+        if (!buttonsContainer) {
             throw new Error ('Container not found');
         } else {
-            container.appendChild(coloredTag);
+            cardProductButton.getButton(buttonsContainer);
+            buttonsContainer.appendChild(counter);
         }
-        console.log(container);
-        // const buttonsContainer = this.cardProduct.getElementsByClassName('card_product_buttons');
-        // const cardProductButton = new Button('добавить в корзину', 'card_product_button');
-        // const counter = new Counter().getCounter();
-
-        // if (!buttonsContainer) {
-        //     throw new Error ('Container not found');
-        // } else {
-        //     cardProductButton.getButton(buttonsContainer);
-        //     buttonsContainer.appendChild(counter);
-        // }
     }
 
     drawItems(parent: HTMLElement, configs: TElementConfig[]) {
