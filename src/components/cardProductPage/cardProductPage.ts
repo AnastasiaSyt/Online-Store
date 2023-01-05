@@ -174,8 +174,6 @@ export default class CardProduct implements ICardProduct {
                 src: flowers[id]['images'][i],
             }
         }
-        console.log(temp)
-
         return temp;
     }
 }
