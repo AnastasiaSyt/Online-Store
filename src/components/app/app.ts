@@ -50,9 +50,7 @@ export default class App implements IApp {
             newPage = new FilterPage();
         } else if (id === PageIDs.CardProductPage) {
             const pathName = window.location.pathname;
-            // console.log(pathName);
             const itemId = Number(pathName.split('_').pop());
-            // console.log(itemId);
             newPage = new CardProduct(itemId);
         } else if (id === PageIDs.CartPage) {
             newPage = new Basket();
@@ -84,7 +82,6 @@ export default class App implements IApp {
             return PageIDs.FilterPage;
         }
         url = url.substring(1);
-        // console.log(url);
         if (url.indexOf(PageIDs.CardProductPage) === 0) {
             return PageIDs.CardProductPage;
         }

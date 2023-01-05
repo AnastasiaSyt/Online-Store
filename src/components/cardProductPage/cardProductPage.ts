@@ -8,14 +8,14 @@ import flowers from "../data/data";
 
 interface ICardProduct extends IPage {
     cardProduct: HTMLDivElement,
-    addItems: () => void,
+    addItems: (item: number) => void,
     drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
     createElement: (config: TElementConfig) => HTMLElement
 }
 
 export default class CardProduct implements ICardProduct {
     cardProduct: HTMLDivElement;
-    constructor(item?: number) {
+    constructor(item: number) {
         const cardProduct = document.createElement('div');
         cardProduct.id = 'cardProductPage';
         cardProduct.classList.add('card_product');
@@ -26,15 +26,15 @@ export default class CardProduct implements ICardProduct {
             this.drawItems(cardProduct, elem);
         }
         this.cardProduct = cardProduct;
-        this.addItems();
+        this.addItems(item);
     }
 
     getPage(): HTMLElement {
         return this.cardProduct;
     }
 
-    addItems() {
-        const coloredTag = new ColoredTags().getColoredTag('Анемон');
+    addItems(item: number) {
+        const coloredTag = new ColoredTags().getColoredTag(flowers[item]['flower'][0][0].toUpperCase() + flowers[item]['flower'][0].slice(1));
         const tagContainer = this.cardProduct.getElementsByClassName('card_product_tags');
         const container = tagContainer[0];
         if (!container) {

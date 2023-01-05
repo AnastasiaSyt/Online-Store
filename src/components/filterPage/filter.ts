@@ -39,6 +39,7 @@ export default class Filter implements IFilter {
         colorItems.forEach((item) => {
             const ellipse = document.createElement('div');
             ellipse.classList.add('color_circle');
+            ellipse.classList.add(item);
             ellipse.style.background = item;
 
             color?.appendChild(ellipse);
@@ -77,7 +78,7 @@ export default class Filter implements IFilter {
 
             const filterHeader = document.createElement('div');
             filterHeader.classList.add('filter_header');
-            
+
             filterHeader.textContent = item;
             filterItem.appendChild(filterHeader);
 
