@@ -28,7 +28,7 @@ export default class CardProduct implements ICardProduct {
         this.cardProduct = cardProduct;
         this.addItems();
     }
-    
+
     getPage(): HTMLElement {
         return this.cardProduct;
     }
@@ -79,7 +79,7 @@ export default class CardProduct implements ICardProduct {
         return node;
     }
     getCardProductDOMElements(flowerNumber: number): TElementConfig[]{
-        
+
         const flowerName = flowers[flowerNumber]["title"];
         const flowerPrice = flowers[flowerNumber]["price"];
         const category = flowers[flowerNumber]["category"];
@@ -106,18 +106,7 @@ export default class CardProduct implements ICardProduct {
                             {
                                 tag: Tags.DIV,
                                 classes: ['card_product_small_img'],
-                                children: [
-                                    {
-                                        tag: Tags.IMG,
-                                        classes: ['small_img'],
-                                        src: photo[0]
-                                    }
-                                    // {
-                                    //     tag: Tags.IMG,
-                                    //     classes: ['small_img'],
-                                    //     src: '../../img/flowers_15_2.jpg'
-                                    // }
-                                ]
+                                children: this.getImgs(flowerNumber),
                             },
                             {
                                 tag: Tags.IMG,
@@ -169,5 +158,19 @@ export default class CardProduct implements ICardProduct {
             }
         ]
             return CardProductDOMElements;
+    }
+
+    getImgs(id: number): TElementConfig[]{
+        const temp: TElementConfig[] = [];
+        for (let i = 0; i < flowers[id]['images'].length; i++){
+            temp[i] = {
+                tag: Tags.IMG,
+                classes: ['small_img'],
+                src: flowers[id]['images'][i],
+            }
+        }
+        console.log(temp)
+
+        return temp;
     }
 }

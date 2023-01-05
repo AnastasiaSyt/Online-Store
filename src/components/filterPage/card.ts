@@ -11,7 +11,7 @@ interface ICard {
 export default class Card implements ICard{
     getCard(item: number): HTMLElement {
             const elem = this.getDOMElements(item);
-            
+
             const card = document.createElement('div');
             card.classList.add('card');
             this.drawItems(card, elem);
@@ -41,7 +41,7 @@ export default class Card implements ICard{
         }
         return node;
     }
-    
+
     getDOMElements(flowerNumber: number): TElementConfig[]{
         const thumbnailPath = flowers[flowerNumber]["thumbnail"];
         const flowerName = flowers[flowerNumber]["title"];

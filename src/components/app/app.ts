@@ -25,7 +25,7 @@ export default class App implements IApp {
         this.changeRouteHandler();
         this.run();
     }
-    
+
     handlerGlobalRoutes() {
         const filterPage = document.getElementById('filterPage');
         filterPage?.addEventListener('click', () => {
@@ -44,7 +44,7 @@ export default class App implements IApp {
     renderNewPage(id: PageIDs) {
 
         this.container?.childNodes.forEach((node) => this.container.removeChild(node));
-        let newPage: IPage | null = null; 
+        let newPage: IPage | null = null;
 
         if (id === PageIDs.FilterPage) {
             newPage = new FilterPage();

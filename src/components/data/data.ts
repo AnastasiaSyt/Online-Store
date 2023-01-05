@@ -767,7 +767,7 @@ const flowers = [
         "../../img/data_img/flowers_40_1.jpg",
         "../../img/data_img/flowers_40_2.jpg"
         ]
-    }, 
+    },
 ]
 
 export default flowers;
