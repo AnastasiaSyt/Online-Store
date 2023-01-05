@@ -35,11 +35,55 @@ export default class BasketItems implements IBasketItems {
 
     itemsContent.appendChild(basketItemsHead);
 
-    const basketItem = new BItem().getItem();
-    itemsContent.appendChild(basketItem);
-    const basketItem2 = new BItem().getItem();
-    itemsContent.appendChild(basketItem2);
+
+
+    let basketItems: HTMLElement[] = [];
+
+    for(let i=0;i<5;i++){
+      basketItems.push(new BItem().getItem('Сладкие ноты', i+1, 120));
+    }
+
+    for(let i=0;i<5;i++){
+      itemsContent.appendChild(basketItems[i]);
+    }
+
+    itemsContent.querySelectorAll('.cross').forEach(cross => {
+      cross.addEventListener('click', e =>{
+        e.preventDefault();
+        basketItems = basketItems.filter(e =>{
+          if(e!=cross.parentNode) return true;
+        } )
+
+        cross.parentNode?.parentNode?.removeChild(cross.parentNode);
+
+        console.log(basketItems)
+
+        let sum = 0;
+        for(let i=0;i<basketItems.length;i++){
+          if(basketItems[i].querySelector('.price')!.textContent!.split('$')[1]!=undefined && (basketItems[i].querySelector('.checked') as HTMLInputElement)?.checked)
+          sum += +basketItems[i].querySelector('.price')!.textContent!.split('$')[1];
+        }
+
+        document.querySelector('.goods-price')!.textContent = '$' + sum;
+        document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+      })
+    });
+
+    itemsContent.querySelectorAll('.checked').forEach(element => {
+      (element as HTMLInputElement).onchange = function(){
+        let sum = 0;
+        for(let i=0;i<basketItems.length;i++){
+          if(basketItems[i].querySelector('.price')!.textContent!.split('$')[1]!=undefined && (basketItems[i].querySelector('.checked') as HTMLInputElement)?.checked)
+          sum += +basketItems[i].querySelector('.price')!.textContent!.split('$')[1];
+        }
+
+        document.querySelector('.goods-price')!.textContent = '$' + sum;
+        document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+      }
+    });
 
     return itemsContent;
   }
 }
+
+//TODO: connect with cross div

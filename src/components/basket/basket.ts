@@ -16,7 +16,7 @@ export default class Basket implements IBasketPage {
     const basketItems = new BasketItems().getItems();
     basketContent.appendChild(basketItems);
 
-    const check = new Check().getCheck();
+    const check = new Check().getCheck(18, 10);
     basketContent.appendChild(check);
 
     return basketContent;

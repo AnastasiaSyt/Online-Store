@@ -1,12 +1,14 @@
 import './basketItem.css'
+import './check'
 
 
 interface IItem {
-  getItem: () => HTMLElement
+  getItem: (defaultName: string, defaultAccessNumber: number, defaultPrice: number) => HTMLElement;
 }
 
 export default class BItem implements IItem {
-  getItem() {
+
+  getItem(defaultName: string, defaultAccessNumber: number, defaultPrice: number) {
     const itemContent = document.createElement('div');
     itemContent.classList.add('basket-item')
 
@@ -30,18 +32,17 @@ export default class BItem implements IItem {
     itemName.classList.add('item-name');
 
     const h2Name = document.createElement('h2');
-    h2Name.innerHTML = 'Сладкие ноты';
+    h2Name.innerHTML = defaultName;
     itemName.appendChild(h2Name);
 
     const accessNumber = document.createElement('p');
-    accessNumber.innerHTML = 'Доступно: 3шт';
+    accessNumber.innerHTML = `Доступно: ${defaultAccessNumber}`;
     itemName.appendChild(accessNumber);
 
     //=======
     itemNameBlock.appendChild(itemName);
     //==========
 
-    //==========
     const color = document.createElement('div');
     color.classList.add('item-color');
 
@@ -52,12 +53,75 @@ export default class BItem implements IItem {
 
     const colorCircle = document.createElement('div');
     colorCircle.classList.add('color-chooser');
+    colorCircle.classList.add('base');
+    colorCircle.classList.add('white');
     color.appendChild(colorCircle)
 
     const colorA = document.createElement('a');
     colorA.classList.add('color-chooser_text');
     colorA.innerHTML = 'Изменить';
     color.appendChild(colorA);
+
+
+    const colors = document.createElement('div');
+    colors.classList.add('colors_block');
+
+    for(let i = 0;i<8;i++){
+      const tempColor = document.createElement('div');
+      tempColor.classList.add('color-chooser');
+      tempColor.classList.add('color');
+      switch(i){
+        case 0:
+          tempColor.classList.add('red');
+          break;
+        case 1:
+          tempColor.classList.add('yellow');
+          break;
+        case 2:
+          tempColor.classList.add('blue');
+          break;
+        case 3:
+          tempColor.classList.add('pink');
+          break;
+        case 4:
+          tempColor.classList.add('purple');
+          break;
+        case 5:
+          tempColor.classList.add('white');
+          break;
+        case 6:
+          tempColor.classList.add('lilac');
+          break;
+        case 7:
+          tempColor.classList.add('orange');
+          break;
+      }
+      colors.appendChild(tempColor)
+
+      tempColor.addEventListener('click', e=>{
+        e.preventDefault();
+        colors.classList.toggle('active');
+        colorCircle.classList.remove(colorCircle.classList[2])
+        colorCircle.classList.add(tempColor.classList[2])
+        colorP.textContent = colorCircle.classList.contains('white') ? 'Белый'
+                            : colorCircle.classList.contains('orange') ? 'Оранжевый'
+                            : colorCircle.classList.contains('pink') ? 'Розовый'
+                            : colorCircle.classList.contains('red') ? 'Красный'
+                            : colorCircle.classList.contains('yellow') ? 'Жёлтый'
+                            : colorCircle.classList.contains('purple') ? 'Фиолетовый'
+                            : colorCircle.classList.contains('lilac') ? 'Сиреневый'
+                            : 'Синий';
+      })
+
+
+    }
+
+    colorA.addEventListener('click', e =>{
+      e.preventDefault();
+      colors.classList.toggle('active')
+    })
+
+    color.appendChild(colors)
 
     //==========
 
@@ -74,6 +138,8 @@ export default class BItem implements IItem {
     counterIncrease.classList.add('increase');
     counterIncrease.innerHTML='+';
 
+
+
     const counterNumber = document.createElement('div');
     counterNumber.classList.add('counter_number');
     counterNumber.innerHTML = '1';
@@ -82,11 +148,46 @@ export default class BItem implements IItem {
     counterBlock.appendChild(counterNumber);
     counterBlock.appendChild(counterIncrease);
 
-    //===========
+    counterIncrease.addEventListener('click', encreaseCounter)
+    counterDecrease.addEventListener('click', decreaseCounter)
 
     const price = document.createElement('p');
     price.classList.add('price');
-    price.innerHTML = '$105'
+    price.innerHTML = "$" + defaultPrice;
+
+    function encreaseCounter(){
+      if(counterNumber.textContent!=null && +counterNumber.textContent+1 <= defaultAccessNumber){
+        counterNumber.textContent = (+counterNumber.textContent+1).toString();
+        if(checkBox.checked){
+          document.querySelector('.goods-price')!.textContent = '$' + (
+          +document.querySelector('.goods-price')!.textContent!.split('$')[1]
+          + defaultPrice);
+          document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+        }
+      }
+      priceRegulation();
+    }
+
+    function decreaseCounter(){
+      if(counterNumber.textContent!=null && +counterNumber.textContent>1){
+        counterNumber.textContent = (+counterNumber.textContent-1).toString();
+        if(checkBox.checked){
+          document.querySelector('.goods-price')!.textContent = '$' + (
+          +document.querySelector('.goods-price')!.textContent!.split('$')[1]
+          - defaultPrice);
+          if(+counterNumber.textContent < defaultAccessNumber) document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+        }
+      }
+      priceRegulation();
+    }
+
+    function priceRegulation(){
+      if (defaultPrice && counterNumber.textContent){
+        price.textContent ='$' + (defaultPrice * +counterNumber.textContent).toString();
+      }
+    }
+    //===========
+
 
     //==========
 
