@@ -8,6 +8,7 @@ import Card from './card';
 import { IPage } from '../IPage';
 import { PageIDs } from '../types';
 import flowers from '../data/data';
+import { IFlower } from '../data/IFlowers';
 
 
 export default class FilterPage implements IPage {
@@ -72,7 +73,19 @@ export default class FilterPage implements IPage {
         allCards.classList.add('all_cards');
         mainContent.appendChild(allCards);
 
-        flowers.forEach(item => {
+        const filteredFlowers = this.filter();
+        this.drawFlowers(allCards, filteredFlowers)
+
+        return filterContent;
+    }
+
+    removeFlowers(parent: HTMLElement){
+        while(parent.childNodes.length > 0 ) {parent.removeChild(parent.childNodes[0])}
+
+    }
+
+    drawFlowers(parent: HTMLElement, filteredFlowers: IFlower[]){
+        filteredFlowers.forEach(item => {
             const cardLink = document.createElement('a');
             cardLink.addEventListener('click', () => {
                 window.history.pushState({}, "", `${PageIDs.CardProductPage}_${item.id}`);
@@ -83,9 +96,18 @@ export default class FilterPage implements IPage {
 
             const card = new Card().getCard(item.id);
             cardLink.appendChild(card);
-            allCards.appendChild(cardLink);
+            parent.appendChild(cardLink);
         })
+    }
 
-        return filterContent;
+    filter(): IFlower[] {
+        let filteredFlowers: IFlower[] = flowers ?? [];
+        filteredFlowers = this.typeFilter(filteredFlowers, 'букет') ?? [];
+        return filteredFlowers;
+    }
+
+    typeFilter(currentFlowers: IFlower[], type: string){
+        if(type.indexOf('Все')>=0) return currentFlowers;
+        return currentFlowers.filter(el=> el.category === type)
     }
 }

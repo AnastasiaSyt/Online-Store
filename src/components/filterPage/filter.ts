@@ -67,6 +67,7 @@ export default class Filter implements IFilter {
 
         return filter;
     }
+
     getAccordion(node: HTMLElement) {
         const accordionsItems = ['тип', 'повод', 'цвет', 'основной цветок', 'стоимость', 'высота'];
 
