@@ -5,18 +5,7 @@ import FilterPage from "../filterPage/filterPage";
 import { IPage } from "../IPage";
 import { PageIDs } from "../types";
 
-interface IApp {
-    container: HTMLElement,
-    handlerGlobalRoutes: () => void,
-    renderNewPage: (id: PageIDs) => void,
-    changeRouteHandler: () => void,
-    locationHandler: () => void,
-    recognizeUrl: (url: string) => PageIDs,
-    run: () => void,
-    setLocation: (page: PageIDs) => void
-}
-
-export default class App implements IApp {
+export default class App {
     container: HTMLElement;
 
     constructor(content: HTMLElement) {
@@ -25,7 +14,7 @@ export default class App implements IApp {
         this.changeRouteHandler();
         this.run();
     }
-
+    
     handlerGlobalRoutes() {
         const filterPage = document.getElementById('filterPage');
         filterPage?.addEventListener('click', () => {
@@ -42,18 +31,13 @@ export default class App implements IApp {
     }
 
     renderNewPage(id: PageIDs) {
-
         this.container?.childNodes.forEach((node) => this.container.removeChild(node));
-        let newPage: IPage | null = null;
+        let newPage: IPage | null = null; 
 
         if (id === PageIDs.FilterPage) {
             newPage = new FilterPage();
         } else if (id === PageIDs.CardProductPage) {
-            const pathName = window.location.pathname;
-            // console.log(pathName);
-            const itemId = Number(pathName.split('_').pop());
-            // console.log(itemId);
-            newPage = new CardProduct(itemId);
+            newPage = new CardProduct();
         } else if (id === PageIDs.CartPage) {
             newPage = new Basket();
         } else if (id === PageIDs.ErrorPage) {
@@ -84,10 +68,6 @@ export default class App implements IApp {
             return PageIDs.FilterPage;
         }
         url = url.substring(1);
-        // console.log(url);
-        if (url.indexOf(PageIDs.CardProductPage) === 0) {
-            return PageIDs.CardProductPage;
-        }
         if (url !== PageIDs.CardProductPage &&
             url !== PageIDs.CartPage &&
             url !== PageIDs.FilterPage

@@ -23,10 +23,10 @@ export default class BasketItems implements IBasketItems {
     head3.classList.add('basket_items-head_name');
     head4.classList.add('basket_items-head_name');
 
-    head1.textContent = 'Наименование';
-    head2.textContent = 'Цвет';
-    head3.textContent = 'Количество';
-    head4.textContent = 'Цена';
+    head1.innerHTML = 'Наименование';
+    head2.innerHTML = 'Цвет';
+    head3.innerHTML = 'Количество';
+    head4.innerHTML = 'Цена';
 
     basketItemsHead.appendChild(head1);
     basketItemsHead.appendChild(head2);
@@ -64,7 +64,7 @@ export default class BasketItems implements IBasketItems {
           sum += +basketItems[i].querySelector('.price')!.textContent!.split('$')[1];
         }
 
-        document.querySelector('.goods-price')!.textContent  = `$${sum}`;
+        document.querySelector('.goods-price')!.textContent = '$' + sum;
         document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
       })
     });
@@ -77,7 +77,7 @@ export default class BasketItems implements IBasketItems {
           sum += +basketItems[i].querySelector('.price')!.textContent!.split('$')[1];
         }
 
-        document.querySelector('.goods-price')!.textContent = `$${sum}`;
+        document.querySelector('.goods-price')!.textContent = '$' + sum;
         document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
       }
     });

@@ -7,7 +7,6 @@ import Tag from './tags';
 import Card from './card';
 import { IPage } from '../IPage';
 import { PageIDs } from '../types';
-import flowers from '../data/data';
 
 
 export default class FilterPage implements IPage {
@@ -68,24 +67,18 @@ export default class FilterPage implements IPage {
         select.appendChild(optionTwo);
         select.appendChild(optionThree);
 
-        const allCards = document.createElement('div');
-        allCards.classList.add('all_cards');
-        mainContent.appendChild(allCards);
+        const cardLink = document.createElement('a');
+        cardLink.addEventListener('click', () => {
+            window.history.pushState({}, "", PageIDs.CardProductPage);
+            const event = new Event('popstate');
+            window.dispatchEvent(event);
+        });
+        cardLink.classList.add('link_card');
 
-        flowers.forEach(item => {
-            const cardLink = document.createElement('a');
-            cardLink.addEventListener('click', () => {
-                window.history.pushState({}, "", `${PageIDs.CardProductPage}_${item.id}`);
-                const event = new Event('popstate');
-                window.dispatchEvent(event);
-            });
-            cardLink.classList.add('link_card');
-
-            const card = new Card().getCard(item.id);
-            cardLink.appendChild(card);
-            allCards.appendChild(cardLink);
-        })
-
+        const card = new Card().getCard();
+        cardLink.appendChild(card);
+        mainContent.appendChild(cardLink);
+       
         return filterContent;
     }
 }
