@@ -102,12 +102,19 @@ export default class FilterPage implements IPage {
 
     filter(): IFlower[] {
         let filteredFlowers: IFlower[] = flowers ?? [];
-        filteredFlowers = this.typeFilter(filteredFlowers, 'букет') ?? [];
+        filteredFlowers = this.typeFilter(filteredFlowers, 'все') ?? [];
+        filteredFlowers = this.occasionFilter(filteredFlowers, ['рождество', 'Свадьба'])
         return filteredFlowers;
     }
 
     typeFilter(currentFlowers: IFlower[], type: string){
-        if(type.indexOf('Все')>=0) return currentFlowers;
+        if(type.indexOf('все')>=0) return currentFlowers;
         return currentFlowers.filter(el=> el.category === type)
+    }
+
+    occasionFilter(currentFlowers: IFlower[], occasion: string[]){
+        return currentFlowers.filter(el=> {
+            return el.occasions.filter(e => occasion.indexOf(e) > -1).length>0
+        })
     }
 }
