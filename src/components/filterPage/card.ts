@@ -41,6 +41,7 @@ export default class Card implements ICard{
         }
         return node;
     }
+    
     getDOMElements(flowerNumber: number): TElementConfig[]{
         const thumbnailPath = flowers[flowerNumber]["thumbnail"];
         const flowerName = flowers[flowerNumber]["title"];
@@ -101,60 +102,3 @@ export default class Card implements ICard{
     }
 
 }
-
-// let flowerNumber = 0;
-// const thumbnailPath = flowers[flowerNumber]["thumbnail"];
-// const flowerName = flowers[flowerNumber]["title"];
-// const flowerPrice = flowers[flowerNumber]["price"];
-
-// const cardDOMElements: TElementConfig[] =
-// [
-//     {
-//         tag: Tags.IMG,
-//         classes: ['thumbnail'],
-//         src: thumbnailPath
-//     },
-//     {
-//         tag: Tags.DIV,
-//         classes: ['card_content'],
-//         children: [
-//             {
-//                 tag: Tags.P,
-//                 classes: ['card_title'],
-//                 label: flowerName
-//             },
-//             {
-//                 tag: Tags.DIV,
-//                 classes: ['card_text'],
-//                 children: [
-//                     {
-//                         tag: Tags.P,
-//                         classes: ['price_card'],
-//                         label: flowerPrice
-//                     },
-//                     {
-//                         tag: Tags.IMG,
-//                         classes: ['card_icon'],
-//                         src: '../../img/arrow-right.svg'
-//                     }
-//                 ]
-//             },
-//             {
-//                 tag: Tags.DIV,
-//                 classes: ['cart_tag'],
-//                 children: [
-//                     {
-//                         tag: Tags.IMG,
-//                         classes: [],
-//                         src: '../../img/add_cart.svg'
-//                     },
-//                     {
-//                         tag: Tags.P,
-//                         classes: ['text_tag'],
-//                         label: 'добавить'
-//                     }
-//                 ]
-//             }
-//         ]
-//     }
-// ]
