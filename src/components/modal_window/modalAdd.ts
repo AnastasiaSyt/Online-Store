@@ -3,6 +3,7 @@ import Button from "../filterPage/button";
 import './modal.css';
 
 export default class Modal {
+
     getModal() {
         this.modalBackground();
         this.openModalWindow();
@@ -51,7 +52,7 @@ export default class Modal {
         const closeIcon = document.getElementById('close_icon');
         closeIcon?.addEventListener('click', this.closeModalWindow.bind(this));
         const cancel = document.querySelector('.cancel_button');
-        cancel?.addEventListener('click', this.closeModalWindow.bind(this));
+        cancel?.addEventListener('click', (this.closeModalWindow.bind(this)));
         const background = document.querySelector('.modalBackground');
         background?.addEventListener('click', this.closeModalWindow.bind(this));
     }
@@ -64,7 +65,10 @@ export default class Modal {
         let classes = (event.target as HTMLElement).classList;
         const modalWindow = document.querySelector('.modalBackground');
         if (modalWindow) {
-            if(classes.contains('modalBackground') || classes.contains('modal_close-button')) {
+            if (classes.contains('modalBackground') || 
+            classes.contains('modal_close-button') || 
+            classes.contains('cancel_button') ||
+            classes.contains('modal_window')) {
                 modalWindow.remove();
             }
         }

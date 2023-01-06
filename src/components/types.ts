@@ -8,7 +8,8 @@ export type TElementConfig = {
     type?: string,
     attribute?: [string, string],
     placeholder?: string,
-    pattern?: string
+    pattern?: string,
+    title?: string
 }
 
 export enum Tags {
@@ -16,7 +17,8 @@ export enum Tags {
     DIV = 'div',
     P = 'p',
     INPUT = 'input',
-    LABEL = 'label'
+    LABEL = 'label',
+    FORM = 'form'
 }
 
 export const enum PageIDs {

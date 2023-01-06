@@ -97,14 +97,45 @@
 .paid_logo:last-child {
     margin-right: 0;
 }
-
+/* 
 .modal_input:invalid {
     border: 1px solid rgb(255, 0, 0);
   }
   
   .modal_input:valid {
     border: 1px solid rgb(39, 180, 26);
-  }
+  } */
+
+  /* input:focus:required:valid {
+    border-color: green;
+    color: green;
+    box-shadow: none;
+}
+
+input:focus:required:invalid {
+    border-color: red;
+    color: red;
+    box-shadow: none;
+} */
+
+input:valid:not(:placeholder-shown) {
+	border-color: green;
+}
+
+input:invalid:not(:placeholder-shown) {
+	border-color: red;
+}
+input:invalid:not(:placeholder-shown) + .form__error {
+	display: block;
+}
+/* .form__error {
+	color: red;
+	text-align: left;
+	font-size: 12px;
+	display: block;
+	margin-top: 3px;
+	display: none;
+} */
 
   .confirm_button {
     margin-left: 35px;

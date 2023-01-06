@@ -3,7 +3,7 @@ import './modal.css';
 
 export default class ModalDraw {
     getModal() {
-        const modal = document.createElement('div');
+        const modal = document.createElement('form');
         modal.classList.add('modal_window');
         this.drawItems(modal, this.getDOMElements());
         return modal;
@@ -42,6 +42,9 @@ export default class ModalDraw {
         if (config.pattern) {
             (node as HTMLInputElement).pattern = config.pattern;
         }
+        if (config.title) {
+            (node as HTMLInputElement).title = config.title;
+        }
         if (config.attribute) {
             (node as HTMLInputElement).setAttribute(config.attribute[0], config.attribute[1]);
         }
@@ -68,15 +71,17 @@ export default class ModalDraw {
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Имя и фамилия',
-                                    pattern: '\D{3,} ^\S+\D{3,}'
+                                    pattern: '[A-Za-zА-Яа-яЁё]{3,}\\s+[A-Za-zА-Яа-яЁё]{3,}',
+                                    title: 'Введите не менее двух слов, длина каждого не менее 3 символов'
                                 },
                                 {
                                     tag: Tags.INPUT,
                                     classes: ['modal_input_phone', 'modal_input'],
-                                    type: 'tel',
+                                    type: '',
                                     attribute: ['required', 'required'],
-                                    placeholder: 'Номер телефона',
-                                    pattern: '\+\d-\d{3}-\d{2}-\d{4}'
+                                    placeholder: 'Номер телефона в формате +000000000000',
+                                    pattern: '[\\+][0-9\\s]{9,}',
+                                    title: 'Введите номер телефона, он должен начинаться с +, содержать только цифры и быть не короче 9 цифр'
                                 },
                                 {
                                     tag: Tags.INPUT,
@@ -84,14 +89,16 @@ export default class ModalDraw {
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Адрес доставки',
-                                    pattern: '\S+\s+\S+\s+\S+'
+                                    pattern: '[A-Za-zА-Яа-яЁё0-9]{5,}\\s+[A-Za-zА-Яа-яЁё0-9]{5,}\\s+[A-Za-zА-Яа-яЁё0-9]{5,}',
+                                    title: 'Введите не менее трех слов, длина каждого не менее 5 символов'
                                 },
                                 {
                                     tag: Tags.INPUT,
                                     classes: ['modal_input_email', 'modal_input'],
                                     type: 'email',
                                     attribute: ['required', 'required'],
-                                    placeholder: 'Email'
+                                    placeholder: 'Email',
+                                    pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
                                 },
                                 {
                                     tag: Tags.DIV,
@@ -140,7 +147,8 @@ export default class ModalDraw {
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Name on card',
-                                    pattern: '\D{3,} ^\S+\D{3,}'
+                                    pattern: '[A-Za-zА-Яа-яЁё]{3,}\\s+[A-Za-zА-Яа-яЁё]{3,}',
+                                    title: 'Введите имя и фамилию держателя карты'
                                 },
                                 {
                                     tag: Tags.INPUT,
@@ -148,7 +156,8 @@ export default class ModalDraw {
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Card number',
-                                    pattern: '\s{0,}\+{1,1}375\s{0,}\({0,1}(([2]{1}([5]{1}|[9]{1}))|([3]{1}[3]{1})|([4]{1}[4]{1}))\)\s{0,}[0-9]{3,3}\s{0,}[0-9]{4,4}'
+                                    pattern: '[0-9]{16}',
+                                    title: 'Введите номер карты, 16 символов'
                                 },
                                 {
                                     tag: Tags.INPUT,
