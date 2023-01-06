@@ -23,13 +23,14 @@
 }
 
 .search_button {
-  height: 24px;
-  width: 24px;
+  height: 38px;
+  display: none;
+  width: 41px;
   position: absolute;
-  top: 8px;
-  right: 8px;
+  background-color: #fff;
+  right: 2px;
+  top: 2px;
   cursor: pointer;
-  background: url(../../img/Search.svg);
   background-repeat: no-repeat;
   background-size: cover;
   border: none;

@@ -103,11 +103,6 @@ export default class FilterPage implements IPage {
     filter(): IFlower[] {
         let filteredFlowers: IFlower[] = flowers ?? [];
         filteredFlowers = this.typeFilter(filteredFlowers, 'все') ?? [];
-        filteredFlowers = this.occasionFilter(filteredFlowers, ['свидание']);
-        filteredFlowers = this.colorFilter(filteredFlowers, 'белый');
-        filteredFlowers = this.flowerFilter(filteredFlowers, ['роза']);
-        filteredFlowers = this.priceFilter(filteredFlowers, 75, 120);
-        filteredFlowers = this.sizeFilter(filteredFlowers, 70, 70);
         return filteredFlowers;
     }
 

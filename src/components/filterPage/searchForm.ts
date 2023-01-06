@@ -21,8 +21,12 @@ export default class Search implements ISearch {
         form.appendChild(searchField);
 
         const button = document.createElement('button');
+        const buttonImg = document.createElement('img');
         button.classList.add('search_button');
+        buttonImg.classList.add('search_button_img');
+        buttonImg.src = '../../img/Search.svg';
         button.type = "submit";
+        button.appendChild(buttonImg)
         form.appendChild(button);
 
         const copyButton = document.createElement('div');
