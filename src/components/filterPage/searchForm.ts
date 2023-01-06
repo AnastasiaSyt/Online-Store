@@ -29,6 +29,12 @@ export default class Search implements ISearch {
         copyButton.classList.add('copy_button');
         searchContainer.appendChild(copyButton);
 
+        copyButton.addEventListener('click', e => {
+            e.preventDefault();
+            searchField.select();
+            document.execCommand("copy");
+        })
+
         const copyIcon = document.createElement('img');
         copyIcon.src = '../../img/icon_copy.svg';
         copyIcon.classList.add('copy_icon');
