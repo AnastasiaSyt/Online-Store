@@ -73,13 +73,13 @@
     border: 1px solid #BDBDBD;
     border-radius: 4px;
     margin-top: 15px;
+    padding: 0 10px;
 }
 
 .modal_input::placeholder {
     font-size: 1.4rem;
     line-height: 1.6rem;
     color: #828282;
-    padding: 0 10px;
 }
 
 .modal_paid_logo {
