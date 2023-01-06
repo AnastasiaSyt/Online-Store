@@ -1,7 +1,7 @@
 import { TElementConfig, Tags } from '../types';
 import './modal.css';
 
-export default class Modal {
+export default class ModalDraw {
     getModal() {
         const modal = document.createElement('div');
         modal.classList.add('modal_window');
@@ -63,13 +63,8 @@ export default class Modal {
                             label: 'Персональные данные',
                             children: [
                                 {
-                                    tag: Tags.DIV,
-                                    classes: ['modal_personal'],
-                                    label: 'Персональная информация',
-                                },
-                                {
                                     tag: Tags.INPUT,
-                                    classes: ['modal_input_name'],
+                                    classes: ['modal_input_name', 'modal_input'],
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Имя и фамилия',
@@ -77,15 +72,15 @@ export default class Modal {
                                 },
                                 {
                                     tag: Tags.INPUT,
-                                    classes: ['modal_input_phone'],
+                                    classes: ['modal_input_phone', 'modal_input'],
                                     type: 'tel',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Номер телефона',
-                                    pattern: '\s{0,}\+{1,1}375\s{0,}\({0,1}(([2]{1}([5]{1}|[9]{1}))|([3]{1}[3]{1})|([4]{1}[4]{1}))\)\s{0,}[0-9]{3,3}\s{0,}[0-9]{4,4}'
+                                    pattern: '\+\d-\d{3}-\d{2}-\d{4}'
                                 },
                                 {
                                     tag: Tags.INPUT,
-                                    classes: ['modal_input_delivery'],
+                                    classes: ['modal_input_delivery', 'modal_input'],
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Адрес доставки',
@@ -93,7 +88,7 @@ export default class Modal {
                                 },
                                 {
                                     tag: Tags.INPUT,
-                                    classes: ['modal_input_email'],
+                                    classes: ['modal_input_email', 'modal_input'],
                                     type: 'email',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Email'
@@ -109,39 +104,39 @@ export default class Modal {
                                     children: [
                                         {
                                             tag: Tags.IMG,
-                                            classes: ['modal_paypal'],
+                                            classes: ['modal_paypal', 'paid_logo'],
                                             src: '../../img/PayPal.svg'
                                         },
                                         {
                                             tag: Tags.IMG,
-                                            classes: ['modal_mastercard'],
+                                            classes: ['modal_mastercard', 'paid_logo'],
                                             src: '../../img/Mastercard.svg'
                                         },
                                         {
                                             tag: Tags.IMG,
-                                            classes: ['modal_visa'],
+                                            classes: ['modal_visa', 'paid_logo'],
                                             src: '../../img/Visa.svg'
                                         },
                                         {
                                             tag: Tags.IMG,
-                                            classes: ['modal_apple'],
+                                            classes: ['modal_apple', 'paid_logo'],
                                             src: '../../img/ApplePay.svg'
                                         },
                                         {
                                             tag: Tags.IMG,
-                                            classes: ['modal_bitcoin'],
+                                            classes: ['modal_bitcoin', 'paid_logo'],
                                             src: '../../img/Bitcoin.svg'
                                         },
                                         {
                                             tag: Tags.IMG,
-                                            classes: ['modal_google'],
+                                            classes: ['modal_google', 'paid_logo'],
                                             src: '../../img/GooglePay.svg'
                                         }
                                     ]
                                 },
                                 {
                                     tag: Tags.INPUT,
-                                    classes: ['modal_input_card_name'],
+                                    classes: ['modal_input_card_name', 'modal_input'],
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Name on card',
@@ -149,7 +144,7 @@ export default class Modal {
                                 },
                                 {
                                     tag: Tags.INPUT,
-                                    classes: ['modal_input_card_number'],
+                                    classes: ['modal_input_card_number', 'modal_input'],
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Card number',
@@ -157,7 +152,7 @@ export default class Modal {
                                 },
                                 {
                                     tag: Tags.INPUT,
-                                    classes: ['modal_input_card_expire'],
+                                    classes: ['modal_input_card_expire', 'modal_input'],
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'MM / YY',
@@ -165,7 +160,7 @@ export default class Modal {
                                 },
                                 {
                                     tag: Tags.INPUT,
-                                    classes: ['modal_input_CVC'],
+                                    classes: ['modal_input_CVC', 'modal_input'],
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'CVC'
