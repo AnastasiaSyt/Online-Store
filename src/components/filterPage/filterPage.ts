@@ -103,7 +103,11 @@ export default class FilterPage implements IPage {
     filter(): IFlower[] {
         let filteredFlowers: IFlower[] = flowers ?? [];
         filteredFlowers = this.typeFilter(filteredFlowers, 'все') ?? [];
-        // filteredFlowers = this.occasionFilter(filteredFlowers, ['temp'])
+        filteredFlowers = this.occasionFilter(filteredFlowers, ['свидание']);
+        filteredFlowers = this.colorFilter(filteredFlowers, 'белый');
+        filteredFlowers = this.flowerFilter(filteredFlowers, ['роза']);
+        filteredFlowers = this.priceFilter(filteredFlowers, 75, 120);
+        filteredFlowers = this.sizeFilter(filteredFlowers, 70, 70);
         return filteredFlowers;
     }
 
@@ -122,5 +126,23 @@ export default class FilterPage implements IPage {
         return currentFlowers.filter(flower => {
             return flower.color.filter(e => color === e).length>0
         })
+    }
+
+    flowerFilter(currentFlowers: IFlower[], flower: string[]){
+        return currentFlowers.filter(el=> {
+            return el.flower.filter(e => flower.indexOf(e) > -1).length>0
+        })
+    }
+
+    priceFilter(currentFlowers: IFlower[], min?: number, max?: number){
+        return currentFlowers.filter(el=> el.price >= (min || 0) && el.price <= (max || 1000));
+    }
+
+    sizeFilter(currentFlowers: IFlower[], min?: number, max?: number){
+        return currentFlowers.filter(el=> el.size >= (min || 0) && el.size <= (max || 150));
+    }
+
+    removeFilters(){
+        return flowers;
     }
 }
