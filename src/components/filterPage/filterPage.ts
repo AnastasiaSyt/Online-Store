@@ -100,9 +100,14 @@ export default class FilterPage implements IPage {
         })
     }
 
-    filter(): IFlower[] {
+    filter(type?: string, occasion?: string[], color?: string, flower?: string[],minPrice?: number, maxPrice?: number, minSize?: number, maxSize?: number): IFlower[] {
         let filteredFlowers: IFlower[] = flowers ?? [];
-        filteredFlowers = this.typeFilter(filteredFlowers, 'все') ?? [];
+        filteredFlowers = this.typeFilter(filteredFlowers, type ?? 'все');
+        filteredFlowers = this.occasionFilter(filteredFlowers, occasion ?? []) ?? [];
+        filteredFlowers = this.colorFilter(filteredFlowers, color ?? '') ?? [];
+        filteredFlowers = this.flowerFilter(filteredFlowers, flower ?? []) ?? [];
+        filteredFlowers = this.priceFilter(filteredFlowers, minPrice, maxPrice) ?? [];
+        filteredFlowers = this.priceFilter(filteredFlowers, minSize, maxSize) ?? [];
         return filteredFlowers;
     }
 
@@ -112,18 +117,21 @@ export default class FilterPage implements IPage {
     }
 
     occasionFilter(currentFlowers: IFlower[], occasion: string[]){
+        if (occasion.length<=0) return currentFlowers;
         return currentFlowers.filter(el=> {
             return el.occasions.filter(e => occasion.indexOf(e) > -1).length>0
         })
     }
 
     colorFilter(currentFlowers: IFlower[], color: string){
+        if (color === '') return currentFlowers;
         return currentFlowers.filter(flower => {
             return flower.color.filter(e => color === e).length>0
         })
     }
 
     flowerFilter(currentFlowers: IFlower[], flower: string[]){
+        if (flower.length<=0) return currentFlowers;
         return currentFlowers.filter(el=> {
             return el.flower.filter(e => flower.indexOf(e) > -1).length>0
         })

@@ -83,11 +83,10 @@
     cursor: pointer;
 }
 
-.color_circle:hover {
-    width: 25px;
-    height: 25px;
+.color_circle.active{
+    width: 22px;
+    height: 22px;
 }
-
 /*_________________checkbox________________*/
 
 .custom-checkbox {

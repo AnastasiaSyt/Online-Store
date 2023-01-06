@@ -35,15 +35,24 @@ export default class Filter implements IFilter {
         const color = filter.querySelector('.num-3');
 
         const colorItems = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink'];
-
+        const colorItemsRu = ['красный', 'белый', 'черный', 'синий', 'желтый', 'орнжевый', 'зеленый', 'розовый']
         colorItems.forEach((item) => {
             const ellipse = document.createElement('div');
             ellipse.classList.add('color_circle');
             ellipse.classList.add(item);
             ellipse.style.background = item;
-
+            ellipse.addEventListener('click', e =>{
+                e.preventDefault();
+                ellipsesClassRemove();
+                ellipse.classList.add('active')
+            })
             color?.appendChild(ellipse);
         })
+
+        function ellipsesClassRemove(){
+            document.querySelectorAll('.color_circle').forEach(e => { e.classList.remove('active') })
+        }
+
 
         const flower = filter.querySelector('.num-4');
         const flowerItems = ['роза', 'гербера', 'тюльпан', 'гвоздика', 'лилия', 'хризантема', 'пион'];
@@ -66,6 +75,10 @@ export default class Filter implements IFilter {
         const filterButton = new Button('cбросить фильтры', 'filter_button').getButton(filter);
 
         return filter;
+    }
+
+    getColor(){
+        return document.querySelectorAll('.color_circle');
     }
 
     getAccordion(node: HTMLElement) {

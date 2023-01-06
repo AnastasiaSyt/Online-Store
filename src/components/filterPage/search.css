@@ -24,7 +24,6 @@
 
 .search_button {
   height: 38px;
-  display: none;
   width: 41px;
   position: absolute;
   background-color: #fff;
@@ -41,13 +40,10 @@
   height: 44px;
   background-color: #F2F2F2;
   border-radius: 4px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   cursor: pointer;
-
   margin-right: 58px;
 }
 
