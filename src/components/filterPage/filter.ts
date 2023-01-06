@@ -1,4 +1,5 @@
 import "./filter.css";
+import FilterPage from "./filterPage";
 
 import Slider from './slider';
 import Button from "./button";
@@ -35,7 +36,7 @@ export default class Filter implements IFilter {
         const color = filter.querySelector('.num-3');
 
         const colorItems = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink'];
-        const colorItemsRu = ['красный', 'белый', 'черный', 'синий', 'желтый', 'орнжевый', 'зеленый', 'розовый']
+        const colorItemsRu = ['красный', 'белый', 'черный', 'синий', 'желтый', 'оранжевый', 'зеленый', 'розовый'];
         colorItems.forEach((item) => {
             const ellipse = document.createElement('div');
             ellipse.classList.add('color_circle');
