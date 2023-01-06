@@ -17,6 +17,7 @@
     top: 20px;
     width: 14px;
     height: 14px;
+    cursor: pointer;
 }
 
 .modal_close-button:before, .modal_close-button:after {
