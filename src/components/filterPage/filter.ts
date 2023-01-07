@@ -3,14 +3,27 @@ import FilterPage from "./filterPage";
 
 import Slider from './slider';
 import Button from "./button";
+import Filtration from "./filtration";
 
 interface IFilter {
+    filtration: Filtration;
+    callback: Function;
     getFilter: () => HTMLElement,
     getAccordion: (node: HTMLElement) => void,
     getBodyItems: (arr: string[], target: Element, name: string) => void
 }
 
 export default class Filter implements IFilter {
+    filtration: Filtration;
+    callback: Function;
+    parent: HTMLElement;
+
+    constructor(filtration: Filtration, callback: Function, parent: HTMLElement) {
+        this.filtration = filtration;
+        this.callback = callback;
+        this.parent = parent;
+    }
+
     getFilter() {
         const filter = document.createElement('div');
         filter.classList.add('filter');
@@ -35,18 +48,20 @@ export default class Filter implements IFilter {
 
         const color = filter.querySelector('.num-3');
 
-        const colorItems = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink'];
-        const colorItemsRu = ['красный', 'белый', 'черный', 'синий', 'желтый', 'оранжевый', 'зеленый', 'розовый'];
+        const colorItems = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink', 'indigo'];
+        const colorItemsRu = ['красный', 'белый', 'черный', 'синий', 'желтый', 'оранжевый', 'зеленый', 'розовый', 'фиолетовый'];
         colorItems.forEach((item) => {
             const ellipse = document.createElement('div');
             ellipse.classList.add('color_circle');
             ellipse.classList.add(item);
             ellipse.style.background = item;
-            ellipse.addEventListener('click', e =>{
+            ellipse.addEventListener('click', e => {
                 e.preventDefault();
                 ellipsesClassRemove();
-                ellipse.classList.add('active')
-            })
+                ellipse.classList.add('active');
+                this.filtration.changeColor(item);
+                this.callback();
+            });
             color?.appendChild(ellipse);
         })
 
@@ -73,9 +88,25 @@ export default class Filter implements IFilter {
             const sliderHeight = new Slider().getSlider(height);
         }
 
-        const filterButton = new Button('cбросить фильтры', 'filter_button').getButton(filter);
+        const filterButton = new Button('cбросить фильтры', 'filter_button', 'reset').getButton(filter);
+        filterButton.addEventListener('click', this.resetFilters.bind(this));
 
         return filter;
+    }
+
+    resetFilters(): void {
+        const filter = this.parent.getElementsByClassName('filter');
+        for (let i = 0; i < filter.length; i += 1) {
+            const filterButton = filter[i].getElementsByClassName('filter_button');
+            for (let j = 0; j < filterButton.length; j += 1) {
+                filterButton[j].removeEventListener('click', this.resetFilters.bind(this));
+            }
+            this.parent.removeChild(filter[i]);
+        }
+        const newFilter = this.getFilter();
+        this.parent.insertAdjacentElement("afterbegin", newFilter);
+        this.filtration.removeFilters();
+        this.callback();
     }
 
     getColor(){
@@ -112,6 +143,7 @@ export default class Filter implements IFilter {
             checkboxGift.type = 'checkbox';
             checkboxGift.classList.add('custom-checkbox');
             checkboxGift.id = `link${index}-${name}`;
+
             typeGift.appendChild(checkboxGift);
 
             const labelGift = document.createElement('label');

@@ -9,16 +9,27 @@ import { IPage } from '../IPage';
 import { PageIDs } from '../types';
 import flowers from '../data/data';
 import { IFlower } from '../data/IFlowers';
+import Filtration from './filtration';
 
 
 export default class FilterPage implements IPage {
+    filtration: Filtration;
+    allCards: HTMLElement;
+
+    constructor() {
+        this.filtration = new Filtration();
+        const allCards = document.createElement('div');
+        allCards.classList.add('all_cards');
+        this.allCards = allCards;
+    }
+
     getPage() {
         const filterContent = document.createElement('div');
         filterContent.id = 'filterPage';
         filterContent.classList.add('filter_content');
         filterContent.classList.add('wrapper');
 
-        const filter = new Filter().getFilter();
+        const filter = new Filter(this.filtration, this.drawFlowers.bind(this), filterContent).getFilter();
         filterContent.appendChild(filter);
 
         const mainContent = document.createElement('div');
@@ -69,22 +80,23 @@ export default class FilterPage implements IPage {
         select.appendChild(optionTwo);
         select.appendChild(optionThree);
 
-        const allCards = document.createElement('div');
-        allCards.classList.add('all_cards');
-        mainContent.appendChild(allCards);
+        mainContent.appendChild(this.allCards);
 
-        const filteredFlowers = this.filter();
-        this.drawFlowers(allCards, filteredFlowers)
+        this.drawFlowers();
 
         return filterContent;
     }
 
-    removeFlowers(parent: HTMLElement){
-        while(parent.childNodes.length > 0 ) {parent.removeChild(parent.childNodes[0])}
-
+    removeFlowers() {
+        while (this.allCards.childNodes.length > 0 ) {
+            this.allCards.removeChild(this.allCards.childNodes[0]);
+        }
     }
 
-    drawFlowers(parent: HTMLElement, filteredFlowers: IFlower[]){
+    drawFlowers() {
+        this.removeFlowers();
+
+        const filteredFlowers = this.filtration.filter();
         filteredFlowers.forEach(item => {
             const cardLink = document.createElement('a');
             cardLink.addEventListener('click', () => {
@@ -96,56 +108,7 @@ export default class FilterPage implements IPage {
 
             const card = new Card().getCard(item.id);
             cardLink.appendChild(card);
-            parent.appendChild(cardLink);
+            this.allCards.appendChild(cardLink);
         })
-    }
-
-    filter(type?: string, occasion?: string[], color?: string, flower?: string[],minPrice?: number, maxPrice?: number, minSize?: number, maxSize?: number): IFlower[] {
-        let filteredFlowers: IFlower[] = flowers ?? [];
-        filteredFlowers = this.typeFilter(filteredFlowers, type ?? 'все');
-        filteredFlowers = this.occasionFilter(filteredFlowers, occasion ?? []) ?? [];
-        filteredFlowers = this.colorFilter(filteredFlowers, color ?? '') ?? [];
-        filteredFlowers = this.flowerFilter(filteredFlowers, flower ?? []) ?? [];
-        filteredFlowers = this.priceFilter(filteredFlowers, minPrice, maxPrice) ?? [];
-        filteredFlowers = this.priceFilter(filteredFlowers, minSize, maxSize) ?? [];
-        return filteredFlowers;
-    }
-
-    typeFilter(currentFlowers: IFlower[], type: string){
-        if(type.indexOf('все') >= 0) return currentFlowers;
-        return currentFlowers.filter(el=> el.category === type)
-    }
-
-    occasionFilter(currentFlowers: IFlower[], occasion: string[]){
-        if (occasion.length<=0) return currentFlowers;
-        return currentFlowers.filter(el=> {
-            return el.occasions.filter(e => occasion.indexOf(e) > -1).length>0
-        })
-    }
-
-    colorFilter(currentFlowers: IFlower[], color: string){
-        if (color === '') return currentFlowers;
-        return currentFlowers.filter(flower => {
-            return flower.color.filter(e => color === e).length>0
-        })
-    }
-
-    flowerFilter(currentFlowers: IFlower[], flower: string[]){
-        if (flower.length<=0) return currentFlowers;
-        return currentFlowers.filter(el=> {
-            return el.flower.filter(e => flower.indexOf(e) > -1).length>0
-        })
-    }
-
-    priceFilter(currentFlowers: IFlower[], min?: number, max?: number){
-        return currentFlowers.filter(el=> el.price >= (min || 0) && el.price <= (max || 1000));
-    }
-
-    sizeFilter(currentFlowers: IFlower[], min?: number, max?: number){
-        return currentFlowers.filter(el=> el.size >= (min || 0) && el.size <= (max || 150));
-    }
-
-    removeFilters(){
-        return flowers;
     }
 }
