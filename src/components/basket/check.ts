@@ -94,6 +94,7 @@ export default class Check implements ICheck {
       const button = document.createElement('button');
       button.classList.add('button');
       button.classList.add('order');
+      button.id = 'button_order';
       button.textContent = 'оформить заказ';
       checkContent.appendChild(button)
 
