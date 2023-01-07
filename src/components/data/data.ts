@@ -967,7 +967,7 @@ const flowers = [
         "size": 70,
         "country": ["Беларусь"],
         "occasions": ["свидание", "8 марта", '14 февраля', 'день рождения', 'юбилей'],
-        "category": "букет",
+        "category": "букеты",
         "color": ["blue"],
         "thumbnail": "../../img/data_img/flowers_51_1.jpg",
         "images": [
@@ -986,7 +986,7 @@ const flowers = [
         "size": 40,
         "country": ["Беларусь"],
         "occasions": ["свидание"],
-        "category": "букет",
+        "category": "букеты",
         "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_52_1.jpg",
         "images": [

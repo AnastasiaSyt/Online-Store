@@ -9,8 +9,9 @@ interface IFilter {
     filtration: Filtration;
     callback: Function;
     getFilter: () => HTMLElement,
+    resetFilters: () => void,
     getAccordion: (node: HTMLElement) => void,
-    getBodyItems: (arr: string[], target: Element, name: string) => void
+    getBodyItems: (arr: string[], target: Element, name: string, callback: Function) => void
 }
 
 export default class Filter implements IFilter {
@@ -31,11 +32,11 @@ export default class Filter implements IFilter {
         this.getAccordion(filter);
 
         const type = filter.querySelector('.num-1');
-        const typeItems = ['Все', 'Цветы', 'Букеты', 'Композиция', 'Свадебные букеты', 'Подарки с цветами'];
+        const typeItems = ['Все', 'цветы', 'букеты', 'композиция', 'свадебные букеты', 'подарки с цветами'];
         const typeName = type?.className;
 
         if (type && !!typeName) {
-            this.getBodyItems(typeItems, type, typeName);
+            this.getBodyItems(typeItems, type, typeName, this.filtration.changeType.bind(this.filtration));
         }
 
         const occasion = filter.querySelector('.num-2');
@@ -43,13 +44,13 @@ export default class Filter implements IFilter {
         const occasionName = occasion?.className;
 
         if (occasion && !!occasionName) {
-            this.getBodyItems(typeOccasion, occasion, occasionName);
+            this.getBodyItems(typeOccasion, occasion, occasionName, this.filtration.changeOccasion.bind(this.filtration));
         }
 
         const color = filter.querySelector('.num-3');
 
         const colorItems = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink', 'indigo'];
-        const colorItemsRu = ['красный', 'белый', 'черный', 'синий', 'желтый', 'оранжевый', 'зеленый', 'розовый', 'фиолетовый'];
+        // const colorItemsRu = ['красный', 'белый', 'черный', 'синий', 'желтый', 'оранжевый', 'зеленый', 'розовый', 'фиолетовый'];
         colorItems.forEach((item) => {
             const ellipse = document.createElement('div');
             ellipse.classList.add('color_circle');
@@ -75,7 +76,7 @@ export default class Filter implements IFilter {
         const flowerName = flower?.className;
 
         if (flower && !!flowerName) {
-            this.getBodyItems(flowerItems, flower, flowerName);
+            this.getBodyItems(flowerItems, flower, flowerName, this.filtration.changeFlower.bind(this.filtration));
         }
 
         const price = filter.querySelector('.num-5');
@@ -95,22 +96,33 @@ export default class Filter implements IFilter {
     }
 
     resetFilters(): void {
-        const filter = this.parent.getElementsByClassName('filter');
-        for (let i = 0; i < filter.length; i += 1) {
-            const filterButton = filter[i].getElementsByClassName('filter_button');
-            for (let j = 0; j < filterButton.length; j += 1) {
-                filterButton[j].removeEventListener('click', this.resetFilters.bind(this));
-            }
-            this.parent.removeChild(filter[i]);
-        }
-        const newFilter = this.getFilter();
-        this.parent.insertAdjacentElement("afterbegin", newFilter);
         this.filtration.removeFilters();
         this.callback();
+
+        this.uncheckCheckbox();
+        this.uncheckColors();
+        //TODO:
+
+        //5.1 Найти слайдер СТОИМОСТЬ
+        //5.2 Поставить дефолтное значение
+
+        //6.1 Найти слайдер ВЫСОТА
+        //6.2 Поставить дефолтное значение
     }
 
-    getColor(){
-        return document.querySelectorAll('.color_circle');
+    uncheckCheckbox() {
+        const checkboxes = this.parent.getElementsByClassName('custom-checkbox');
+        for (let i = 0; i < checkboxes.length; i += 1) {
+            const item = checkboxes[i] as HTMLInputElement;
+            item.checked = false;
+        }
+    }
+
+    uncheckColors() {
+        const colors = this.parent.getElementsByClassName('color_circle');
+        for (let i = 0; i < colors.length; i += 1) {
+            colors[i].classList.remove('active');
+        }
     }
 
     getAccordion(node: HTMLElement) {
@@ -135,7 +147,7 @@ export default class Filter implements IFilter {
         })
     }
 
-    getBodyItems(arr: string[], target: Element, name: string) {
+    getBodyItems(arr: string[], target: Element, name: string, callback: Function) {
         arr.forEach((item, index) => {
             const typeGift = document.createElement('div');
 
@@ -143,7 +155,10 @@ export default class Filter implements IFilter {
             checkboxGift.type = 'checkbox';
             checkboxGift.classList.add('custom-checkbox');
             checkboxGift.id = `link${index}-${name}`;
-
+            checkboxGift.addEventListener('click', () => {
+                callback(item);
+                this.callback();
+            })
             typeGift.appendChild(checkboxGift);
 
             const labelGift = document.createElement('label');

@@ -11,7 +11,7 @@ export type SelectedFilter = {
     type : {[type:string]: string},
     occasion: {[occasion:string]: string},
     color?: string,
-    flower: {},
+    flower: {[flower:string]: string},
     price: {min: number, max: number},
     size: {min: number, max: number}
 }
