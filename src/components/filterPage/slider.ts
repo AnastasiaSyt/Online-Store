@@ -2,6 +2,11 @@ import './slider.css';
 
 interface ISlider {
     minGap: number,
+    sliderContainer: HTMLDivElement,
+    firstRange: HTMLSpanElement,
+    secondRange: HTMLSpanElement,
+    firstSlider: HTMLInputElement,
+    secondSlider: HTMLInputElement,
     getSlider: (target: Node) => void,
     slideOne: () => void,
     slideTwo: () => void
@@ -9,64 +14,72 @@ interface ISlider {
 
 export default class Slider implements ISlider {
     minGap = 0;
+    sliderContainer: HTMLDivElement;
+    firstRange!: HTMLSpanElement;
+    secondRange!: HTMLSpanElement;
+    firstSlider!: HTMLInputElement;
+    secondSlider!: HTMLInputElement;
+    constructor() {
+        this.sliderContainer = document.createElement('div');
+        
+    }
 
     getSlider(target: Node) {
         const values = document.createElement('div');
         values.classList.add('values');
         target.appendChild(values);
 
-        const firstRange = document.createElement('span');
-        firstRange.id = 'range1';
-        firstRange.textContent = '0';
-        values.appendChild(firstRange);
+        this.firstRange = document.createElement('span');
+        this.firstRange.id = 'range1';
+        this.firstRange.textContent = '0';
+        values.appendChild(this.firstRange);
 
         const dash = document.createElement('span');
         dash.textContent = `-`;
         values.appendChild(dash);
 
-        const secondRange = document.createElement('span');
-        secondRange.id = 'range2';
-        secondRange.textContent = '100';
-        values.appendChild(secondRange);
+        this.secondRange = document.createElement('span');
+        this.secondRange.id = 'range2';
+        this.secondRange.textContent = '100';
+        values.appendChild(this.secondRange);
 
-        const sliderContainer = document.createElement('div');
+        const sliderContainer = this.sliderContainer;
         sliderContainer.classList.add('slider_container');
 
         const track = document.createElement('div');
         track.classList.add('slider_track');
         sliderContainer.appendChild(track);
 
-        const firstSlider = document.createElement('input');
-        firstSlider.type = 'range';
-        firstSlider.setAttribute('min', '0');
-        firstSlider.setAttribute('max', '100');
-        firstSlider.value = '30';
-        firstSlider.id = 'slider-1';
-        firstSlider.setAttribute('oninput', 'slideOne()');
+        this.firstSlider = document.createElement('input');
+        this.firstSlider.type = 'range';
+        this.firstSlider.setAttribute('min', '0');
+        this.firstSlider.setAttribute('max', '100');
+        this.firstSlider.value = '30';
+        this.firstSlider.id = 'slider-1';
+        this.firstSlider.addEventListener('input', this.slideOne.bind(this));
 
-        sliderContainer.appendChild(firstSlider);
+        sliderContainer.appendChild(this.firstSlider);
 
-        const secondSlider = document.createElement('input');
-        secondSlider.type = 'range';
-        secondSlider.setAttribute('min', '0');
-        secondSlider.setAttribute('max', '100');
-        secondSlider.value = '70';
-        secondSlider.id = 'slider-2';
-        secondSlider.setAttribute('oninput', 'slideTwo()');
+        this.secondSlider = document.createElement('input');
+        this.secondSlider.type = 'range';
+        this.secondSlider.setAttribute('min', '0');
+        this.secondSlider.setAttribute('max', '100');
+        this.secondSlider.value = '70';
+        this.secondSlider.id = 'slider-2';
+        this.secondSlider.addEventListener('input', this.slideTwo.bind(this));
 
-        sliderContainer.appendChild(secondSlider);
+        sliderContainer.appendChild(this.secondSlider);
 
         target.appendChild(sliderContainer);
     }
 
     slideOne() {
-        const sliderFirst = document.getElementById('slider-1');
-        const sliderSecond = document.getElementById('slider-2');
-        const valueFirst = document.getElementById('range1');
+        const sliderFirst = this.firstSlider;
+        const sliderSecond = this.secondSlider;
+        const valueFirst = this.firstRange;
 
-        // let minGap = 0;
         let firstVal = (sliderFirst as HTMLInputElement).value;
-        let secondVal = (sliderSecond as HTMLInputElement).value;
+        const secondVal = (sliderSecond as HTMLInputElement).value;
         if ((parseInt(secondVal) - parseInt(firstVal)) <= this.minGap) {
             firstVal = `link${(parseInt(secondVal) - this.minGap)}`;
         }
@@ -74,16 +87,15 @@ export default class Slider implements ISlider {
     }
 
     slideTwo() {
-        const sliderFirst = document.getElementById('slider-1');
-        const sliderSecond = document.getElementById('slider-2');
-        const valueSecond = document.getElementById('range2');
+        const sliderFirst = this.firstSlider;
+        const sliderSecond = this.secondSlider;
+        const valueSecond = this.secondRange;
 
-        let firstVal = (sliderFirst as HTMLInputElement).value;
+        const firstVal = (sliderFirst as HTMLInputElement).value;
         let secondVal = (sliderSecond as HTMLInputElement).value;
         if (parseInt(secondVal) - parseInt(firstVal) <= this.minGap) {
             secondVal = String(parseInt(firstVal) + this.minGap);
         }
         (valueSecond as HTMLSpanElement).textContent = secondVal;
     }
-
 }

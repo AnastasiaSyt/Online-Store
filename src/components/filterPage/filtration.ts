@@ -33,7 +33,7 @@ export default class Filtration {
     }
 
     changeColor(color: string) {
-        this.selectedFilter.color = color;;
+        this.selectedFilter.color = color;
     }
 
     filter(): IFlower[] {
