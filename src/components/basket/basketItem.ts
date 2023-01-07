@@ -120,7 +120,6 @@ export default class BItem implements IItem {
     })
 
     color.appendChild(colors)
-
     //==========
 
     const counterBlock = document.createElement('div');
