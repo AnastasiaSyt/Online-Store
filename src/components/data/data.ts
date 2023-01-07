@@ -11,7 +11,7 @@ const flowers = [
         "country": ["Колумбия"],
         "occasions": ["свидание", "юбилей", "8 марта", "выпускной"],
         "category": "цветы",
-        "color": ["красный"],
+        "color": ["darkred"],
         "thumbnail": "../../img/data_img/flowers_1.jpg",
         "images": [
         "../../img/data_img/flowers_1_1.jpg",
@@ -31,7 +31,7 @@ const flowers = [
         "country": ["Эквадор"],
         "occasions": ["свидание", "юбилей", "8 марта", "выпускной", "день рождения"],
         "category": "цветы",
-        "color": ["синий"],
+        "color": ["blue"],
         "thumbnail": "../../img/data_img/flowers_2.jpg",
         "images": [
         "../../img/data_img/flowers_2_1.jpg",
@@ -52,7 +52,7 @@ const flowers = [
         "country": ["Беларусь"],
         "occasions": ["свидание", "юбилей", "8 марта", "выпускной", "день рождения"],
         "category": "цветы",
-        "color": ["розовый"],
+        "color": ["pink"],
         "thumbnail": "../../img/data_img/flowers_3.jpg",
         "images": [
         "../../img/data_img/flowers_3_1.jpg",
@@ -71,7 +71,7 @@ const flowers = [
         "country": ["Голландия"],
         "occasions": ["свидание", "юбилей", "8 марта", "выпускной", "14 февраля"],
         "category": "цветы",
-        "color": ["розовый"],
+        "color": ["pink"],
         "thumbnail": "../../img/data_img/flowers_4.jpg",
         "images": [
         "../../img/data_img/flowers_4_1.jpg",
@@ -90,7 +90,7 @@ const flowers = [
         "country": ["Голландия"],
         "occasions": ["свидание", "юбилей", "8 марта", "выпускной", "свадьба", "14 февраля", "день рождения"],
         "category": "цветы",
-        "color": ["белый"],
+        "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_5.jpg",
         "images": [
         "../../img/data_img/flowers_5_1.jpg",
@@ -109,7 +109,7 @@ const flowers = [
         "country": ["Голландия"],
         "occasions": ["выпускной", "свидание", "день рождения"],
         "category": "цветы",
-        "color": ["розовый"],
+        "color": ["pink"],
         "thumbnail": "../../img/data_img/flowers_6.jpg",
         "images": [
         "../../img/data_img/flowers_6_1.jpg",
@@ -128,7 +128,7 @@ const flowers = [
         "country": ["Голландия"],
         "occasions": ["свидание", "14 февраля", "8 марта", "день рождения"],
         "category": "цветы",
-        "color": ["красный"],
+        "color": ["darkred"],
         "thumbnail": "../../img/data_img/flowers_7.jpg",
         "images": [
         "../../img/data_img/flowers_7_1.jpg",
@@ -147,7 +147,7 @@ const flowers = [
         "country": ["Турция"],
         "occasions": ["14 февраля", "юбилей", "8 марта", "день рождения"],
         "category": "цветы",
-        "color": ["желтый"],
+        "color": ["yellow"],
         "thumbnail": "../../img/data_img/flowers_8.jpg",
         "images": [
         "../../img/data_img/flowers_8_1.jpg",
@@ -168,7 +168,7 @@ const flowers = [
         "country": ["Турция"],
         "occasions": ["день рождения", "юбилей", "8 марта", "выпускной"],
         "category": "цветы",
-        "color": ["оранжевый"],
+        "color": ["orange"],
         "thumbnail": "../../img/data_img/flowers_9.jpg",
         "images": [
         "../../img/data_img/flowers_9_1.jpg",
@@ -188,7 +188,7 @@ const flowers = [
         "country": ["Франция"],
         "occasions": ["свидание", "юбилей", "8 марта", "выпускной", "14 февраля", "день рождения", "свадьба"],
         "category": "цветы",
-        "color": ["красный"],
+        "color": ["indigo"],
         "thumbnail": "../../img/data_img/flowers_10.jpg",
         "images": [
         "../../img/data_img/flowers_10_1.jpg",
@@ -207,7 +207,7 @@ const flowers = [
         "country": ["Колумбия", "Эквадор"],
         "occasions": ["свидание", "юбилей", "8 марта", "выпускной", "в школу"],
         "category": "букеты",
-        "color": ["разные"],
+        "color": ["pink", "orange", "white"],
         "thumbnail": "../../img/data_img/flowers_11.jpg",
         "images": [
         "../../img/data_img/flowers_11_1.jpg",
@@ -226,7 +226,7 @@ const flowers = [
         "country": ["Колумбия", "Эквадор", "Турция"],
         "occasions": ["свидание", "юбилей", "8 марта", "выпускной", "в школу", "14 февраля"],
         "category": "букеты",
-        "color": ["розовый"],
+        "color": ["pink"],
         "thumbnail": "../../img/data_img/flowers_12.jpg",
         "images": [
         "../../img/data_img/flowers_12_1.jpg",
@@ -245,7 +245,7 @@ const flowers = [
         "country": ["Франция", "Эквадор"],
         "occasions": ["свидание", "юбилей", "14 февраля"],
         "category": "букеты",
-        "color": ["розовый", "желтый", "красный"],
+        "color": ["pink", "yellow", "darkred"],
         "thumbnail": "../../img/data_img/flowers_13.jpg",
         "images": [
         "../../img/data_img/flowers_13_1.jpg",
@@ -264,7 +264,7 @@ const flowers = [
         "country": ["Франция", "Эквадор", "Колумбия"],
         "occasions": ["свидание", "юбилей", "14 февраля", "день рождения"],
         "category": "букеты",
-        "color": ["розовый", "желтый", "белый"],
+        "color": ["pink", "yellow", "white"],
         "thumbnail": "../../img/data_img/flowers_14.jpg",
         "images": [
         "../../img/data_img/flowers_14_1.jpg",
@@ -283,7 +283,7 @@ const flowers = [
         "country": ["Колумбия"],
         "occasions": ["свидание", "юбилей", "14 февраля", "день рождения", "новый год"],
         "category": "букеты",
-        "color": ["красный"],
+        "color": ["darkred"],
         "thumbnail": "../../img/data_img/flowers_15.jpg",
         "images": [
         "../../img/data_img/flowers_15_1.jpg",
@@ -302,7 +302,7 @@ const flowers = [
         "country": ["Турция"],
         "occasions": ["свидание", "юбилей", "14 февраля", "день рождения", "новый год", "8 марта", "свадьба"],
         "category": "букеты",
-        "color": ["розовый"],
+        "color": ["pink"],
         "thumbnail": "../../img/data_img/flowers_16.jpg",
         "images": [
         "../../img/data_img/flowers_16_1.jpg",
@@ -321,7 +321,7 @@ const flowers = [
         "country": ["Китай"],
         "occasions": ["свидание", "юбилей", "14 февраля", "день рождения", "новый год", "рождество", "свадьба"],
         "category": "букеты",
-        "color": ["красный"],
+        "color": ["darkred"],
         "thumbnail": "../../img/data_img/flowers_17.jpg",
         "images": [
         "../../img/data_img/flowers_17_1.jpg",
@@ -340,7 +340,7 @@ const flowers = [
         "country": ["Китай", "Колумбия", "Турция"],
         "occasions": ["свидание", "юбилей", "14 февраля", "день рождения", "новый год", "рождество", "свадьба"],
         "category": "букеты",
-        "color": ["красный", "белый"],
+        "color": ["darkred", "white"],
         "thumbnail": "../../img/data_img/flowers_18.jpg",
         "images": [
         "../../img/data_img/flowers_18_1.jpg",
@@ -359,7 +359,7 @@ const flowers = [
         "country": ["Нидерланды", "Колумбия", "Турция"],
         "occasions": ["свидание", "юбилей", "14 февраля", "день рождения", "новый год", "свадьба", "выпускной"],
         "category": "букеты",
-        "color": ["белый"],
+        "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_19.jpg",
         "images": [
         "../../img/data_img/flowers_19_1.jpg",
@@ -378,7 +378,7 @@ const flowers = [
         "country": ["Нидерланды", "Китай", "Турция"],
         "occasions": ["свидание", "14 февраля", "день рождения", "новый год", "свадьба"],
         "category": "букеты",
-        "color": ["белый", "розовый"],
+        "color": ["white", "pink"],
         "thumbnail": "../../img/data_img/flowers_20.jpg",
         "images": [
         "../../img/data_img/flowers_20_1.jpg",
@@ -397,7 +397,7 @@ const flowers = [
         "country": ["Нидерланды", "ЮАР"],
         "occasions": ["свидание", "14 февраля", "день рождения", "новый год", "свадьба", "юбилей"],
         "category": "букеты",
-        "color": ["желтый", "зеленый", "розовый"],
+        "color": ["yellow", "lime", "pink"],
         "thumbnail": "../../img/data_img/flowers_21.jpg",
         "images": [
         "../../img/data_img/flowers_21_1.jpg",
@@ -416,7 +416,7 @@ const flowers = [
         "country": ["Нидерланды", "Колумбия", "Эквадор"],
         "occasions": ["день рождения", "новый год", "свадьба", "рождество"],
         "category": "букеты",
-        "color": ["красный", "зеленый", "розовый"],
+        "color": ["darkred", "lime", "pink"],
         "thumbnail": "../../img/data_img/flowers_22.jpg",
         "images": [
         "../../img/data_img/flowers_22_1.jpg",
@@ -435,7 +435,7 @@ const flowers = [
         "country": ["Нидерланды", "Колумбия", "Эквадор"],
         "occasions": ["новый год", "рождество", "в школу"],
         "category": "букеты",
-        "color": ["желтый", "оранжевый", "розовый"],
+        "color": ["yellow", "orange", "pink"],
         "thumbnail": "../../img/data_img/flowers_23.jpg",
         "images": [
         "../../img/data_img/flowers_23_1.jpg",
@@ -454,7 +454,7 @@ const flowers = [
         "country": ["Нидерланды", "Турция"],
         "occasions": ["новый год", "рождество", "свидание", "день рождения"],
         "category": "букеты",
-        "color": ["белый", "красный", "зеленый"],
+        "color": ["white", "darkred", "lime"],
         "thumbnail": "../../img/data_img/flowers_24.jpg",
         "images": [
         "../../img/data_img/flowers_24_1.jpg",
@@ -473,7 +473,7 @@ const flowers = [
         "country": ["Нидерланды"],
         "occasions": ["свидание", "день рождения", "8 марта", "14 февраля", "юбилей"],
         "category": "цветы",
-        "color": ["розовый"],
+        "color": ["pink"],
         "thumbnail": "../../img/data_img/flowers_25.jpg",
         "images": [
         "../../img/data_img/flowers_25_1.jpg",
@@ -492,7 +492,7 @@ const flowers = [
         "country": ["Эфиопия", "Италия"],
         "occasions": ["новый год", "рождество", "в школу"],
         "category": "букеты",
-        "color": ["белый", "красный"],
+        "color": ["white", "darkred"],
         "thumbnail": "../../img/data_img/flowers_26.jpg",
         "images": [
         "../../img/data_img/flowers_26_1.jpg",
@@ -511,7 +511,7 @@ const flowers = [
         "country": ["Нидерланды", "Италия", "Эквадор"],
         "occasions": ["новый год", "рождество", "в школу", "свадьба", "свидание"],
         "category": "букеты",
-        "color": ["белый", "зеленый", "синий"],
+        "color": ["white", "lime", "blue"],
         "thumbnail": "../../img/data_img/flowers_27.jpg",
         "images": [
         "../../img/data_img/flowers_27_1.jpg",
@@ -532,7 +532,7 @@ const flowers = [
         "country": ["Нидерланды"],
         "occasions": ["новый год", "рождество", "в школу", "свадьба", "свидание", "день рождения"],
         "category": "букеты",
-        "color": ["желтый", "фиолетовый"],
+        "color": ["yellow", "indigo"],
         "thumbnail": "../../img/data_img/flowers_28.jpg",
         "images": [
         "../../img/data_img/flowers_28_1.jpg",
@@ -551,7 +551,7 @@ const flowers = [
         "country": ["Нидерланды", "Эквадор", "Италия"],
         "occasions": ["новый год", "рождество", "в школу", "свадьба", "свидание", "день рождения", "юбилей", "8 марта", "14 февраля"],
         "category": "букеты",
-        "color": ["белый", "фиолетовый", "зеленый", "синий"],
+        "color": ["white", "indigo", "lime", "blue"],
         "thumbnail": "../../img/data_img/flowers_29.jpg",
         "images": [
         "../../img/data_img/flowers_29_1.jpg",
@@ -571,7 +571,7 @@ const flowers = [
         "country": ["Нидерланды"],
         "occasions": ["новый год", "рождество", "свадьба", "свидание", "день рождения", "8 марта", "14 февраля", "выпускной"],
         "category": "букеты",
-        "color": ["белый", "зеленый", "синий"],
+        "color": ["white", "lime", "blue"],
         "thumbnail": "../../img/data_img/flowers_30.jpg",
         "images": [
         "../../img/data_img/flowers_30_1.jpg",
@@ -590,7 +590,7 @@ const flowers = [
         "country": ["Нидерланды", "Италия", "Турция"],
         "occasions": ["новый год", "свидание", "день рождения", "8 марта", "14 февраля"],
         "category": "букеты",
-        "color": ["белый", "зеленый", "фиолетовый", "розовый"],
+        "color": ["white", "lime", "indigo", "pink"],
         "thumbnail": "../../img/data_img/flowers_31.jpg",
         "images": [
         "../../img/data_img/flowers_31_1.jpg",
@@ -609,7 +609,7 @@ const flowers = [
         "country": ["Нидерланды", "Италия"],
         "occasions": ["новый год", "свидание", "день рождения", "8 марта", "14 февраля", "юбилей"],
         "category": "букеты",
-        "color": ["красный", "оранжевый", "розовый"],
+        "color": ["darkred", "orange", "pink"],
         "thumbnail": "../../img/data_img/flowers_32.jpg",
         "images": [
         "../../img/data_img/flowers_32_1.jpg",
@@ -628,7 +628,7 @@ const flowers = [
         "country": ["Нидерланды", "Турция"],
         "occasions": ["новый год", "свидание", "день рождения", "8 марта", "14 февраля", "юбилей", "в школу"],
         "category": "букеты",
-        "color": ["фиолетовый", "розовый"],
+        "color": ["indigo", "pink"],
         "thumbnail": "../../img/data_img/flowers_33.jpg",
         "images": [
         "../../img/data_img/flowers_33_1.jpg",
@@ -647,7 +647,7 @@ const flowers = [
         "country": ["Нидерланды", "Турция"],
         "occasions": ["новый год", "свидание", "день рождения", "рождество"],
         "category": "букеты",
-        "color": ["белый"],
+        "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_34.jpg",
         "images": [
         "../../img/data_img/flowers_34_1.jpg",
@@ -666,7 +666,7 @@ const flowers = [
         "country": ["Эквадор", "Италия"],
         "occasions": ["свидание", "день рождения", "8 марта", "14 февраля"],
         "category": "букеты",
-        "color": ["красный", "оранжевый", "желтый"],
+        "color": ["darkred", "orange", "yellow"],
         "thumbnail": "../../img/data_img/flowers_35.jpg",
         "images": [
         "../../img/data_img/flowers_35_1.jpg",
@@ -685,7 +685,7 @@ const flowers = [
         "country": ["Эквадор", "Италия", "Турция"],
         "occasions": ["свидание", "день рождения", "8 марта", "14 февраля", "юбилей"],
         "category": "букеты",
-        "color": ["красный", "розовый", "желтый", "белый", "зеленый"],
+        "color": ["darkred", "pink", "yellow", "white", "lime"],
         "thumbnail": "../../img/data_img/flowers_36.jpg",
         "images": [
         "../../img/data_img/flowers_36_1.jpg",
@@ -704,7 +704,7 @@ const flowers = [
         "country": ["Колумбия", "ЮАР"],
         "occasions": ["свидание", "день рождения", "8 марта", "14 февраля", "юбилей", "рождество", "новый год"],
         "category": "букеты",
-        "color": ["красный", "белый"],
+        "color": ["darkred", "white"],
         "thumbnail": "../../img/data_img/flowers_37.jpg",
         "images": [
         "../../img/data_img/flowers_37_1.jpg",
@@ -723,7 +723,7 @@ const flowers = [
         "country": ["Нидерланды", "Италия"],
         "occasions": ["свидание", "день рождения", "8 марта", "14 февраля", "юбилей", "в школу"],
         "category": "композиция",
-        "color": ["желтый", "белый", "зеленый"],
+        "color": ["yellow", "white", "lime"],
         "thumbnail": "../../img/data_img/flowers_38.jpg",
         "images": [
         "../../img/data_img/flowers_38_1.jpg",
@@ -742,7 +742,7 @@ const flowers = [
         "country": ["Нидерланды", "Италия"],
         "occasions": ["день рождения", "8 марта", "14 февраля", "юбилей", "в школу"],
         "category": "композиция",
-        "color": ["розовый", "зеленый"],
+        "color": ["pink", "lime"],
         "thumbnail": "../../img/data_img/flowers_39.jpg",
         "images": [
         "../../img/data_img/flowers_39_1.jpg",
@@ -761,7 +761,7 @@ const flowers = [
         "country": ["Нидерланды", "Италия", "ЮАР"],
         "occasions": ["день рождения", "8 марта", "14 февраля", "юбилей", "в школу", "выпускной"],
         "category": "букеты",
-        "color": ["розовый", "зеленый", "белый"],
+        "color": ["pink", "lime", "white"],
         "thumbnail": "../../img/data_img/flowers_40.jpg",
         "images": [
         "../../img/data_img/flowers_40_1.jpg",
@@ -780,7 +780,7 @@ const flowers = [
         "country": ["Турция"],
         "occasions": ["свидание", "14 февраля", "8 марта"],
         "category": "цветы",
-        "color": ["черный"],
+        "color": ["black"],
         "thumbnail": "../../img/data_img/flowers_41_1.jpg",
         "images": [
         "../../img/data_img/flowers_41_1.jpg",
@@ -800,7 +800,7 @@ const flowers = [
         "country": ["Нидерланды"],
         "occasions": ["день рождения"],
         "category": "композиция",
-        "color": ["красный", "белый"],
+        "color": ["darkred", "white"],
         "thumbnail": "../../img/data_img/flowers_42_1.jpg",
         "images": [
         "../../img/data_img/flowers_42_1.jpg",
@@ -819,7 +819,7 @@ const flowers = [
         "country": ["Нидерланды"],
         "occasions": ["свидание", "день рождения", "8 марта", 'юбилей', '14 февраля'],
         "category": "букеты",
-        "color": ["белый"],
+        "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_43_1.jpg",
         "images": [
         "../../img/data_img/flowers_43_1.jpg",
@@ -839,7 +839,7 @@ const flowers = [
         "country": ["Россия", "Нидерланды"],
         "occasions": ["свидание","8 марта", '14 февраля'],
         "category": "букеты",
-        "color": ["белый"],
+        "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_44_1.jpg",
         "images": [
         "../../img/data_img/flowers_44_1.jpg",
@@ -858,7 +858,7 @@ const flowers = [
         "country": ["Колумбия"],
         "occasions": ["свидание", "8 марта", '14 февраля', 'день рождения', 'выпускной'],
         "category": "цветы",
-        "color": ["розовый"],
+        "color": ["pink"],
         "thumbnail": "../../img/data_img/flowers_45_1.jpg",
         "images": [
         "../../img/data_img/flowers_45_1.jpg",
@@ -877,7 +877,7 @@ const flowers = [
         "country": ["Колумбия"],
         "occasions": ["свидание", "8 марта", '14 февраля', 'день рождения', 'выпускной'],
         "category": "цветы",
-        "color": ["бордовый", "красный"],
+        "color": ["darkred"],
         "thumbnail": "../../img/data_img/flowers_46_1.jpg",
         "images": [
         "../../img/data_img/flowers_46_1.jpg",
@@ -895,7 +895,7 @@ const flowers = [
         "country": ["Россия"],
         "occasions": ['день рождения'],
         "category": "цветы",
-        "color": ["бордовый", "красный"],
+        "color": ["indigo"],
         "thumbnail": "../../img/data_img/flowers_47_1.jpg",
         "images": [
         "../../img/data_img/flowers_47_1.jpg",
@@ -913,7 +913,7 @@ const flowers = [
         "country": ["Нидерланды"],
         "occasions": ['8 марта', '14 февраля', 'свидание'],
         "category": "букеты",
-        "color": ["бордовый", "красный"],
+        "color": ["darkred"],
         "thumbnail": "../../img/data_img/flowers_48_1.jpg",
         "images": [
         "../../img/data_img/flowers_48_1.jpg",
@@ -931,7 +931,7 @@ const flowers = [
         "country": ["Австралия"],
         "occasions": ['день рождения', 'юбилей'],
         "category": "композиция",
-        "color": ["розовый", "белый"],
+        "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_49_1.jpg",
         "images": [
         "../../img/data_img/flowers_49_1.jpg",
@@ -950,7 +950,7 @@ const flowers = [
         "country": ["Китай", "Нидерланды", "Колумбия"],
         "occasions": ["свидание", "8 марта", '14 февраля', 'день рождения', 'юбилей'],
         "category": "композиция",
-        "color": ["желтый", "красный", 'синий'],
+        "color": ["yellow", "darkred", "orange"],
         "thumbnail": "../../img/data_img/flowers_50_1.jpg",
         "images": [
         "../../img/data_img/flowers_50_1.jpg",
@@ -968,7 +968,7 @@ const flowers = [
         "country": ["Беларусь"],
         "occasions": ["свидание", "8 марта", '14 февраля', 'день рождения', 'юбилей'],
         "category": "букеты",
-        "color": ["синий"],
+        "color": ["blue"],
         "thumbnail": "../../img/data_img/flowers_51_1.jpg",
         "images": [
         "../../img/data_img/flowers_51_1.jpg",
@@ -987,7 +987,7 @@ const flowers = [
         "country": ["Беларусь"],
         "occasions": ["свидание"],
         "category": "букеты",
-        "color": ["белый"],
+        "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_52_1.jpg",
         "images": [
         "../../img/data_img/flowers_52_1.jpg",
@@ -1007,7 +1007,7 @@ const flowers = [
         "country": ["Беларусь"],
         "occasions": ["свидание"],
         "category": "цветы",
-        "color": ["белый"],
+        "color": ["white"],
         "thumbnail": "../../img/data_img/flowers_53_1.jpg",
         "images": [
         "../../img/data_img/flowers_53_1.jpg",
