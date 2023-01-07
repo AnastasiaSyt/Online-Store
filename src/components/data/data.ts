@@ -320,7 +320,7 @@ const flowers = [
         "size": 50,
         "country": ["Китай"],
         "occasions": ["свидание", "юбилей", "14 февраля", "день рождения", "новый год", "рождество", "свадьба"],
-        "category": "букет",
+        "category": "букеты",
         "color": ["красный"],
         "thumbnail": "../../img/data_img/flowers_17.jpg",
         "images": [
@@ -818,7 +818,7 @@ const flowers = [
         "size": 60,
         "country": ["Нидерланды"],
         "occasions": ["свидание", "день рождения", "8 марта", 'юбилей', '14 февраля'],
-        "category": "букет",
+        "category": "букеты",
         "color": ["белый"],
         "thumbnail": "../../img/data_img/flowers_43_1.jpg",
         "images": [
@@ -838,7 +838,7 @@ const flowers = [
         "size": 50,
         "country": ["Россия", "Нидерланды"],
         "occasions": ["свидание","8 марта", '14 февраля'],
-        "category": "букет",
+        "category": "букеты",
         "color": ["белый"],
         "thumbnail": "../../img/data_img/flowers_44_1.jpg",
         "images": [
@@ -967,7 +967,7 @@ const flowers = [
         "size": 70,
         "country": ["Беларусь"],
         "occasions": ["свидание", "8 марта", '14 февраля', 'день рождения', 'юбилей'],
-        "category": "букет",
+        "category": "букеты",
         "color": ["синий"],
         "thumbnail": "../../img/data_img/flowers_51_1.jpg",
         "images": [
@@ -986,7 +986,7 @@ const flowers = [
         "size": 40,
         "country": ["Беларусь"],
         "occasions": ["свидание"],
-        "category": "букет",
+        "category": "букеты",
         "color": ["белый"],
         "thumbnail": "../../img/data_img/flowers_52_1.jpg",
         "images": [

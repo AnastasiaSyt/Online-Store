@@ -3,6 +3,8 @@ import FilterPage from "./filterPage";
 
 import Slider from './slider';
 import Button from "./button";
+import filterFlowers from "../targetfunctions";
+import flowers from "../data/data";
 
 interface IFilter {
     getFilter: () => HTMLElement,
@@ -45,6 +47,7 @@ export default class Filter implements IFilter {
             ellipse.addEventListener('click', e =>{
                 e.preventDefault();
                 ellipsesClassRemove();
+                filterFlowers();
                 ellipse.classList.add('active')
             })
             color?.appendChild(ellipse);
@@ -76,10 +79,6 @@ export default class Filter implements IFilter {
         const filterButton = new Button('cбросить фильтры', 'filter_button').getButton(filter);
 
         return filter;
-    }
-
-    getColor(){
-        return document.querySelectorAll('.color_circle');
     }
 
     getAccordion(node: HTMLElement) {
