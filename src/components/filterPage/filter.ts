@@ -54,7 +54,6 @@ export default class Filter implements IFilter {
         const color = filter.querySelector('.num-3');
 
         const colorItems = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink', 'indigo'];
-        // const colorItemsRu = ['красный', 'белый', 'черный', 'синий', 'желтый', 'оранжевый', 'зеленый', 'розовый', 'фиолетовый'];
         colorItems.forEach((item) => {
             const ellipse = document.createElement('div');
             ellipse.classList.add('color_circle');
