@@ -36,15 +36,25 @@ export default class Filtration {
         this.selectedFilter.color = color;
     }
 
+    changePrice(min: number, max: number) {
+        this.selectedFilter.price.min = min;
+        this.selectedFilter.price.max = max;
+    }
+
+    changeSize(min: number, max: number) {
+        this.selectedFilter.size.min = min;
+        this.selectedFilter.size.max = max;
+    }
+
     filter(): IFlower[] {
         let filteredFlowers: IFlower[] = flowers ?? [];
         const {type, occasion, color, flower, price, size} = this.selectedFilter;
         filteredFlowers = type?.['Все'] || Object.keys(type).length === 0 ? filteredFlowers: this.typeFilter(filteredFlowers, type) ?? []; 
         filteredFlowers = Object.keys(occasion).length === 0 ? filteredFlowers: this.occasionFilter(filteredFlowers, occasion) ?? [];
-        filteredFlowers = this.colorFilter(filteredFlowers, this.selectedFilter.color ?? '') ?? [];
+        filteredFlowers = this.colorFilter(filteredFlowers, color ?? '') ?? [];
         filteredFlowers = Object.keys(flower).length === 0 ? filteredFlowers: this.flowerFilter(filteredFlowers, flower) ?? [];
-        // filteredFlowers = this.priceFilter(filteredFlowers, minPrice, maxPrice) ?? [];
-        // filteredFlowers = this.priceFilter(filteredFlowers, minSize, maxSize) ?? [];
+        filteredFlowers = this.priceFilter(filteredFlowers, price.min, price.max) ?? [];
+        filteredFlowers = this.sizeFilter(filteredFlowers, size.min, size.max) ?? [];
         return filteredFlowers;
     }
 
@@ -71,20 +81,13 @@ export default class Filtration {
         });
     }
 
-    // flowerFilter(currentFlowers: IFlower[], flower: string[]){
-    //     if (flower.length<=0) return currentFlowers;
-    //     return currentFlowers.filter(el=> {
-    //         return el.flower.filter(e => flower.indexOf(e) > -1).length>0
-    //     })
-    // }
+    priceFilter(currentFlowers: IFlower[], min?: number, max?: number){
+        return currentFlowers.filter(el=> el.price >= (min || 0) && el.price <= (max || 1000));
+    }
 
-    // priceFilter(currentFlowers: IFlower[], min?: number, max?: number){
-    //     return currentFlowers.filter(el=> el.price >= (min || 0) && el.price <= (max || 1000));
-    // }
-
-    // sizeFilter(currentFlowers: IFlower[], min?: number, max?: number){
-    //     return currentFlowers.filter(el=> el.size >= (min || 0) && el.size <= (max || 150));
-    // }
+    sizeFilter(currentFlowers: IFlower[], min?: number, max?: number){
+        return currentFlowers.filter(el=> el.size >= (min || 0) && el.size <= (max || 150));
+    }
 
     removeFilters() {
         this.selectedFilter = {

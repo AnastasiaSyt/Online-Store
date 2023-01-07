@@ -8,6 +8,8 @@ import Filtration from "./filtration";
 interface IFilter {
     filtration: Filtration;
     callback: Function;
+    priceSlider: Slider;
+    sizeSlider: Slider;
     getFilter: () => HTMLElement,
     resetFilters: () => void,
     getAccordion: (node: HTMLElement) => void,
@@ -18,6 +20,8 @@ export default class Filter implements IFilter {
     filtration: Filtration;
     callback: Function;
     parent: HTMLElement;
+    priceSlider!: Slider;
+    sizeSlider!: Slider;
 
     constructor(filtration: Filtration, callback: Function, parent: HTMLElement) {
         this.filtration = filtration;
@@ -81,12 +85,20 @@ export default class Filter implements IFilter {
 
         const price = filter.querySelector('.num-5');
         if (price) {
-            const sliderPrice = new Slider().getSlider(price);
+            this.priceSlider = new Slider((min: number, max: number) => {
+                this.filtration.changePrice(min, max);
+                this.callback();
+            });
+            this.priceSlider.getSlider(price);
         }
 
         const height = filter.querySelector('.num-6');
         if (height) {
-            const sliderHeight = new Slider().getSlider(height);
+            this.sizeSlider = new Slider((min: number, max: number) => {
+                this.filtration.changeSize(min, max);
+                this.callback();
+            });
+            this.sizeSlider.getSlider(height);
         }
 
         const filterButton = new Button('cбросить фильтры', 'filter_button', 'reset').getButton(filter);
@@ -101,13 +113,9 @@ export default class Filter implements IFilter {
 
         this.uncheckCheckbox();
         this.uncheckColors();
-        //TODO:
 
-        //5.1 Найти слайдер СТОИМОСТЬ
-        //5.2 Поставить дефолтное значение
-
-        //6.1 Найти слайдер ВЫСОТА
-        //6.2 Поставить дефолтное значение
+        this.priceSlider.resetSlider();
+        this.sizeSlider.resetSlider();
     }
 
     uncheckCheckbox() {

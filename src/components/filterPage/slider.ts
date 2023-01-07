@@ -7,6 +7,7 @@ interface ISlider {
     secondRange: HTMLSpanElement,
     firstSlider: HTMLInputElement,
     secondSlider: HTMLInputElement,
+    onchange: (min: number, max: number) => void,
     getSlider: (target: Node) => void,
     slideOne: () => void,
     slideTwo: () => void
@@ -19,9 +20,10 @@ export default class Slider implements ISlider {
     secondRange!: HTMLSpanElement;
     firstSlider!: HTMLInputElement;
     secondSlider!: HTMLInputElement;
-    constructor() {
+    onchange: (min: number, max: number) => void;
+    constructor(onchange: (min: number, max: number) => void) {
         this.sliderContainer = document.createElement('div');
-        
+        this.onchange = onchange;
     }
 
     getSlider(target: Node) {
@@ -84,6 +86,7 @@ export default class Slider implements ISlider {
             firstVal = `link${(parseInt(secondVal) - this.minGap)}`;
         }
         (valueFirst as HTMLSpanElement).textContent = firstVal;
+        this.onchange(Number(firstVal), Number(secondVal));
     }
 
     slideTwo() {
@@ -97,5 +100,14 @@ export default class Slider implements ISlider {
             secondVal = String(parseInt(firstVal) + this.minGap);
         }
         (valueSecond as HTMLSpanElement).textContent = secondVal;
+        this.onchange(Number(firstVal), Number(secondVal));
+    }
+
+    resetSlider() {
+        this.firstSlider.value = '0';
+        this.secondSlider.value = '100';
+
+        this.secondRange.textContent = '100';
+        this.firstRange.textContent = '0';
     }
 }
