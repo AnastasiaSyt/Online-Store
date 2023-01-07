@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import "./filter.css";
-import FilterPage from "./filterPage";
 
 import Slider from './slider';
 import Button from "./button";
