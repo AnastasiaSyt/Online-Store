@@ -82,6 +82,24 @@
     color: #828282;
 }
 
+.modal_input_small {
+    width: 80px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    border-radius: 4px;
+    margin-top: 15px;
+    padding: 0 10px;
+    margin-bottom: 25px;
+    margin-right: 20px;
+}
+
+.modal_input_small::placeholder {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: #828282;
+}
+
 .modal_paid_logo {
     cursor: pointer;
 }
@@ -157,3 +175,11 @@ input:invalid:not(:placeholder-shown) + .form__error {
     color: white;
     background: #C73153;
   }
+
+  .card_data {
+    display: flex;
+    width: 100%;
+    margin-left: 71px;
+  }
+
+  
