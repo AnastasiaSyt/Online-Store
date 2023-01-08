@@ -38,11 +38,12 @@ export default class Slider implements ISlider {
 
         const dash = document.createElement('span');
         dash.textContent = `-`;
+        dash.style.color = 'white';
         values.appendChild(dash);
 
         this.secondRange = document.createElement('span');
         this.secondRange.id = 'range2';
-        this.secondRange.textContent = '100';
+        this.secondRange.textContent = '300';
         values.appendChild(this.secondRange);
 
         const sliderContainer = this.sliderContainer;
@@ -55,8 +56,8 @@ export default class Slider implements ISlider {
         this.firstSlider = document.createElement('input');
         this.firstSlider.type = 'range';
         this.firstSlider.setAttribute('min', '0');
-        this.firstSlider.setAttribute('max', '100');
-        this.firstSlider.value = '30';
+        this.firstSlider.setAttribute('max', '300');
+        this.firstSlider.value = '0';
         this.firstSlider.id = 'slider-1';
         this.firstSlider.addEventListener('input', this.slideOne.bind(this));
 
@@ -65,8 +66,8 @@ export default class Slider implements ISlider {
         this.secondSlider = document.createElement('input');
         this.secondSlider.type = 'range';
         this.secondSlider.setAttribute('min', '0');
-        this.secondSlider.setAttribute('max', '100');
-        this.secondSlider.value = '70';
+        this.secondSlider.setAttribute('max', '300');
+        this.secondSlider.value = '300';
         this.secondSlider.id = 'slider-2';
         this.secondSlider.addEventListener('input', this.slideTwo.bind(this));
 
