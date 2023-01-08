@@ -11,6 +11,22 @@
     transition: all 0.4s ease-out;
 }
 
+.message_modal {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.7);
+    transition: all 0.4s ease-out;
+
+    color: white;
+    font-size: 40px;
+}
+
 .modal_close-button {
     position: absolute;
     right: 20px;
