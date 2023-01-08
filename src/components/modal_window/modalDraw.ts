@@ -1,11 +1,21 @@
 import { TElementConfig, Tags } from '../types';
 import './modal.css';
 
-export default class ModalDraw {
-    getModal() {
+interface IModalDraw {
+    getModal: () => HTMLFormElement,
+    drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
+    createElement: (config: TElementConfig) => HTMLElement,
+    checkCardNumber: (modal: HTMLFormElement) => void,
+    getDOMElements: () => TElementConfig[]
+}
+
+export default class ModalDraw implements IModalDraw {
+
+    getModal(): HTMLFormElement {
         const modal = document.createElement('form');
         modal.classList.add('modal_window');
         this.drawItems(modal, this.getDOMElements());
+        this.checkCardNumber(modal);
         return modal;
     }
 
@@ -49,6 +59,30 @@ export default class ModalDraw {
             (node as HTMLInputElement).setAttribute(config.attribute[0], config.attribute[1]);
         }
         return node;
+    }
+
+    checkCardNumber(modal: HTMLFormElement) {
+        const cardNumberInput = modal.querySelector('#card_number_input') as HTMLInputElement;
+        cardNumberInput.addEventListener('keypress', (e: KeyboardEvent) => {
+            setTimeout(() => {
+                const firstInteger = Number((e.target as HTMLInputElement).value[0]);
+                if (firstInteger === 4) {
+                    modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
+                    const visa = modal.querySelector('.modal_visa');
+                    visa?.classList.add('active');
+                    console.log('4444')
+                }
+                if (firstInteger === 5) {
+                    modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
+                    const masterCard = modal.querySelector('.modal_mastercard');
+                    masterCard?.classList.add('active');
+                    console.log('555555')
+                }
+                if (firstInteger !== 4 && firstInteger !== 5) {
+                    modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
+                }
+            });
+        });
     }
 
     getDOMElements(): TElementConfig[]{
@@ -153,6 +187,7 @@ export default class ModalDraw {
                                 {
                                     tag: Tags.INPUT,
                                     classes: ['modal_input_card_number', 'modal_input'],
+                                    id: 'card_number_input',
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Card number',
