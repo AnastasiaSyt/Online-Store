@@ -1,5 +1,6 @@
 import './check.css'
 import './../filterPage/button'
+import Modal from '../modal_window/modalAdd';
 
 
 interface ICheck {
@@ -96,6 +97,7 @@ export default class Check implements ICheck {
       button.classList.add('order');
       button.id = 'button_order';
       button.textContent = 'оформить заказ';
+      button.addEventListener('click', () => new Modal())
       checkContent.appendChild(button)
 
 

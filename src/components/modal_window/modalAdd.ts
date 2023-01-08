@@ -1,10 +1,9 @@
 import ModalDraw from "./modalDraw";
-import Button from "../filterPage/button";
 import './modal.css';
 
 export default class Modal {
 
-    getModal() {
+    constructor() {
         this.modalBackground();
         this.openModalWindow();
         this.bindEvents();
@@ -62,7 +61,7 @@ export default class Modal {
     }
 
     closeModalWindow(event: Event) {
-        let classes = (event.target as HTMLElement).classList;
+        const classes = (event.target as HTMLElement).classList;
         const modalWindow = document.querySelector('.modalBackground');
         if (modalWindow) {
             if (classes.contains('modalBackground') || 
