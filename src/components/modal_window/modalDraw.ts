@@ -202,7 +202,7 @@ export default class ModalDraw implements IModalDraw {
                                             type: 'text',
                                             attribute: ['required', 'required'],
                                             placeholder: 'MM / YY',
-                                            pattern: '[0-12]{2}[- /.][0-9]{2}'
+                                            pattern: '(0[1-9]|1[012])[- /.][0-9]{2}'
                                         },
                                         {
                                             tag: Tags.INPUT,
