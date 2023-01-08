@@ -1,9 +1,11 @@
 import { IFlower } from '../data/IFlowers';
 import flowers from '../data/data';
 import { SelectedFilter } from '../types';
+import Tags from './tags';
 
 export default class Filtration {
-    selectedFilter!: SelectedFilter; 
+    selectedFilter!: SelectedFilter;
+    count = 0;
     constructor() {
         this.removeFilters();
     }
@@ -55,6 +57,7 @@ export default class Filtration {
         filteredFlowers = Object.keys(flower).length === 0 ? filteredFlowers: this.flowerFilter(filteredFlowers, flower) ?? [];
         filteredFlowers = this.priceFilter(filteredFlowers, price.min, price.max) ?? [];
         filteredFlowers = this.sizeFilter(filteredFlowers, size.min, size.max) ?? [];
+        this.count = filteredFlowers.length;
         return filteredFlowers;
     }
 
@@ -98,5 +101,47 @@ export default class Filtration {
             price: {min:0, max: 100},
             size: {min: 0, max: 100}
         }
+    }
+
+    generateTags(): HTMLDivElement[] {
+        const tag = new Tags();
+        return this.getSelectedFilterForTags().map((info) => tag.getTag(info));
+    }
+
+    getSelectedFilterForTags(): string[] {
+        const result: string[] = [];
+
+        result.push(
+            ...Object.values(this.selectedFilter.type)
+                .map((x) => `${x} (${this.count})`)
+        );
+
+        result.push(
+            ...Object.values(this.selectedFilter.occasion)
+                .map((x) => `${x} (${this.count})`)
+        );
+
+        if (this.selectedFilter.color) {
+            result.push(
+                ...this.selectedFilter.color
+            );
+        }
+
+        result.push(
+            ...Object.values(this.selectedFilter.flower)
+                .map((x) => `${x} (${this.count})`)
+        );
+
+        const price = this.selectedFilter.price;
+        result.push(
+           `$${price.min} - $${price.max} (${this.count})`
+        ) 
+
+        const size = this.selectedFilter.size;
+        result.push(
+           `${size.min}см - ${size.max}см (${this.count})`
+        )
+        
+        return result;
     }
 }
