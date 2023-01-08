@@ -3,20 +3,24 @@ import './modal.css';
 import { PageIDs } from "../types";
 
 export default class Modal {
+    modalForm!: HTMLFormElement;
+    modal: HTMLDivElement;
 
     constructor() {
-        this.modalBackground();
-        this.openModalWindow();
+        this.modal = this.modalBackground();
+        this.openModalWindow(this.modal);
         this.bindEvents();
     }
 
-    modalBackground(): Node {
+    modalBackground(): HTMLDivElement {
         const background = document.createElement('div');
         background.classList.add('modalBackground');
         const modal = new ModalDraw().getModal();
         background.appendChild(modal);
         modal.appendChild(this.closeIcon());
         modal.appendChild(this.getButton());
+        this.modalForm = modal;
+        this.modalForm.action = 'javascript:void(0);';
         return background;
     }
 
@@ -30,13 +34,22 @@ export default class Modal {
         buttonConfirm.classList.add('confirm_button');
         buttonConfirm.value = 'подтвердить';
         buttons.appendChild(buttonConfirm);
-
         buttonConfirm.addEventListener('click', () => {
-                setTimeout(function() {
+            if (this.modalForm.checkValidity()) {
+                console.log('valid is true');
+                const message = this.message();
+                document.body.append(message);
+                setTimeout(() => {
+                    message.remove();
+                    this.modal.remove();
+
                     window.history.pushState({}, "", `${PageIDs.FilterPage}`);
                     const event = new Event('popstate');
                     window.dispatchEvent(event);
-                }, 5000);
+                }, 3000);
+            } else {
+                console.log('valid is false');
+            }
         })
 
         const buttonCancel = document.createElement('input');
@@ -65,20 +78,25 @@ export default class Modal {
         background?.addEventListener('click', this.closeModalWindow.bind(this));
     }
 
-    openModalWindow() {
-        document.body.append(this.modalBackground());
+    openModalWindow(backgorund: Node) {
+        document.body.append(backgorund);
     }
 
     closeModalWindow(event: Event) {
         const classes = (event.target as HTMLElement).classList;
-        const modalWindow = document.querySelector('.modalBackground');
-        if (modalWindow) {
-            if (classes.contains('modalBackground') || 
-            classes.contains('modal_close-button') || 
-            classes.contains('cancel_button') ||
-            classes.contains('modal_window')) {
-                modalWindow.remove();
-            }
+        if (classes.contains('modalBackground') || 
+        classes.contains('modal_close-button') || 
+        classes.contains('cancel_button') ||
+        classes.contains('modal_window')) {
+            this.modal.remove();
         }
+    }
+
+    message() {
+        const message = document.createElement('div');
+        message.classList.add('message_modal');
+        message.textContent = 'Ваш заказ оформлен!';
+
+        return message;
     }
 }
