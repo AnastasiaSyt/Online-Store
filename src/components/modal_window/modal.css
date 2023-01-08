@@ -94,6 +94,11 @@
     margin-right: 10px;
 }
 
+.paid_logo.active {
+    border: 2px solid #C73153;
+    border-radius: 5px;
+}
+
 .paid_logo:last-child {
     margin-right: 0;
 }
