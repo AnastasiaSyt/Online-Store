@@ -92,6 +92,8 @@ export default class CardProduct implements ICardProduct {
         const description = flowers[flowerNumber]["description"];
         const stock = flowers[flowerNumber]["stock"];
         const color = flowers[flowerNumber]["color"];
+        const colorEng = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink', 'indigo'];
+        const colorRu = ['Красный', 'Белый', 'Черный', 'Синий', 'Желтый', 'Оранжевый', 'Зеленый', 'Розовый', 'Фиолетовый']
 
         const CardProductDOMElements: TElementConfig[] =
         [
@@ -146,7 +148,7 @@ export default class CardProduct implements ICardProduct {
                             {
                                 tag: Tags.P,
                                 classes: ['card_product_color'],
-                                label: `Цвет: ${color[0]}`
+                                label: `Цвет: ${colorRu[colorEng.indexOf(color[0])]}`
                             },
                             {
                                 tag: Tags.P,
