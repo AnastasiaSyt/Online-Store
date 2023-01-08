@@ -36,7 +36,7 @@ export default class CardProduct implements ICardProduct {
 
     addItems(flowerNumber: number) {
         const tags = flowers[flowerNumber]["flower"];
-        console.log(tags);
+        console.log(tags); //clear
         tags.forEach(item => {
             const coloredTag = new ColoredTags().getColoredTag(item);
             const tagContainer = this.cardProduct.getElementsByClassName('card_product_tags');
@@ -74,6 +74,12 @@ export default class CardProduct implements ICardProduct {
         const node = document.createElement(config.tag);
         config.classes.forEach((className) => {
             node.classList.add(className);
+            if(className === 'small_img'){
+                node.addEventListener('click', e => {
+                    e.preventDefault();
+                    (node.parentNode?.parentNode?.querySelector('.card_product_big_img') as HTMLImageElement)!.src = (node as HTMLImageElement).src;
+                })
+            }
         });
         if (config.label) {
             node.textContent = config.label;
