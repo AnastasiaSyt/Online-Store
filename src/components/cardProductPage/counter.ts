@@ -32,7 +32,6 @@ export default class Counter {
         buttonIncrement.addEventListener('click', e=>{
             e.preventDefault();
             const amount = Number(inputCounter.parentNode?.parentNode?.parentNode?.querySelector('.card_product_sort')?.textContent?.split(' ')[2]);
-            console.log(amount)
             if(+inputCounter.value + 1 <= amount)
             inputCounter.value = (+inputCounter.value + 1).toString();
         })

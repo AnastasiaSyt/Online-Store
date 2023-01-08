@@ -104,15 +104,16 @@
   display: grid;
 }
 
-.red{  background-color: rgb(255, 72, 72);}
+
+.darkred{  background-color: darkred;}
 .yellow{  background-color: yellow;}
 .blue{  background-color: blue;}
 .pink{ background-color: pink;}
-.purple{ background-color: purple;}
 .white{ background-color: #fff;}
-.lilac{ background-color: #d2afff;}
+.black{ background-color: black;}
 .orange{ background-color: orange;}
-
+.indigo{ background-color: indigo;}
+.lime{background-color: lime;}
 
 
 .checked{

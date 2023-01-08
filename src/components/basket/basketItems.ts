@@ -34,13 +34,10 @@ export default class BasketItems implements IBasketItems {
     basketItemsHead.appendChild(head4);
 
     itemsContent.appendChild(basketItemsHead);
-
-
-
     let basketItems: HTMLElement[] = [];
 
     for(let i=0;i<5;i++){
-      basketItems.push(new BItem().getItem('Сладкие ноты', i+1, 120));
+      basketItems.push(new BItem().getItem(i+10));
     }
 
     for(let i=0;i<5;i++){
@@ -50,6 +47,7 @@ export default class BasketItems implements IBasketItems {
     itemsContent.querySelectorAll('.cross').forEach(cross => {
       cross.addEventListener('click', e =>{
         e.preventDefault();
+        document.querySelector('.count')!.textContent = (Number(document.querySelector('.count')?.textContent) - 1) >= 0 ? (Number(document.querySelector('.count')?.textContent) - 1).toString() : '0';
         basketItems = basketItems.filter(e =>{
           if(e!=cross.parentNode) return true;
         } )

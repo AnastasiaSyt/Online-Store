@@ -48,12 +48,20 @@ export default class CardProduct implements ICardProduct {
         })
 
         const buttonsContainer = this.cardProduct.querySelector('.card_product_buttons');
-        const cardProductButton = new Button('добавить в корзину', 'card_product_button');
+        const cardProductButton = buttonsContainer ? new Button('добавить в корзину', 'card_product_button').getButton(buttonsContainer) : '';
         const counter = new Counter().getCounter();
+        if (cardProductButton){
+            cardProductButton.addEventListener('click', e=>{
+                e.preventDefault();
+                document.querySelector('.count')!.textContent = (Number(document.querySelector('.count')?.textContent) + 1).toString();
+            })
+        }
+
+
+
         if (!buttonsContainer) {
             throw new Error ('Container not found');
         } else {
-            cardProductButton.getButton(buttonsContainer);
             buttonsContainer.appendChild(counter);
         }
     }
