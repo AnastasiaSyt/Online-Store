@@ -8,9 +8,7 @@
 }
 
 .card_product_content {
-    position: relative;
     display: flex;
-    justify-content: space-between;
 }
 
 .card_product_images {
@@ -31,15 +29,9 @@
 }
 
 .card_product_big_img {
-    position: absolute;
-    max-width: 470px;
-    max-height: 528px;
+    width: 470px;
+    height: 528px;
     margin: 0 52px;
-    left: 90px;
-}
-
-.card_product_text{
-    max-width: 473px;
 }
 
 .card_product_title {
