@@ -2,11 +2,11 @@ import "./button.css";
 
 interface IButton {
     node: HTMLElement,
-    getButton: (target: Node) => void
+    getButton: (target: Node) => HTMLButtonElement
 }
 
 export default class Button implements IButton {
-    node: HTMLElement;
+    node: HTMLButtonElement;
     constructor(buttonText: string, className?: string, id?: string) {
         this.node = document.createElement('button');
         this.node.classList.add('button');
@@ -18,7 +18,8 @@ export default class Button implements IButton {
         }
         this.node.textContent = buttonText;
     }
-    getButton(target: Node) {
+    getButton(target: Node): HTMLButtonElement {
         target.appendChild(this.node);
+        return this.node;
     }
 }

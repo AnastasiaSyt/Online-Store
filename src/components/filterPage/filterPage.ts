@@ -7,17 +7,26 @@ import Tag from './tags';
 import Card from './card';
 import { IPage } from '../IPage';
 import { PageIDs } from '../types';
-import flowers from '../data/data';
-
+import Filtration from './filtration';
 
 export default class FilterPage implements IPage {
+    filtration: Filtration;
+    allCards: HTMLElement;
+
+    constructor() {
+        this.filtration = new Filtration();
+        const allCards = document.createElement('div');
+        allCards.classList.add('all_cards');
+        this.allCards = allCards;
+    }
+
     getPage() {
         const filterContent = document.createElement('div');
         filterContent.id = 'filterPage';
         filterContent.classList.add('filter_content');
         filterContent.classList.add('wrapper');
 
-        const filter = new Filter().getFilter();
+        const filter = new Filter(this.filtration, this.drawFlowers.bind(this), filterContent).getFilter();
         filterContent.appendChild(filter);
 
         const mainContent = document.createElement('div');
@@ -68,11 +77,25 @@ export default class FilterPage implements IPage {
         select.appendChild(optionTwo);
         select.appendChild(optionThree);
 
-        const allCards = document.createElement('div');
-        allCards.classList.add('all_cards');
-        mainContent.appendChild(allCards);
+        mainContent.appendChild(this.allCards);
 
-        flowers.forEach(item => {
+        this.drawFlowers();
+
+        return filterContent;
+    }
+
+    removeFlowers() {
+        while (this.allCards.childNodes.length > 0 ) {
+            this.allCards.removeChild(this.allCards.childNodes[0]);
+        }
+    }
+
+
+    drawFlowers() {
+        this.removeFlowers();
+
+        const filteredFlowers = this.filtration.filter();
+        filteredFlowers.forEach(item => {
             const cardLink = document.createElement('a');
             cardLink.addEventListener('click', () => {
                 window.history.pushState({}, "", `${PageIDs.CardProductPage}_${item.id}`);
@@ -83,9 +106,7 @@ export default class FilterPage implements IPage {
 
             const card = new Card().getCard(item.id);
             cardLink.appendChild(card);
-            allCards.appendChild(cardLink);
+            this.allCards.appendChild(cardLink);
         })
-
-        return filterContent;
     }
 }

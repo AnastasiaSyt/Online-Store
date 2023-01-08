@@ -82,7 +82,7 @@ export default class App implements IApp {
             return PageIDs.FilterPage;
         }
         url = url.substring(1);
-        
+
         if (url.indexOf(PageIDs.CardProductPage) === 0) {
             return PageIDs.CardProductPage;
         }
