@@ -1,5 +1,6 @@
 import ModalDraw from "./modalDraw";
 import './modal.css';
+import { PageIDs } from "../types";
 
 export default class Modal {
 
@@ -29,6 +30,14 @@ export default class Modal {
         buttonConfirm.classList.add('confirm_button');
         buttonConfirm.value = 'подтвердить';
         buttons.appendChild(buttonConfirm);
+
+        buttonConfirm.addEventListener('click', () => {
+                setTimeout(function() {
+                    window.history.pushState({}, "", `${PageIDs.FilterPage}`);
+                    const event = new Event('popstate');
+                    window.dispatchEvent(event);
+                }, 5000);
+        })
 
         const buttonCancel = document.createElement('input');
         buttonCancel.type = 'reset';
