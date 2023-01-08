@@ -1,11 +1,11 @@
 import './tags.css';
 
 interface ITag {
-    getTag: (data: string) => HTMLElement
+    getTag: (data: string) => HTMLDivElement
 }
 
 export default class Tags implements ITag{
-    getTag(data: string): HTMLElement {
+    getTag(data: string): HTMLDivElement {
         const tag = document.createElement('div');
         tag.classList.add('tag');
         tag.textContent = data;

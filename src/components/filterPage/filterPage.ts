@@ -3,7 +3,6 @@ import './slider.css';
 
 import Search from './searchForm';
 import Filter from './filter';
-import Tag from './tags';
 import Card from './card';
 import { IPage } from '../IPage';
 import { PageIDs } from '../types';
@@ -12,6 +11,7 @@ import Filtration from './filtration';
 export default class FilterPage implements IPage {
     filtration: Filtration;
     allCards: HTMLElement;
+    tagContainer!: HTMLDivElement;
 
     constructor() {
         this.filtration = new Filtration();
@@ -43,13 +43,7 @@ export default class FilterPage implements IPage {
         const tagsContainer = document.createElement('div');
         tagsContainer.classList.add('tags_container');
         sortContainer.appendChild(tagsContainer);
-
-        const tag = new Tag().getTag('Букеты(34)');
-        const tagOne = new Tag().getTag('Белый(6)');
-        const tagTwo = new Tag().getTag('$10-$1000');
-        tagsContainer.appendChild(tag);
-        tagsContainer.appendChild(tagOne);
-        tagsContainer.appendChild(tagTwo);
+        this.tagContainer = tagsContainer;
 
         const selectContainer = document.createElement('div');
         selectContainer.classList.add('select_container');
@@ -94,6 +88,12 @@ export default class FilterPage implements IPage {
         this.removeFlowers();
 
         const filteredFlowers = this.filtration.filter();
+        const tags = this.filtration.generateTags();
+        while (this.tagContainer.lastElementChild) {
+            this.tagContainer.removeChild(this.tagContainer.lastElementChild);
+        }
+        tags.forEach((tag) => this.tagContainer.append(tag));
+
         filteredFlowers.forEach(item => {
             const cardLink = document.createElement('a');
             cardLink.addEventListener('click', () => {
