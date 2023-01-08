@@ -70,13 +70,11 @@ export default class ModalDraw implements IModalDraw {
                     modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
                     const visa = modal.querySelector('.modal_visa');
                     visa?.classList.add('active');
-                    console.log('4444')
                 }
                 if (firstInteger === 5) {
                     modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
                     const masterCard = modal.querySelector('.modal_mastercard');
                     masterCard?.classList.add('active');
-                    console.log('555555')
                 }
                 if (firstInteger !== 4 && firstInteger !== 5) {
                     modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
@@ -195,20 +193,27 @@ export default class ModalDraw implements IModalDraw {
                                     title: 'Введите номер карты, 16 символов'
                                 },
                                 {
-                                    tag: Tags.INPUT,
-                                    classes: ['modal_input_card_expire', 'modal_input'],
-                                    type: 'text',
-                                    attribute: ['required', 'required'],
-                                    placeholder: 'MM / YY',
-                                    pattern: '\S+\s+\S+\s+\S+'
-                                },
-                                {
-                                    tag: Tags.INPUT,
-                                    classes: ['modal_input_CVC', 'modal_input'],
-                                    type: 'text',
-                                    attribute: ['required', 'required'],
-                                    placeholder: 'CVC'
-                                },
+                                    tag: Tags.DIV,
+                                    classes: ['card_data'],
+                                    children: [
+                                        {
+                                            tag: Tags.INPUT,
+                                            classes: ['modal_input_card_expire', 'modal_input_small'],
+                                            type: 'text',
+                                            attribute: ['required', 'required'],
+                                            placeholder: 'MM / YY',
+                                            pattern: '[0-12]{2}[- /.][0-9]{2}'
+                                        },
+                                        {
+                                            tag: Tags.INPUT,
+                                            classes: ['modal_input_CVC', 'modal_input_small'],
+                                            type: 'text',
+                                            attribute: ['required', 'required'],
+                                            placeholder: 'CVC',
+                                            pattern: '[0-9]{3}'
+                                        }
+                                    ]
+                                }
                             ]
                         }
                     ]
