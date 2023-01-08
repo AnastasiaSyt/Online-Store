@@ -77,7 +77,7 @@ export default class CardProduct implements ICardProduct {
             if(className === 'small_img'){
                 node.addEventListener('click', e => {
                     e.preventDefault();
-                    (node.parentNode?.parentNode?.querySelector('.card_product_big_img') as HTMLImageElement)!.src = (node as HTMLImageElement).src;
+                    (node.parentNode?.parentNode?.querySelector('.card_product_big_img') as HTMLImageElement).src = (node as HTMLImageElement).src;
                 })
             }
         });
