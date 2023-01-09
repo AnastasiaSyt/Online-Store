@@ -7,6 +7,8 @@ interface ISlider {
     secondRange: HTMLSpanElement,
     firstSlider: HTMLInputElement,
     secondSlider: HTMLInputElement,
+    defaultMin: string,
+    defaultMax: string,
     onchange: (min: number, max: number) => void,
     getSlider: (target: Node) => void,
     slideOne: () => void,
@@ -20,10 +22,14 @@ export default class Slider implements ISlider {
     secondRange!: HTMLSpanElement;
     firstSlider!: HTMLInputElement;
     secondSlider!: HTMLInputElement;
+    defaultMin: string;
+    defaultMax: string;
     onchange: (min: number, max: number) => void;
-    constructor(onchange: (min: number, max: number) => void) {
+    constructor(onchange: (min: number, max: number) => void, defaultMin: string, defaultMax: string) {
         this.sliderContainer = document.createElement('div');
         this.onchange = onchange;
+        this.defaultMin = defaultMin;
+        this.defaultMax = defaultMax;
     }
 
     getSlider(target: Node) {
@@ -33,7 +39,7 @@ export default class Slider implements ISlider {
 
         this.firstRange = document.createElement('span');
         this.firstRange.id = 'range1';
-        this.firstRange.textContent = '0';
+        this.firstRange.textContent = this.defaultMin;
         values.appendChild(this.firstRange);
 
         const dash = document.createElement('span');
@@ -43,7 +49,7 @@ export default class Slider implements ISlider {
 
         this.secondRange = document.createElement('span');
         this.secondRange.id = 'range2';
-        this.secondRange.textContent = '300';
+        this.secondRange.textContent = this.defaultMax;
         values.appendChild(this.secondRange);
 
         const sliderContainer = this.sliderContainer;
@@ -55,9 +61,9 @@ export default class Slider implements ISlider {
 
         this.firstSlider = document.createElement('input');
         this.firstSlider.type = 'range';
-        this.firstSlider.setAttribute('min', '0');
-        this.firstSlider.setAttribute('max', '300');
-        this.firstSlider.value = '0';
+        this.firstSlider.setAttribute('min', this.defaultMin);
+        this.firstSlider.setAttribute('max', this.defaultMax);
+        this.firstSlider.value = this.defaultMin;
         this.firstSlider.id = 'slider-1';
         this.firstSlider.addEventListener('input', this.slideOne.bind(this));
 
@@ -65,9 +71,9 @@ export default class Slider implements ISlider {
 
         this.secondSlider = document.createElement('input');
         this.secondSlider.type = 'range';
-        this.secondSlider.setAttribute('min', '0');
-        this.secondSlider.setAttribute('max', '300');
-        this.secondSlider.value = '300';
+        this.secondSlider.setAttribute('min', this.defaultMin);
+        this.secondSlider.setAttribute('max', this.defaultMax);
+        this.secondSlider.value = this.defaultMax;
         this.secondSlider.id = 'slider-2';
         this.secondSlider.addEventListener('input', this.slideTwo.bind(this));
 
@@ -104,11 +110,11 @@ export default class Slider implements ISlider {
         this.onchange(Number(firstVal), Number(secondVal));
     }
 
-    resetSlider() {
-        this.firstSlider.value = '0';
-        this.secondSlider.value = '100';
+    resetSlider(defaultMin: string, defaultMax: string) {
+        this.firstSlider.value = defaultMin;
+        this.secondSlider.value = defaultMax;
 
-        this.secondRange.textContent = '100';
-        this.firstRange.textContent = '0';
+        this.secondRange.textContent = defaultMax;
+        this.firstRange.textContent = defaultMin;
     }
 }
