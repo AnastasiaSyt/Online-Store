@@ -3,7 +3,7 @@ import flowers from '../data/data';
 import { SelectedFilter } from '../types';
 
 export default class Filtration {
-    selectedFilter!: SelectedFilter; 
+    selectedFilter!: SelectedFilter;
     constructor() {
         this.removeFilters();
     }
@@ -49,7 +49,7 @@ export default class Filtration {
     filter(): IFlower[] {
         let filteredFlowers: IFlower[] = flowers ?? [];
         const {type, occasion, color, flower, price, size} = this.selectedFilter;
-        filteredFlowers = type?.['Все'] || Object.keys(type).length === 0 ? filteredFlowers: this.typeFilter(filteredFlowers, type) ?? []; 
+        filteredFlowers = type?.['Все'] || Object.keys(type).length === 0 ? filteredFlowers: this.typeFilter(filteredFlowers, type) ?? [];
         filteredFlowers = Object.keys(occasion).length === 0 ? filteredFlowers: this.occasionFilter(filteredFlowers, occasion) ?? [];
         filteredFlowers = this.colorFilter(filteredFlowers, color ?? '') ?? [];
         filteredFlowers = Object.keys(flower).length === 0 ? filteredFlowers: this.flowerFilter(filteredFlowers, flower) ?? [];
@@ -95,8 +95,14 @@ export default class Filtration {
             occasion: {},
             color: '',
             flower: {},
-            price: {min:0, max: 100},
-            size: {min: 0, max: 100}
+            price: {min:0, max: 160},
+            size: {min: 20, max: 80}
         }
+    }
+
+    searchFilter(currentFlowers: IFlower[], request: string){
+        return currentFlowers.filter(e => {
+            return e.title.indexOf(request);
+        })
     }
 }

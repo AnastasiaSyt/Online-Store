@@ -1,4 +1,5 @@
 import './search.css';
+import Filtration from './filtration';
 
 interface ISearch {
     getForm: () => HTMLElement
