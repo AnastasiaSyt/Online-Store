@@ -4,12 +4,12 @@ import flowers from '../data/data';
 
 
 interface IItem {
-  getItem: (id: number /*defaultName: string, defaultAccessNumber: number, defaultPrice: number*/) => HTMLElement;
+  getItem: (id: number) => HTMLElement;
 }
 
 export default class BItem implements IItem {
 
-  getItem(id: number /*defaultName: string, defaultAccessNumber: number, defaultPrice: number*/) {
+  getItem(id: number) {
     const itemContent = document.createElement('div');
     itemContent.classList.add('basket-item')
 
