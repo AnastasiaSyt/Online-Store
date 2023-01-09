@@ -102,7 +102,7 @@ export default class Filtration implements IFiltration {
     }
 
     sizeFilter(currentFlowers: IFlower[], min?: number, max?: number) {
-        return currentFlowers.filter(el => el.size >= (min || 25) && el.size <= (max || 80));
+        return currentFlowers.filter(el => el.size >= (min || 20) && el.size <= (max || 80));
     }
 
     removeFilters() {
@@ -112,7 +112,7 @@ export default class Filtration implements IFiltration {
             color: '',
             flower: {},
             price: { min: 0, max: 160 },
-            size: { min: 25, max: 80 }
+            size: { min: 20, max: 80 }
         }
     }
 
@@ -130,7 +130,7 @@ export default class Filtration implements IFiltration {
     onRemove(item: string) {
         const keys = item.split('.');
         if (keys[0] === 'size') {
-            this.selectedFilter.size = { min: 25, max: 80 };
+            this.selectedFilter.size = { min: 20, max: 80 };
         } else if (keys[0] === 'price') {
             this.selectedFilter.price = { min: 0, max: 160 };
         } else if (keys.length === 2) {

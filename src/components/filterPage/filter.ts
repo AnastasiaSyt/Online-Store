@@ -122,7 +122,7 @@ export default class Filter implements IFilter {
         this.uncheckColors();
 
         this.priceSlider.resetSlider('0', '160');
-        this.sizeSlider.resetSlider('25', '80');
+        this.sizeSlider.resetSlider('20', '80');
     }
 
     uncheckCheckbox() {
