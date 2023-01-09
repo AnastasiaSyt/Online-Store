@@ -25,8 +25,7 @@ export default class Counter {
         buttonDecrement.addEventListener('click', e=>{
             e.preventDefault();
             inputCounter.value = +inputCounter.value - 1 >= 0 ? (+inputCounter.value - 1).toString() : '0';
-            // if(+inputCounter.value === 0) inputCounter.parentNode?.parentNode?.querySelector('.button')?.setAttribute('disable', 'disable');
-            //Активируй, если посчитаешь нужным
+            if(+inputCounter.value === 0) inputCounter.parentNode?.parentNode?.querySelector('.button')?.setAttribute('disabled', '');
         })
 
         buttonIncrement.addEventListener('click', e=>{

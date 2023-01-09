@@ -87,7 +87,7 @@ export default class Filter implements IFilter {
             this.priceSlider = new Slider((min: number, max: number) => {
                 this.filtration.changePrice(min, max);
                 this.callback();
-            });
+            }, '0', '160');
             this.priceSlider.getSlider(price);
         }
 
@@ -96,7 +96,7 @@ export default class Filter implements IFilter {
             this.sizeSlider = new Slider((min: number, max: number) => {
                 this.filtration.changeSize(min, max);
                 this.callback();
-            });
+            }, '20', '80');
             this.sizeSlider.getSlider(height);
         }
 
@@ -113,8 +113,8 @@ export default class Filter implements IFilter {
         this.uncheckCheckbox();
         this.uncheckColors();
 
-        this.priceSlider.resetSlider();
-        this.sizeSlider.resetSlider();
+        this.priceSlider.resetSlider('0', '160');
+        this.sizeSlider.resetSlider('20', '80');
     }
 
     uncheckCheckbox() {
