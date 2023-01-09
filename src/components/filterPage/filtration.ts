@@ -139,7 +139,7 @@ export default class Filtration {
 
         const size = this.selectedFilter.size;
         result.push(
-           `${size.min}см - ${size.max}см (${this.count})`
+           `${size.min} см - ${size.max} см (${this.count})`
         )
         
         return result;
