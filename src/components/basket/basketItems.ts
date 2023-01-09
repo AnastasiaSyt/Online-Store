@@ -36,12 +36,17 @@ export default class BasketItems implements IBasketItems {
     itemsContent.appendChild(basketItemsHead);
     let basketItems: HTMLElement[] = [];
 
-    for(let i=0;i<5;i++){
-      basketItems.push(new BItem().getItem(i+10));
-    }
+    if(localStorage.getItem('basketFlowers')){
+      const storagedItems = JSON.parse(localStorage.getItem('basketFlowers') ?? '');
+      console.log(storagedItems)
+      for(let i=0;i<storagedItems.length;i++){
+        console.log(storagedItems[i])
+        basketItems.push(new BItem().getItem(storagedItems[i]));
+      }
 
-    for(let i=0;i<5;i++){
-      itemsContent.appendChild(basketItems[i]);
+      for(let i=0;i<storagedItems.length;i++){
+        itemsContent.appendChild(basketItems[i]);
+      }
     }
 
     itemsContent.querySelectorAll('.cross').forEach(cross => {
