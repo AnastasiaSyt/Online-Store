@@ -136,9 +136,9 @@ export default class BItem implements IItem {
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
           + flowers[id]['price']);
           document.querySelector('.total-price')!.textContent = '$' +
-                                                                (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] +
+                                                                ((+document!.querySelector('.goods-price')!.textContent!.split('$')[1] +
                                                                 +document!.querySelector('.tax-price')!.textContent!.split('$')[1] +
-                                                                +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+                                                                +document!.querySelector('.delivery-price')!.textContent!.split('$')[1])*(1 - +document!.querySelector('.sale-price')!.textContent!.split('%')[0]/100)).toFixed(2);
         }
       }
       priceRegulation();
@@ -151,7 +151,7 @@ export default class BItem implements IItem {
           document.querySelector('.goods-price')!.textContent = '$' + (
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
           - flowers[id]['price']);
-          if(+counterNumber.value < flowers[id]['stock']) document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+          if(+counterNumber.value < flowers[id]['stock']) document.querySelector('.total-price')!.textContent = '$' + ((+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1])*(1 - +document!.querySelector('.sale-price')!.textContent!.split('%')[0]/100)).toFixed(2);
         }
       }
       priceRegulation();

@@ -75,7 +75,7 @@
     line-height: 2.8rem;
     text-transform: uppercase;
     color: #FFFFFF;
-
+    z-index: 1;
     margin-left: 5px;
 }
 
