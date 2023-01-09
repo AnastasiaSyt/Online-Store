@@ -46,6 +46,7 @@ export default class FilterPage implements IPage {
         tagsContainer.classList.add('tags_container');
         sortContainer.appendChild(tagsContainer);
         this.tagContainer = tagsContainer;
+        this.tagContainer = tagsContainer;
 
         const selectContainer = document.createElement('div');
         selectContainer.classList.add('select_container');

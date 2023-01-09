@@ -70,6 +70,7 @@ export default class Filtration implements IFiltration {
         filteredFlowers = this.priceFilter(filteredFlowers, price.min, price.max) ?? [];
         filteredFlowers = this.sizeFilter(filteredFlowers, size.min, size.max) ?? [];
         this.count = filteredFlowers.length;
+        this.count = filteredFlowers.length;
         return filteredFlowers;
     }
 
