@@ -40,7 +40,6 @@ export default class BasketItems implements IBasketItems {
       const storagedItems = JSON.parse(localStorage.getItem('basketFlowers') ?? '');
       console.log(storagedItems)
       for(let i=0;i<storagedItems.length;i++){
-        console.log(storagedItems[i])
         basketItems.push(new BItem().getItem(storagedItems[i]));
       }
 
@@ -52,14 +51,16 @@ export default class BasketItems implements IBasketItems {
     itemsContent.querySelectorAll('.cross').forEach(cross => {
       cross.addEventListener('click', e =>{
         e.preventDefault();
-        document.querySelector('.count')!.textContent = (Number(document.querySelector('.count')?.textContent) - 1) >= 0 ? (Number(document.querySelector('.count')?.textContent) - 1).toString() : '0';
-        basketItems = basketItems.filter(e =>{
-          if(e!=cross.parentNode) return true;
-        } )
 
         cross.parentNode?.parentNode?.removeChild(cross.parentNode);
+        const tempFlowers = JSON.parse(localStorage.getItem('basketFlowers') ?? '');
+        if(cross.parentElement) tempFlowers.splice(basketItems.indexOf(cross.parentElement), 1)
+        localStorage.setItem('basketFlowers', JSON.stringify(tempFlowers))
 
-        console.log(basketItems)
+        document.querySelector('.count')!.textContent = (Number(document.querySelector('.count')?.textContent) - 1) >= 0 ? (Number(document.querySelector('.count')?.textContent) - 1).toString() : '0';
+        basketItems = basketItems.filter(e =>{
+          return e !== cross.parentNode;
+        } )
 
         let sum = 0;
         for(let i=0;i<basketItems.length;i++){
@@ -88,5 +89,3 @@ export default class BasketItems implements IBasketItems {
     return itemsContent;
   }
 }
-
-//TODO: connect with cross div
