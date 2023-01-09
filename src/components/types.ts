@@ -36,3 +36,8 @@ export const enum PageIDs {
     CardProductPage = 'cardProductPage',
     CartPage = 'basketPage'
   }
+
+export type TagItem = {
+    key: string,
+    item: string
+}
