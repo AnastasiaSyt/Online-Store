@@ -1,0 +1,53 @@
+.filter {
+    width: 270px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.08);
+    margin-top: 60px;
+    margin-bottom: 60px;
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.filter_content {
+    display: flex;
+}
+
+.sort_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tags_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.label_select {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    color: #4F4F4F;
+}
+
+.select {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    color: #C73153;
+
+    border: none;
+}
+
+.link_card {
+    text-decoration: none;
+}
+
+.all_cards {
+    width: 870px;
+    display: flex;
+    flex-wrap: wrap;
+}

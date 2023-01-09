@@ -1,0 +1,176 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-size: 1.4rem;
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+}
+
+/*______________header____________*/
+
+.header {
+    background: white;
+    padding: 14px 0;
+    filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.15));
+}
+
+.wrapper {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.header_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo_text {
+    font-size: 2.0rem;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.header_logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.link_filterPage {
+    text-decoration: none;
+    color: #333333;
+
+    display: flex;
+    align-items: center;
+}
+
+.link_filterPage:hover {
+    color: #C73153;
+}
+
+.bg_cart {
+    width: 170px;
+    height: 32px;
+    background: #F2F2F2;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_cart {
+    cursor: pointer;
+}
+
+.cart_logo {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+}
+
+.text_cart {
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3.2rem;
+    text-transform: uppercase;
+    color: #333333;
+    margin-left: 10px;
+    margin-right: 33px;
+}
+
+.bg_count {
+    width: 32px;
+    height: 32px;
+    background: #C73153;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.count {
+    color: white;
+    font-weight: 500;
+    line-height: 3.2rem;
+    text-align: center;
+}
+
+.wrap_content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .content_all {
+    flex: 1 0 auto;
+  }
+
+  .link_basketPage {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+/*______________main____________*/
+
+.flowers_top {
+    width: 100%;
+}
+
+/*______________footer____________*/
+
+.footer {
+    padding: 15px 0;
+    background: white;
+    filter: drop-shadow(0px -2px 10px rgba(0, 0, 0, 0.15));
+
+    flex: 0 0 auto;
+}
+
+.wrapper_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo_footer {
+    display: flex;
+    align-items: center;
+}
+
+.text_logo_footer {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    color: #4F4F4F;
+    margin-left: 8px;
+}
+
+.footer_text {
+    font-weight: 400;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    color: #4F4F4F;
+    margin-left: 10px;
+}
+
+.footer__link {
+    color: #C73153;
+}

@@ -1,0 +1,86 @@
+.search_container {
+  width: 100%;
+  display: flex;
+  margin-top: 60px;
+  margin-bottom: 15px;
+  /* justify-content: space-between; */
+  align-items: top;
+
+}
+
+.search_form {
+  position: relative;
+  background: white;
+  margin-right: 10px;
+}
+
+.search_field{
+  width: 670px;
+  height: 42px;
+  padding-left: 15px;
+  border: 1px solid #C73153;
+  border-radius: 4px;
+}
+
+.search_button {
+  height: 38px;
+  width: 41px;
+  position: absolute;
+  background-color: #fff;
+  right: 2px;
+  top: 2px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+}
+
+.copy_button {
+  width: 44px;
+  height: 44px;
+  background-color: #F2F2F2;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 58px;
+}
+
+/*__________________toggle__________________*/
+
+.icons_container {
+  width: 88px;
+  height: 44px;
+  background: #F2F2F2;
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icon_cards {
+  width: 42px;
+  height: 42px;
+  background: white;
+  filter: drop-shadow(2px 0px 5px rgba(0, 0, 0, 0.1));
+  border-radius: 3px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.icon_list {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
