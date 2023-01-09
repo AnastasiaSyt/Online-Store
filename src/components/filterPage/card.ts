@@ -32,7 +32,32 @@ export default class Card implements ICard{
         const node = document.createElement(config.tag);
         config.classes.forEach((className) => {
             node.classList.add(className);
+            if(className === 'cart_tag'){
+                node.addEventListener('click', e=>{
+                    if(localStorage.getItem('basketFlowers')){
+                    let tempFlowers = JSON.parse(localStorage.getItem('basketFlowers') ?? '');
+                    if(tempFlowers){
+                        tempFlowers.push(
+                            flowers.filter(e => {
+                                return e.title === node.parentNode?.querySelector('.card_title')?.textContent;
+                            })[0]['id']
+                        );
+                        const tempSet = new Set(tempFlowers);
+                        tempFlowers = Array.from(tempSet);
+                        document.querySelector('.count')!.textContent = tempFlowers.length;
+                        localStorage.setItem('basketFlowers', JSON.stringify(tempFlowers))
+                    }
+                }
+                else{
+                    const basketFlowers = [];
+                    basketFlowers.push(Number(window.location.href.split('_')[1]));
+                    localStorage.setItem('basketFlowers', JSON.stringify(basketFlowers))
+                    document.querySelector('.count')!.textContent = '1';
+                }
+            }
+            )}
         });
+
         if (config.label) {
             node.textContent = config.label;
         }
