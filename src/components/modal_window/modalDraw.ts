@@ -1,11 +1,21 @@
 import { TElementConfig, Tags } from '../types';
 import './modal.css';
 
-export default class ModalDraw {
-    getModal() {
+interface IModalDraw {
+    getModal: () => HTMLFormElement,
+    drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
+    createElement: (config: TElementConfig) => HTMLElement,
+    checkCardNumber: (modal: HTMLFormElement) => void,
+    getDOMElements: () => TElementConfig[]
+}
+
+export default class ModalDraw implements IModalDraw {
+
+    getModal(): HTMLFormElement {
         const modal = document.createElement('form');
         modal.classList.add('modal_window');
         this.drawItems(modal, this.getDOMElements());
+        this.checkCardNumber(modal);
         return modal;
     }
 
@@ -49,6 +59,33 @@ export default class ModalDraw {
             (node as HTMLInputElement).setAttribute(config.attribute[0], config.attribute[1]);
         }
         return node;
+    }
+
+    checkCardNumber(modal: HTMLFormElement) {
+        const cardNumberInput = modal.querySelector('#card_number_input') as HTMLInputElement;
+        cardNumberInput.addEventListener('keypress', (e: KeyboardEvent) => {
+            setTimeout(() => {
+                const firstInteger = Number((e.target as HTMLInputElement).value[0]);
+                if (firstInteger === 4) {
+                    modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
+                    const visa = modal.querySelector('.modal_visa');
+                    visa?.classList.add('active');
+                }
+                if (firstInteger === 5) {
+                    modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
+                    const masterCard = modal.querySelector('.modal_mastercard');
+                    masterCard?.classList.add('active');
+                }
+                if (firstInteger === 3) {
+                    modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
+                    const masterCard = modal.querySelector('.modal_american_express');
+                    masterCard?.classList.add('active');
+                }
+                if (firstInteger !== 4 && firstInteger !== 5 && firstInteger !== 3) {
+                    modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
+                }
+            });
+        });
     }
 
     getDOMElements(): TElementConfig[]{
@@ -111,8 +148,8 @@ export default class ModalDraw {
                                     children: [
                                         {
                                             tag: Tags.IMG,
-                                            classes: ['modal_paypal', 'paid_logo'],
-                                            src: '../../img/PayPal.svg'
+                                            classes: ['modal_american_express', 'paid_logo'],
+                                            src: '../../img/american_express.svg'
                                         },
                                         {
                                             tag: Tags.IMG,
@@ -123,21 +160,6 @@ export default class ModalDraw {
                                             tag: Tags.IMG,
                                             classes: ['modal_visa', 'paid_logo'],
                                             src: '../../img/Visa.svg'
-                                        },
-                                        {
-                                            tag: Tags.IMG,
-                                            classes: ['modal_apple', 'paid_logo'],
-                                            src: '../../img/ApplePay.svg'
-                                        },
-                                        {
-                                            tag: Tags.IMG,
-                                            classes: ['modal_bitcoin', 'paid_logo'],
-                                            src: '../../img/Bitcoin.svg'
-                                        },
-                                        {
-                                            tag: Tags.IMG,
-                                            classes: ['modal_google', 'paid_logo'],
-                                            src: '../../img/GooglePay.svg'
                                         }
                                     ]
                                 },
@@ -153,27 +175,35 @@ export default class ModalDraw {
                                 {
                                     tag: Tags.INPUT,
                                     classes: ['modal_input_card_number', 'modal_input'],
+                                    id: 'card_number_input',
                                     type: 'text',
                                     attribute: ['required', 'required'],
                                     placeholder: 'Card number',
                                     pattern: '[0-9]{16}',
-                                    title: 'Введите номер карты, 16 символов'
+                                    title: 'Введите номер карты, 16 символов. Если номер карты начинает с 4, устанавливается логотип Visa, если 5 - MasterCard, если 3 - AmericanExpress'
                                 },
                                 {
-                                    tag: Tags.INPUT,
-                                    classes: ['modal_input_card_expire', 'modal_input'],
-                                    type: 'text',
-                                    attribute: ['required', 'required'],
-                                    placeholder: 'MM / YY',
-                                    pattern: '\S+\s+\S+\s+\S+'
-                                },
-                                {
-                                    tag: Tags.INPUT,
-                                    classes: ['modal_input_CVC', 'modal_input'],
-                                    type: 'text',
-                                    attribute: ['required', 'required'],
-                                    placeholder: 'CVC'
-                                },
+                                    tag: Tags.DIV,
+                                    classes: ['card_data'],
+                                    children: [
+                                        {
+                                            tag: Tags.INPUT,
+                                            classes: ['modal_input_card_expire', 'modal_input_small'],
+                                            type: 'text',
+                                            attribute: ['required', 'required'],
+                                            placeholder: 'MM / YY',
+                                            pattern: '(0[1-9]|1[012])[- /.][0-9]{2}'
+                                        },
+                                        {
+                                            tag: Tags.INPUT,
+                                            classes: ['modal_input_CVC', 'modal_input_small'],
+                                            type: 'text',
+                                            attribute: ['required', 'required'],
+                                            placeholder: 'CVC',
+                                            pattern: '[0-9]{3}'
+                                        }
+                                    ]
+                                }
                             ]
                         }
                     ]

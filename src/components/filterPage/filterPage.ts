@@ -90,7 +90,6 @@ export default class FilterPage implements IPage {
         }
     }
 
-
     drawFlowers() {
         this.removeFlowers();
 

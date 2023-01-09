@@ -11,6 +11,22 @@
     transition: all 0.4s ease-out;
 }
 
+.message_modal {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.7);
+    transition: all 0.4s ease-out;
+
+    color: white;
+    font-size: 40px;
+}
+
 .modal_close-button {
     position: absolute;
     right: 20px;
@@ -57,15 +73,6 @@
     align-items: center;
 }
 
-/* .modal_personal, .modal_data_card {
-    font-weight: 500;
-    font-size: 1.4rem;
-    line-height: 2.0rem;
-    color: #333333;
-    margin-top: 10px;
-    margin-bottom: 15px;
-} */
-
 .modal_input {
     width: 370px;
     height: 40px;
@@ -82,41 +89,40 @@
     color: #828282;
 }
 
+.modal_input_small {
+    width: 80px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    border-radius: 4px;
+    margin-top: 15px;
+    padding: 0 10px;
+    margin-bottom: 25px;
+    margin-right: 20px;
+}
+
+.modal_input_small::placeholder {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: #828282;
+}
+
 .modal_paid_logo {
     cursor: pointer;
 }
 
-.modal_paid_logo:last-child {
-    margin-right: 0;
+.paid_logo {
+    margin-right: 20px;
 }
 
-.paid_logo {
-    margin-right: 10px;
+.paid_logo.active {
+    border: 2px solid #C73153;
+    border-radius: 5px;
 }
 
 .paid_logo:last-child {
     margin-right: 0;
 }
-/* 
-.modal_input:invalid {
-    border: 1px solid rgb(255, 0, 0);
-  }
-  
-  .modal_input:valid {
-    border: 1px solid rgb(39, 180, 26);
-  } */
-
-  /* input:focus:required:valid {
-    border-color: green;
-    color: green;
-    box-shadow: none;
-}
-
-input:focus:required:invalid {
-    border-color: red;
-    color: red;
-    box-shadow: none;
-} */
 
 input:valid:not(:placeholder-shown) {
 	border-color: green;
@@ -128,27 +134,27 @@ input:invalid:not(:placeholder-shown) {
 input:invalid:not(:placeholder-shown) + .form__error {
 	display: block;
 }
-/* .form__error {
-	color: red;
-	text-align: left;
-	font-size: 12px;
-	display: block;
-	margin-top: 3px;
-	display: none;
-} */
 
-  .confirm_button {
+.confirm_button {
     margin-left: 35px;
     margin-right: 15px;
-  }
+}
 
-  .cancel_button {
+.cancel_button {
     background: #FFFFFF;
     border: 0.805357px solid #C73153;
     color:#C73153
-  }
+}
 
-  .cancel_button:hover {
+.cancel_button:hover {
     color: white;
     background: #C73153;
-  }
+}
+
+.card_data {
+    display: flex;
+    width: 100%;
+    margin-left: 71px;
+}
+
+  
