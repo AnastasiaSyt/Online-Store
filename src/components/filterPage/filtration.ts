@@ -110,8 +110,8 @@ export default class Filtration implements IFiltration {
             occasion: {},
             color: '',
             flower: {},
-            price: { min: 0, max: 100 },
-            size: { min: 0, max: 100 }
+            price: { min: 0, max: 160 },
+            size: { min: 25, max: 80 }
         }
     }
 
