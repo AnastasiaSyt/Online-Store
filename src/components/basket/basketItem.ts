@@ -103,10 +103,15 @@ export default class BItem implements IItem {
     counterIncrease.classList.add('increase');
     counterIncrease.textContent ='+';
 
+    const counterNumber = document.createElement('input');
+    counterNumber.type = 'number';
+    counterNumber.classList.add('input_counter');
+    counterNumber.value = '1';
+    counterNumber.setAttribute('min', '0');
 
-    const counterNumber = document.createElement('div');
-    counterNumber.classList.add('counter_number');
-    counterNumber.textContent = '1';
+    // const counterNumber = document.createElement('div');
+    // counterNumber.classList.add('counter_number');
+    // counterNumber.textContent = '1';
 
     counterBlock.appendChild(counterDecrease);
     counterBlock.appendChild(counterNumber);
@@ -119,9 +124,13 @@ export default class BItem implements IItem {
     price.classList.add('price');
     price.textContent = `$${flowers[id]['price']}`;
 
+    counterNumber.onchange = function(){
+      priceRegulation();
+    }
+
     function encreaseCounter(){
-      if(counterNumber.textContent!=null && +counterNumber.textContent+1 <= flowers[id]['stock']){
-        counterNumber.textContent = (+counterNumber.textContent+1).toString();
+      if(counterNumber.value!=null && +counterNumber.value+1 <= flowers[id]['stock']){
+        counterNumber.value = (+counterNumber.value+1).toString();
         if(checkBox.checked){
           document.querySelector('.goods-price')!.textContent = '$' + (
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
@@ -136,21 +145,21 @@ export default class BItem implements IItem {
     }
 
     function decreaseCounter(){
-      if(counterNumber.textContent!=null && +counterNumber.textContent>1){
-        counterNumber.textContent = (+counterNumber.textContent-1).toString();
+      if(counterNumber.value!=null && +counterNumber.value>1){
+        counterNumber.value = (+counterNumber.value-1).toString();
         if(checkBox.checked){
           document.querySelector('.goods-price')!.textContent = '$' + (
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
           - flowers[id]['price']);
-          if(+counterNumber.textContent < flowers[id]['stock']) document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+          if(+counterNumber.value < flowers[id]['stock']) document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
         }
       }
       priceRegulation();
     }
 
     function priceRegulation(){
-      if (flowers[id]['price'] && counterNumber.textContent){
-        price.textContent ='$' + (flowers[id]['price'] * +counterNumber.textContent).toString();
+      if (flowers[id]['price'] && counterNumber.value){
+        price.textContent ='$' + (flowers[id]['price'] * +counterNumber.value).toString();
       }
     }
     //===========
