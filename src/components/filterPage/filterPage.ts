@@ -3,7 +3,6 @@ import './slider.css';
 
 import Search from './searchForm';
 import Filter from './filter';
-import Tag from './tags';
 import Card from './card';
 import { IPage } from '../IPage';
 import { PageIDs } from '../types';
@@ -12,9 +11,11 @@ import Filtration from './filtration';
 export default class FilterPage implements IPage {
     filtration: Filtration;
     allCards: HTMLElement;
+    tagContainer!: HTMLDivElement;
+    filter!: Filter;
 
     constructor() {
-        this.filtration = new Filtration();
+        this.filtration = new Filtration(this.drawFlowers.bind(this));
         const allCards = document.createElement('div');
         allCards.classList.add('all_cards');
         this.allCards = allCards;
@@ -26,8 +27,9 @@ export default class FilterPage implements IPage {
         filterContent.classList.add('filter_content');
         filterContent.classList.add('wrapper');
 
-        const filter = new Filter(this.filtration, this.drawFlowers.bind(this), filterContent).getFilter();
-        filterContent.appendChild(filter);
+        const filter = new Filter(this.filtration, this.drawFlowers.bind(this), filterContent);
+        filterContent.appendChild(filter.getFilter());
+        this.filter = filter;
 
         const mainContent = document.createElement('div');
         mainContent.classList.add('main_content');
@@ -43,13 +45,8 @@ export default class FilterPage implements IPage {
         const tagsContainer = document.createElement('div');
         tagsContainer.classList.add('tags_container');
         sortContainer.appendChild(tagsContainer);
-
-        const tag = new Tag().getTag('Букеты(34)');
-        const tagOne = new Tag().getTag('Белый(6)');
-        const tagTwo = new Tag().getTag('$10-$1000');
-        tagsContainer.appendChild(tag);
-        tagsContainer.appendChild(tagOne);
-        tagsContainer.appendChild(tagTwo);
+        this.tagContainer = tagsContainer;
+        this.tagContainer = tagsContainer;
 
         const selectContainer = document.createElement('div');
         selectContainer.classList.add('select_container');
@@ -92,8 +89,14 @@ export default class FilterPage implements IPage {
 
     drawFlowers() {
         this.removeFlowers();
-
+        
         const filteredFlowers = this.filtration.filter();
+        const tags = this.filtration.generateTags();
+        while (this.tagContainer.lastElementChild) {
+            this.tagContainer.removeChild(this.tagContainer.lastElementChild);
+        }
+        tags.forEach((tag) => this.tagContainer.append(tag));
+        
         filteredFlowers.forEach(item => {
             const cardLink = document.createElement('a');
             cardLink.addEventListener('click', () => {
@@ -102,10 +105,14 @@ export default class FilterPage implements IPage {
                 window.dispatchEvent(event);
             });
             cardLink.classList.add('link_card');
-
+            
             const card = new Card().getCard(item.id);
             cardLink.appendChild(card);
             this.allCards.appendChild(cardLink);
         })
+        
+        this.filter.redrawCheckboxes(this.filtration.selectedFilter);
+        this.filter.redrawSliders(this.filtration.selectedFilter);
+        this.filter.redrawColors(this.filtration.selectedFilter.color);
     }
 }

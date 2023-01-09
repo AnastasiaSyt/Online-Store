@@ -4,6 +4,7 @@ import "./filter.css";
 import Slider from './slider';
 import Button from "./button";
 import Filtration from "./filtration";
+import { SelectedFilter } from "../types";
 
 interface IFilter {
     filtration: Filtration;
@@ -13,7 +14,7 @@ interface IFilter {
     getFilter: () => HTMLElement,
     resetFilters: () => void,
     getAccordion: (node: HTMLElement) => void,
-    getBodyItems: (arr: string[], target: Element, name: string, callback: Function) => void
+    getBodyItems: (arr: string[], target: Element, name: string, callback: Function, type: string) => void
 }
 
 export default class Filter implements IFilter {
@@ -40,7 +41,7 @@ export default class Filter implements IFilter {
         const typeName = type?.className;
 
         if (type && !!typeName) {
-            this.getBodyItems(typeItems, type, typeName, this.filtration.changeType.bind(this.filtration));
+            this.getBodyItems(typeItems, type, typeName, this.filtration.changeType.bind(this.filtration), 'type');
         }
 
         const occasion = filter.querySelector('.num-2');
@@ -48,7 +49,7 @@ export default class Filter implements IFilter {
         const occasionName = occasion?.className;
 
         if (occasion && !!occasionName) {
-            this.getBodyItems(typeOccasion, occasion, occasionName, this.filtration.changeOccasion.bind(this.filtration));
+            this.getBodyItems(typeOccasion, occasion, occasionName, this.filtration.changeOccasion.bind(this.filtration), 'occasion');
         }
 
         const color = filter.querySelector('.num-3');
@@ -77,9 +78,10 @@ export default class Filter implements IFilter {
         const flower = filter.querySelector('.num-4');
         const flowerItems = ['роза', 'гербера', 'тюльпан', 'гвоздика', 'лилия', 'хризантема', 'пион'];
         const flowerName = flower?.className;
+        console.log(`flowerName${flowerName}`);
 
         if (flower && !!flowerName) {
-            this.getBodyItems(flowerItems, flower, flowerName, this.filtration.changeFlower.bind(this.filtration));
+            this.getBodyItems(flowerItems, flower, flowerName, this.filtration.changeFlower.bind(this.filtration), 'flower');
         }
 
         const price = filter.querySelector('.num-5');
@@ -104,6 +106,12 @@ export default class Filter implements IFilter {
         filterButton.addEventListener('click', this.resetFilters.bind(this));
 
         return filter;
+    }
+
+    redrawSliders(selectedFilters: SelectedFilter) {
+        const {price, size} = selectedFilters;
+        this.sizeSlider.resetSlider(size.min.toString(), size.max.toString());
+        this.priceSlider.resetSlider(price.min.toString(), price.max.toString());
     }
 
     resetFilters(): void {
@@ -154,7 +162,7 @@ export default class Filter implements IFilter {
         })
     }
 
-    getBodyItems(arr: string[], target: Element, name: string, callback: Function) {
+    getBodyItems(arr: string[], target: Element, name: string, callback: Function, type: string) {
         arr.forEach((item, index) => {
             const typeGift = document.createElement('div');
 
@@ -162,6 +170,8 @@ export default class Filter implements IFilter {
             checkboxGift.type = 'checkbox';
             checkboxGift.classList.add('custom-checkbox');
             checkboxGift.id = `link${index}-${name}`;
+            checkboxGift.setAttribute('itemType', type);
+            checkboxGift.setAttribute('item', item);
             checkboxGift.addEventListener('click', () => {
                 callback(item);
                 this.callback();
@@ -177,4 +187,35 @@ export default class Filter implements IFilter {
             target.appendChild(typeGift);
         })
     }
+
+    selectCheckboxes(type: string, items: string[]): void {
+        items.forEach(item => {
+            const checkbox = document.querySelector(`[itemType="${type}"][item="${item}"]`);
+            if (checkbox){
+                (checkbox as HTMLInputElement).checked = true;
+                console.log((checkbox as HTMLInputElement).checked);
+            }
+        });
+    }
+    
+    redrawCheckboxes(selectedFilter: SelectedFilter): void {
+        this.uncheckCheckbox();
+        const typesCheckboxes = Object.keys(selectedFilter.type);
+        const occasionCheckboxes = Object.keys(selectedFilter.occasion);
+        const flowerCheckboxes = Object.keys(selectedFilter.flower);
+        this.selectCheckboxes('type', typesCheckboxes);
+        this.selectCheckboxes('occasion', occasionCheckboxes);
+        this.selectCheckboxes('flower', flowerCheckboxes);
+    }
+
+    redrawColors(color?: string) {
+        this.uncheckColors();
+        if (color) {
+            const currentColor = document.querySelector(`.${color}`);
+            console.log(currentColor);
+            currentColor?.classList.add('active');
+        }
+    }
+
+    
 }
