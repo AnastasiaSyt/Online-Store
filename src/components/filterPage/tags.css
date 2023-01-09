@@ -1,5 +1,4 @@
 .tag {
-    width: 109px;
     height: 32px;
     background: #F2F2F2;
     border-radius: 5px;
@@ -13,8 +12,11 @@
 
     margin-right: 15px;
     margin-bottom: 25px;
+
+    padding: 0px 10px;
 }
 
 .close_icon {
+    margin-left: 10px;
     cursor: pointer;
 }
