@@ -73,15 +73,6 @@
     align-items: center;
 }
 
-/* .modal_personal, .modal_data_card {
-    font-weight: 500;
-    font-size: 1.4rem;
-    line-height: 2.0rem;
-    color: #333333;
-    margin-top: 10px;
-    margin-bottom: 15px;
-} */
-
 .modal_input {
     width: 370px;
     height: 40px;
@@ -120,12 +111,8 @@
     cursor: pointer;
 }
 
-.modal_paid_logo:last-child {
-    margin-right: 0;
-}
-
 .paid_logo {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .paid_logo.active {
@@ -136,26 +123,6 @@
 .paid_logo:last-child {
     margin-right: 0;
 }
-/* 
-.modal_input:invalid {
-    border: 1px solid rgb(255, 0, 0);
-  }
-  
-  .modal_input:valid {
-    border: 1px solid rgb(39, 180, 26);
-  } */
-
-  /* input:focus:required:valid {
-    border-color: green;
-    color: green;
-    box-shadow: none;
-}
-
-input:focus:required:invalid {
-    border-color: red;
-    color: red;
-    box-shadow: none;
-} */
 
 input:valid:not(:placeholder-shown) {
 	border-color: green;
@@ -167,35 +134,27 @@ input:invalid:not(:placeholder-shown) {
 input:invalid:not(:placeholder-shown) + .form__error {
 	display: block;
 }
-/* .form__error {
-	color: red;
-	text-align: left;
-	font-size: 12px;
-	display: block;
-	margin-top: 3px;
-	display: none;
-} */
 
-  .confirm_button {
+.confirm_button {
     margin-left: 35px;
     margin-right: 15px;
-  }
+}
 
-  .cancel_button {
+.cancel_button {
     background: #FFFFFF;
     border: 0.805357px solid #C73153;
     color:#C73153
-  }
+}
 
-  .cancel_button:hover {
+.cancel_button:hover {
     color: white;
     background: #C73153;
-  }
+}
 
-  .card_data {
+.card_data {
     display: flex;
     width: 100%;
     margin-left: 71px;
-  }
+}
 
   

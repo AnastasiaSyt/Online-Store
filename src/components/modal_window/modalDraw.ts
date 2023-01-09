@@ -76,7 +76,12 @@ export default class ModalDraw implements IModalDraw {
                     const masterCard = modal.querySelector('.modal_mastercard');
                     masterCard?.classList.add('active');
                 }
-                if (firstInteger !== 4 && firstInteger !== 5) {
+                if (firstInteger === 3) {
+                    modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
+                    const masterCard = modal.querySelector('.modal_american_express');
+                    masterCard?.classList.add('active');
+                }
+                if (firstInteger !== 4 && firstInteger !== 5 && firstInteger !== 3) {
                     modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
                 }
             });
@@ -143,8 +148,8 @@ export default class ModalDraw implements IModalDraw {
                                     children: [
                                         {
                                             tag: Tags.IMG,
-                                            classes: ['modal_paypal', 'paid_logo'],
-                                            src: '../../img/PayPal.svg'
+                                            classes: ['modal_american_express', 'paid_logo'],
+                                            src: '../../img/american_express.svg'
                                         },
                                         {
                                             tag: Tags.IMG,
@@ -155,21 +160,6 @@ export default class ModalDraw implements IModalDraw {
                                             tag: Tags.IMG,
                                             classes: ['modal_visa', 'paid_logo'],
                                             src: '../../img/Visa.svg'
-                                        },
-                                        {
-                                            tag: Tags.IMG,
-                                            classes: ['modal_apple', 'paid_logo'],
-                                            src: '../../img/ApplePay.svg'
-                                        },
-                                        {
-                                            tag: Tags.IMG,
-                                            classes: ['modal_bitcoin', 'paid_logo'],
-                                            src: '../../img/Bitcoin.svg'
-                                        },
-                                        {
-                                            tag: Tags.IMG,
-                                            classes: ['modal_google', 'paid_logo'],
-                                            src: '../../img/GooglePay.svg'
                                         }
                                     ]
                                 },
@@ -190,7 +180,7 @@ export default class ModalDraw implements IModalDraw {
                                     attribute: ['required', 'required'],
                                     placeholder: 'Card number',
                                     pattern: '[0-9]{16}',
-                                    title: 'Введите номер карты, 16 символов'
+                                    title: 'Введите номер карты, 16 символов. Если номер карты начинает с 4, устанавливается логотип Visa, если 5 - MasterCard, если 3 - AmericanExpress'
                                 },
                                 {
                                     tag: Tags.DIV,
