@@ -245,7 +245,7 @@ const flowers = [
         "country": ["Франция", "Эквадор"],
         "occasions": ["свидание", "юбилей", "14 февраля"],
         "category": "букеты",
-        "color": ["pink", "yellow", "darkred"],
+        "color": ["darkred", "pink", "yellow", ],
         "thumbnail": "../../img/data_img/flowers_13.jpg",
         "images": [
         "../../img/data_img/flowers_13_1.jpg",

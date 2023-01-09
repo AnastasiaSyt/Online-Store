@@ -1,14 +1,15 @@
 import './basketItem.css'
 import './check'
+import flowers from '../data/data';
 
 
 interface IItem {
-  getItem: (defaultName: string, defaultAccessNumber: number, defaultPrice: number) => HTMLElement;
+  getItem: (id: number /*defaultName: string, defaultAccessNumber: number, defaultPrice: number*/) => HTMLElement;
 }
 
 export default class BItem implements IItem {
 
-  getItem(defaultName: string, defaultAccessNumber: number, defaultPrice: number) {
+  getItem(id: number /*defaultName: string, defaultAccessNumber: number, defaultPrice: number*/) {
     const itemContent = document.createElement('div');
     itemContent.classList.add('basket-item')
 
@@ -23,7 +24,7 @@ export default class BItem implements IItem {
     itemNameBlock.classList.add('item-name_block');
 
     const itemImg = document.createElement('img');
-    itemImg.src = '../../img/flower.jpg'
+    itemImg.src = flowers[id]['thumbnail'];
     itemImg.classList.add('basket-item_img');
     itemNameBlock.appendChild(itemImg);
 
@@ -32,11 +33,11 @@ export default class BItem implements IItem {
     itemName.classList.add('item-name');
 
     const h2Name = document.createElement('h2');
-    h2Name.textContent = defaultName;
+    h2Name.textContent = flowers[id]['title'];
     itemName.appendChild(h2Name);
 
     const accessNumber = document.createElement('p');
-    accessNumber.textContent = `Доступно: ${defaultAccessNumber}`;
+    accessNumber.textContent = `Доступно: ${flowers[id]['stock']}`;
     itemName.appendChild(accessNumber);
 
     //=======
@@ -48,13 +49,14 @@ export default class BItem implements IItem {
 
     const colorP = document.createElement('p');
     colorP.classList.add('color_text');
-    colorP.textContent = 'Белый';
+    const colorEng = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink', 'indigo'];
+    const colorRu = ['Красный', 'Белый', 'Черный', 'Синий', 'Желтый', 'Оранжевый', 'Зеленый', 'Розовый', 'Фиолетовый']
+
+    colorP.textContent = colorRu[colorEng.indexOf(flowers[id]['color'][0])];
     color.appendChild(colorP);
 
     const colorCircle = document.createElement('div');
-    colorCircle.classList.add('color-chooser');
-    colorCircle.classList.add('base');
-    colorCircle.classList.add('white');
+    colorCircle.classList.add('color-chooser', 'base', colorEng[colorEng.indexOf(flowers[id]['color'][0])]);
     color.appendChild(colorCircle)
 
     const colorA = document.createElement('a');
@@ -66,36 +68,9 @@ export default class BItem implements IItem {
     const colors = document.createElement('div');
     colors.classList.add('colors_block');
 
-    for(let i = 0;i<8;i++){
+    for(let i = 0;i<flowers[id].color.length; i++){
       const tempColor = document.createElement('div');
-      tempColor.classList.add('color-chooser');
-      tempColor.classList.add('color');
-      switch(i){
-        case 0:
-          tempColor.classList.add('red');
-          break;
-        case 1:
-          tempColor.classList.add('yellow');
-          break;
-        case 2:
-          tempColor.classList.add('blue');
-          break;
-        case 3:
-          tempColor.classList.add('pink');
-          break;
-        case 4:
-          tempColor.classList.add('purple');
-          break;
-        case 5:
-          tempColor.classList.add('white');
-          break;
-        case 6:
-          tempColor.classList.add('lilac');
-          break;
-        case 7:
-          tempColor.classList.add('orange');
-          break;
-      }
+      tempColor.classList.add('color-chooser', 'color', flowers[id].color[i]);
       colors.appendChild(tempColor)
 
       tempColor.addEventListener('click', e=>{
@@ -103,14 +78,7 @@ export default class BItem implements IItem {
         colors.classList.toggle('active');
         colorCircle.classList.remove(colorCircle.classList[2])
         colorCircle.classList.add(tempColor.classList[2])
-        colorP.textContent = colorCircle.classList.contains('white') ? 'Белый'
-                            : colorCircle.classList.contains('orange') ? 'Оранжевый'
-                            : colorCircle.classList.contains('pink') ? 'Розовый'
-                            : colorCircle.classList.contains('red') ? 'Красный'
-                            : colorCircle.classList.contains('yellow') ? 'Жёлтый'
-                            : colorCircle.classList.contains('purple') ? 'Фиолетовый'
-                            : colorCircle.classList.contains('lilac') ? 'Сиреневый'
-                            : 'Синий';
+        colorP.textContent = colorRu[colorEng.indexOf(tempColor.classList[2])];
       })
     }
 
@@ -149,15 +117,15 @@ export default class BItem implements IItem {
 
     const price = document.createElement('p');
     price.classList.add('price');
-    price.textContent = `$${defaultPrice}`;
+    price.textContent = `$${flowers[id]['price']}`;
 
     function encreaseCounter(){
-      if(counterNumber.textContent!=null && +counterNumber.textContent+1 <= defaultAccessNumber){
+      if(counterNumber.textContent!=null && +counterNumber.textContent+1 <= flowers[id]['stock']){
         counterNumber.textContent = (+counterNumber.textContent+1).toString();
         if(checkBox.checked){
           document.querySelector('.goods-price')!.textContent = '$' + (
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
-          + defaultPrice);
+          + flowers[id]['price']);
           document.querySelector('.total-price')!.textContent = '$' +
                                                                 (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] +
                                                                 +document!.querySelector('.tax-price')!.textContent!.split('$')[1] +
@@ -173,16 +141,16 @@ export default class BItem implements IItem {
         if(checkBox.checked){
           document.querySelector('.goods-price')!.textContent = '$' + (
           +document.querySelector('.goods-price')!.textContent!.split('$')[1]
-          - defaultPrice);
-          if(+counterNumber.textContent < defaultAccessNumber) document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
+          - flowers[id]['price']);
+          if(+counterNumber.textContent < flowers[id]['stock']) document.querySelector('.total-price')!.textContent = '$' + (+document!.querySelector('.goods-price')!.textContent!.split('$')[1] + +document!.querySelector('.tax-price')!.textContent!.split('$')[1] + +document!.querySelector('.delivery-price')!.textContent!.split('$')[1]);
         }
       }
       priceRegulation();
     }
 
     function priceRegulation(){
-      if (defaultPrice && counterNumber.textContent){
-        price.textContent ='$' + (defaultPrice * +counterNumber.textContent).toString();
+      if (flowers[id]['price'] && counterNumber.textContent){
+        price.textContent ='$' + (flowers[id]['price'] * +counterNumber.textContent).toString();
       }
     }
     //===========

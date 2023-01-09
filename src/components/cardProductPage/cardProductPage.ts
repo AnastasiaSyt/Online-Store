@@ -36,7 +36,6 @@ export default class CardProduct implements ICardProduct {
 
     addItems(flowerNumber: number) {
         const tags = flowers[flowerNumber]["flower"];
-        console.log(tags);
         tags.forEach(item => {
             const coloredTag = new ColoredTags().getColoredTag(item);
             const tagContainer = this.cardProduct.getElementsByClassName('card_product_tags');
@@ -49,13 +48,36 @@ export default class CardProduct implements ICardProduct {
         })
 
         const buttonsContainer = this.cardProduct.querySelector('.card_product_buttons');
-        const cardProductButton = new Button('добавить в корзину', 'card_product_button');
+        const cardProductButton = buttonsContainer ? new Button('добавить в корзину', 'card_product_button').getButton(buttonsContainer) : '';
         const counter = new Counter().getCounter();
+        if (cardProductButton){
+            cardProductButton.addEventListener('click', e=>{
+                e.preventDefault();
+                if(localStorage.getItem('basketFlowers')){
+                    let tempFlowers = JSON.parse(localStorage.getItem('basketFlowers') ?? '');
+                    if(tempFlowers){
+                        tempFlowers.push(Number(window.location.href.split('_')[1]));
+                        const tempSet = new Set(tempFlowers);
+                        tempFlowers = Array.from(tempSet);
+                        document.querySelector('.count')!.textContent = tempFlowers.length;
+                        localStorage.setItem('basketFlowers', JSON.stringify(tempFlowers))
+
+                    }
+                }
+                else{
+                    const basketFlowers = [];
+                    basketFlowers.push(Number(window.location.href.split('_')[1]));
+                    localStorage.setItem('basketFlowers', JSON.stringify(basketFlowers))
+                    document.querySelector('.count')!.textContent = '1';
+                }
+            })
+        }
+
+
 
         if (!buttonsContainer) {
             throw new Error ('Container not found');
         } else {
-            cardProductButton.getButton(buttonsContainer);
             buttonsContainer.appendChild(counter);
         }
     }
@@ -74,6 +96,12 @@ export default class CardProduct implements ICardProduct {
         const node = document.createElement(config.tag);
         config.classes.forEach((className) => {
             node.classList.add(className);
+            if(className === 'small_img'){
+                node.addEventListener('click', e => {
+                    e.preventDefault();
+                    (node.parentNode?.parentNode?.querySelector('.card_product_big_img') as HTMLImageElement).src = (node as HTMLImageElement).src;
+                })
+            }
         });
         if (config.label) {
             node.textContent = config.label;
@@ -92,6 +120,8 @@ export default class CardProduct implements ICardProduct {
         const description = flowers[flowerNumber]["description"];
         const stock = flowers[flowerNumber]["stock"];
         const color = flowers[flowerNumber]["color"];
+        const colorEng = ['darkred', 'white', 'black', 'blue', 'yellow', 'orange', 'lime', 'pink', 'indigo'];
+        const colorRu = ['Красный', 'Белый', 'Черный', 'Синий', 'Желтый', 'Оранжевый', 'Зеленый', 'Розовый', 'Фиолетовый']
 
         const CardProductDOMElements: TElementConfig[] =
         [
@@ -146,7 +176,7 @@ export default class CardProduct implements ICardProduct {
                             {
                                 tag: Tags.P,
                                 classes: ['card_product_color'],
-                                label: `Цвет: ${color[0]}`
+                                label: `Цвет: ${colorRu[colorEng.indexOf(color[0])]}`
                             },
                             {
                                 tag: Tags.P,

@@ -22,6 +22,19 @@ export default class Counter {
         buttonIncrement.textContent = '+';
         counter.appendChild(buttonIncrement);
 
+        buttonDecrement.addEventListener('click', e=>{
+            e.preventDefault();
+            inputCounter.value = +inputCounter.value - 1 >= 0 ? (+inputCounter.value - 1).toString() : '0';
+            if(+inputCounter.value === 0) inputCounter.parentNode?.parentNode?.querySelector('.button')?.setAttribute('disabled', '');
+        })
+
+        buttonIncrement.addEventListener('click', e=>{
+            e.preventDefault();
+            const amount = Number(inputCounter.parentNode?.parentNode?.parentNode?.querySelector('.card_product_sort')?.textContent?.split(' ')[2]);
+            if(+inputCounter.value + 1 <= amount)
+            inputCounter.value = (+inputCounter.value + 1).toString();
+        })
+
         return counter;
     }
 }
