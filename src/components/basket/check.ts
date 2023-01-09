@@ -63,6 +63,18 @@ export default class Check implements ICheck {
       target3.appendChild(deliveryPosition);
       target3.appendChild(deliveryPrice);
 
+      const target3_1 = document.createElement('li');
+      target3_1.classList.add('target_li');
+      const salePosition = document.createElement('span');
+      const salePrice = document.createElement('span');
+      salePosition.textContent = 'Скидка';
+      salePrice.textContent = `0%`;
+      salePosition.classList.add('sale-position');
+      salePrice.classList.add('sale-price');
+      target3_1.appendChild(salePosition);
+      target3_1.appendChild(salePrice);
+
+
       //=======
       const target4 = document.createElement('li');
       target4.classList.add('target_li');
@@ -74,7 +86,7 @@ export default class Check implements ICheck {
       totalPrice.textContent ='$'
                                 + (+deliveryPrice.textContent?.split('$')[1] +
                                 +taxPrice.textContent?.split('$')[1] +
-                                +goodsPrice.textContent?.split('$')[1]);
+                                +goodsPrice.textContent?.split('$')[1]) * (1 - +salePrice.textContent?.split('%')[0]/100);
       totalPosition.classList.add('total-position');
       totalPrice.classList.add('total-price');
 
@@ -86,6 +98,7 @@ export default class Check implements ICheck {
       checkInfo.appendChild(target1);
       checkInfo.appendChild(target2);
       checkInfo.appendChild(target3);
+      checkInfo.appendChild(target3_1);
       checkInfo.appendChild(target4);
       //================
 
