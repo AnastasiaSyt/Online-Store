@@ -2,7 +2,19 @@ import ModalDraw from "./modalDraw";
 import './modal.css';
 import { PageIDs } from "../types";
 
-export default class Modal {
+interface IModal {
+    modalForm: HTMLFormElement,
+    modal: HTMLDivElement,
+    modalBackground: () => HTMLDivElement,
+    getButton: () => HTMLDivElement,
+    closeIcon: () => HTMLSpanElement,
+    bindEvents: () => void,
+    openModalWindow: (background: Node) => void,
+    closeModalWindow: (event: Event) => void,
+    message: () => HTMLDivElement
+}
+
+export default class Modal implements IModal {
     modalForm!: HTMLFormElement;
     modal: HTMLDivElement;
 
@@ -24,7 +36,7 @@ export default class Modal {
         return background;
     }
 
-    getButton() {
+    getButton(): HTMLDivElement {
         const buttons = document.createElement('div');
         buttons.classList.add('modal_buttons');
 
@@ -34,6 +46,7 @@ export default class Modal {
         buttonConfirm.classList.add('confirm_button');
         buttonConfirm.value = 'подтвердить';
         buttons.appendChild(buttonConfirm);
+
         buttonConfirm.addEventListener('click', () => {
             if (this.modalForm.checkValidity()) {
                 console.log('valid is true');
@@ -62,7 +75,7 @@ export default class Modal {
         return buttons;
     }
 
-    closeIcon() {
+    closeIcon(): HTMLSpanElement {
         const closeIcon = document.createElement('span');
         closeIcon.id = 'close_icon';
         closeIcon.classList.add('modal_close-button');
@@ -74,12 +87,12 @@ export default class Modal {
         closeIcon?.addEventListener('click', this.closeModalWindow.bind(this));
         const cancel = document.querySelector('.cancel_button');
         cancel?.addEventListener('click', (this.closeModalWindow.bind(this)));
-        const background = document.querySelector('.modalBackground');
-        background?.addEventListener('click', this.closeModalWindow.bind(this));
+        // const background = document.querySelector('.modalBackground');
+        // background?.addEventListener('click', this.closeModalWindow.bind(this));
     }
 
-    openModalWindow(backgorund: Node) {
-        document.body.append(backgorund);
+    openModalWindow(background: Node) {
+        document.body.append(background);
     }
 
     closeModalWindow(event: Event) {
@@ -92,7 +105,7 @@ export default class Modal {
         }
     }
 
-    message() {
+    message(): HTMLDivElement {
         const message = document.createElement('div');
         message.classList.add('message_modal');
         message.textContent = 'Ваш заказ оформлен!';
