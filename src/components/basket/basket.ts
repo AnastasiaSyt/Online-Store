@@ -18,7 +18,9 @@ export default class Basket implements IBasketPage {
     basketContent.appendChild(basketItems);
 
     const promoCheck = document.createElement('div');
-    const check = new Check().getCheck(18, 10);
+    const tax = 10;
+    const delivery = 18; 
+    const check = new Check().getCheck(delivery, tax);
     promoCheck.appendChild(check)
 
     const promo = new Promo().getPage();
