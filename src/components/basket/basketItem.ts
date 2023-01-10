@@ -109,10 +109,6 @@ export default class BItem implements IItem {
     counterNumber.value = '1';
     counterNumber.setAttribute('min', '0');
 
-    // const counterNumber = document.createElement('div');
-    // counterNumber.classList.add('counter_number');
-    // counterNumber.textContent = '1';
-
     counterBlock.appendChild(counterDecrease);
     counterBlock.appendChild(counterNumber);
     counterBlock.appendChild(counterIncrease);

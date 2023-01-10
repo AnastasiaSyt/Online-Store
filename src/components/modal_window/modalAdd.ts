@@ -87,8 +87,6 @@ export default class Modal implements IModal {
         closeIcon?.addEventListener('click', this.closeModalWindow.bind(this));
         const cancel = document.querySelector('.cancel_button');
         cancel?.addEventListener('click', (this.closeModalWindow.bind(this)));
-        // const background = document.querySelector('.modalBackground');
-        // background?.addEventListener('click', this.closeModalWindow.bind(this));
     }
 
     openModalWindow(background: Node) {
