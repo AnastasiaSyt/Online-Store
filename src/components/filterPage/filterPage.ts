@@ -8,7 +8,16 @@ import { IPage } from '../IPage';
 import { PageIDs } from '../types';
 import Filtration from './filtration';
 
-export default class FilterPage implements IPage {
+interface IFilterPage extends IPage {
+    filtration: Filtration,
+    allCards: HTMLElement,
+    tagContainer: HTMLDivElement,
+    filter: Filter,
+    removeFlowers: () => void,
+    drawFlowers: () => void
+}
+
+export default class FilterPage implements IFilterPage {
     filtration: Filtration;
     allCards: HTMLElement;
     tagContainer!: HTMLDivElement;

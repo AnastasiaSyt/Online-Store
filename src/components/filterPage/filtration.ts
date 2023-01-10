@@ -7,16 +7,39 @@ interface IFiltration {
     onRemoveFilter: () => void,
     selectedFilter: SelectedFilter,
     count: number,
+    minPrice: number,
+    maxPrice: number,
+    minHeight: number,
+    maxHeight: number,
     changeType: (type: string) => void,
     changeOccasion: (occasion: string) => void,
     changeFlower: (flower: string) => void,
-
+    changeColor: (color: string) => void,
+    changePrice: (min: number, max: number) => void,
+    changeSize: (min: number, max: number) => void,
+    filter: () => IFlower[],
+    typeFilter: (currentFlowers: IFlower[], type: { [type: string]: string }) => void,
+    occasionFilter: (currentFlowers: IFlower[], type: { [type: string]: string }) => void,
+    colorFilter: (currentFlowers: IFlower[], color: string) => void,
+    flowerFilter: (currentFlowers: IFlower[], type: { [type: string]: string }) => void,
+    priceFilter: (currentFlowers: IFlower[], min?: number, max?: number) => void,
+    sizeFilter: (currentFlowers: IFlower[], min?: number, max?: number) => void,
+    removeFilters: () => void,
+    addCount: (container: HTMLDivElement) => void,
+    onRemove: (item: string) => void,
+    generateTags: () => HTMLDivElement[],
+    getSelectedFilterForTags: () => TagItem[]
 }
 
 export default class Filtration implements IFiltration {
     onRemoveFilter: () => void;
     selectedFilter!: SelectedFilter;
     count = 0;
+    minPrice = 0;
+    maxPrice = 160;
+    minHeight = 20;
+    maxHeight = 80;
+
     constructor(onRemoveFilter: () => void) {
         this.onRemoveFilter = onRemoveFilter;
         this.removeFilters();
@@ -98,11 +121,11 @@ export default class Filtration implements IFiltration {
     }
 
     priceFilter(currentFlowers: IFlower[], min?: number, max?: number) {
-        return currentFlowers.filter(el => el.price >= (min || 0) && el.price <= (max || 160));
+        return currentFlowers.filter(el => el.price >= (min || this.minPrice) && el.price <= (max || this.maxPrice));
     }
 
     sizeFilter(currentFlowers: IFlower[], min?: number, max?: number) {
-        return currentFlowers.filter(el => el.size >= (min || 20) && el.size <= (max || 80));
+        return currentFlowers.filter(el => el.size >= (min || this.minHeight) && el.size <= (max || this.maxHeight));
     }
 
     removeFilters() {
@@ -111,13 +134,12 @@ export default class Filtration implements IFiltration {
             occasion: {},
             color: '',
             flower: {},
-            price: { min: 0, max: 160 },
-            size: { min: 20, max: 80 }
+            price: { min: this.minPrice, max: this.maxPrice },
+            size: { min: this.minHeight, max: this.maxHeight }
         }
     }
 
     addCount(container: HTMLDivElement) {
-        console.log(`count - ${this.count}`)
         const currentCount = document.createElement('p');
         if (this.count !== 0) {
             currentCount.textContent = `Найдено: ${this.count} товаров`;
@@ -130,9 +152,9 @@ export default class Filtration implements IFiltration {
     onRemove(item: string) {
         const keys = item.split('.');
         if (keys[0] === 'size') {
-            this.selectedFilter.size = { min: 20, max: 80 };
+            this.selectedFilter.size = { min: this.minHeight, max: this.maxHeight };
         } else if (keys[0] === 'price') {
-            this.selectedFilter.price = { min: 0, max: 160 };
+            this.selectedFilter.price = { min: this.minPrice, max: this.maxPrice };
         } else if (keys.length === 2) {
             switch (keys[0]) {
                 case 'type': {

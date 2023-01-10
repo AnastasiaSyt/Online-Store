@@ -12,7 +12,8 @@ interface ISlider {
     onchange: (min: number, max: number) => void,
     getSlider: (target: Node) => void,
     slideOne: () => void,
-    slideTwo: () => void
+    slideTwo: () => void,
+    resetSlider: (defaultMin: string, defaultMax: string) => void
 }
 
 export default class Slider implements ISlider {

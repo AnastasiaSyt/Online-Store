@@ -7,14 +7,25 @@ import Filtration from "./filtration";
 import { SelectedFilter } from "../types";
 
 interface IFilter {
-    filtration: Filtration;
-    callback: Function;
-    priceSlider: Slider;
-    sizeSlider: Slider;
+    filtration: Filtration,
+    callback: Function,
+    parent: HTMLElement,
+    priceSlider: Slider,
+    sizeSlider: Slider,
+    minPrice: string,
+    maxPrice: string,
+    minHeight: string,
+    maxHeight: string,
     getFilter: () => HTMLElement,
+    redrawSliders: (selectedFilters: SelectedFilter) => void,
     resetFilters: () => void,
+    uncheckCheckbox: () => void,
+    uncheckColors: () => void,
     getAccordion: (node: HTMLElement) => void,
-    getBodyItems: (arr: string[], target: Element, name: string, callback: Function, type: string) => void
+    getBodyItems: (arr: string[], target: Element, name: string, callback: Function, type: string) => void,
+    selectCheckboxes: (type: string, items: string[]) => void,
+    redrawCheckboxes: (selectedFilter: SelectedFilter) => void,
+    redrawColors: (color?: string) => void
 }
 
 export default class Filter implements IFilter {
@@ -23,6 +34,10 @@ export default class Filter implements IFilter {
     parent: HTMLElement;
     priceSlider!: Slider;
     sizeSlider!: Slider;
+    minPrice = '0';
+    maxPrice = '160';
+    minHeight = '20';
+    maxHeight = '80';
 
     constructor(filtration: Filtration, callback: Function, parent: HTMLElement) {
         this.filtration = filtration;
@@ -37,7 +52,7 @@ export default class Filter implements IFilter {
         this.getAccordion(filter);
 
         const type = filter.querySelector('.num-1');
-        const typeItems = ['Все', 'цветы', 'букеты', 'композиция', 'свадебные букеты', 'подарки с цветами'];
+        const typeItems = ['Все', 'цветы', 'букеты', 'композиция'];
         const typeName = type?.className;
 
         if (type && !!typeName) {
@@ -45,7 +60,7 @@ export default class Filter implements IFilter {
         }
 
         const occasion = filter.querySelector('.num-2');
-        const typeOccasion = ['свадьба', 'юбилей', '8 марта', 'день рождения', '14 февраля', 'свидание'];
+        const typeOccasion = ['свадьба', 'юбилей', '8 марта', 'день рождения', '14 февраля', 'свидание', 'выпускной', 'рождество'];
         const occasionName = occasion?.className;
 
         if (occasion && !!occasionName) {
@@ -78,7 +93,6 @@ export default class Filter implements IFilter {
         const flower = filter.querySelector('.num-4');
         const flowerItems = ['роза', 'гербера', 'тюльпан', 'гвоздика', 'лилия', 'хризантема', 'пион'];
         const flowerName = flower?.className;
-        console.log(`flowerName${flowerName}`);
 
         if (flower && !!flowerName) {
             this.getBodyItems(flowerItems, flower, flowerName, this.filtration.changeFlower.bind(this.filtration), 'flower');
@@ -89,7 +103,7 @@ export default class Filter implements IFilter {
             this.priceSlider = new Slider((min: number, max: number) => {
                 this.filtration.changePrice(min, max);
                 this.callback();
-            }, '0', '160');
+            }, this.minPrice, this.maxPrice);
             this.priceSlider.getSlider(price);
         }
 
@@ -98,7 +112,7 @@ export default class Filter implements IFilter {
             this.sizeSlider = new Slider((min: number, max: number) => {
                 this.filtration.changeSize(min, max);
                 this.callback();
-            }, '20', '80');
+            }, this.minHeight, this.maxHeight);
             this.sizeSlider.getSlider(height);
         }
 
@@ -121,8 +135,8 @@ export default class Filter implements IFilter {
         this.uncheckCheckbox();
         this.uncheckColors();
 
-        this.priceSlider.resetSlider('0', '160');
-        this.sizeSlider.resetSlider('20', '80');
+        this.priceSlider.resetSlider(this.minPrice, this.maxPrice);
+        this.sizeSlider.resetSlider(this.minHeight, this.maxHeight);
     }
 
     uncheckCheckbox() {
@@ -191,9 +205,8 @@ export default class Filter implements IFilter {
     selectCheckboxes(type: string, items: string[]): void {
         items.forEach(item => {
             const checkbox = document.querySelector(`[itemType="${type}"][item="${item}"]`);
-            if (checkbox){
+            if (checkbox) {
                 (checkbox as HTMLInputElement).checked = true;
-                console.log((checkbox as HTMLInputElement).checked);
             }
         });
     }
@@ -212,10 +225,7 @@ export default class Filter implements IFilter {
         this.uncheckColors();
         if (color) {
             const currentColor = document.querySelector(`.${color}`);
-            console.log(currentColor);
             currentColor?.classList.add('active');
         }
-    }
-
-    
+    }  
 }

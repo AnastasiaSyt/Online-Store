@@ -30,9 +30,7 @@ export default class Tags implements ITag {
     }
 
     closeTag(icon: HTMLImageElement, tag: HTMLDivElement) {
-        
         icon.addEventListener('click', () => {
-            // tag.remove();
             this.onRemove?.(tag.getAttribute('tagKey') ?? '');
         })
     }

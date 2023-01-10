@@ -8,10 +8,12 @@ import flowers from "../data/data";
 
 interface ICardProduct extends IPage {
     cardProduct: HTMLDivElement,
+    getPage: () => HTMLElement,
     addItems: (flowerNumber: number) => void,
     drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
     createElement: (config: TElementConfig) => HTMLElement,
-    getCardProductDOMElements: (flowerNumber: number) => TElementConfig[]
+    getCardProductDOMElements: (flowerNumber: number) => TElementConfig[],
+    getImgs: (id: number) => TElementConfig[]
 }
 
 export default class CardProduct implements ICardProduct {

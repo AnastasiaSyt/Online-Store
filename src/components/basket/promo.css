@@ -1,5 +1,6 @@
 .promo_block{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px 15px;
@@ -42,4 +43,21 @@
 
 .promo_button:active{
   background-color: #a52a47;
+}
+
+.enter_promo {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 10px;
+}
+
+.promotion {
+  margin-right: 10px;
+  color: gray;
+}
+
+.promo_text {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #C73153;
 }

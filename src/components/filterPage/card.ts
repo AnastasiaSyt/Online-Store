@@ -1,10 +1,12 @@
 import "./card.css";
 import { TElementConfig, Tags } from "../types";
 import flowers from "../data/data";
-import Promo from "../basket/promo";
 
 interface ICard {
-    getCard: (item: number) => HTMLElement
+    getCard: (item: number) => HTMLElement,
+    drawItems: (parent: HTMLElement, configs: TElementConfig[]) => void,
+    createElement: (config: TElementConfig) => HTMLElement,
+    getDOMElements: (flowerNumber: number) => TElementConfig[]
 }
 
 

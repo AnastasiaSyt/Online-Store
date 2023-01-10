@@ -63,25 +63,29 @@ export default class ModalDraw implements IModalDraw {
 
     checkCardNumber(modal: HTMLFormElement) {
         const cardNumberInput = modal.querySelector('#card_number_input') as HTMLInputElement;
+
+        const visaInteger = 4;
+        const mastercardInteger = 5;
+        const americanExpressInteger = 3;
         cardNumberInput.addEventListener('keypress', (e: KeyboardEvent) => {
             setTimeout(() => {
                 const firstInteger = Number((e.target as HTMLInputElement).value[0]);
-                if (firstInteger === 4) {
+                if (firstInteger === visaInteger) {
                     modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
                     const visa = modal.querySelector('.modal_visa');
                     visa?.classList.add('active');
                 }
-                if (firstInteger === 5) {
+                if (firstInteger === mastercardInteger) {
                     modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
                     const masterCard = modal.querySelector('.modal_mastercard');
                     masterCard?.classList.add('active');
                 }
-                if (firstInteger === 3) {
+                if (firstInteger === americanExpressInteger) {
                     modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
                     const masterCard = modal.querySelector('.modal_american_express');
                     masterCard?.classList.add('active');
                 }
-                if (firstInteger !== 4 && firstInteger !== 5 && firstInteger !== 3) {
+                if (firstInteger !== visaInteger && firstInteger !== mastercardInteger && firstInteger !== americanExpressInteger) {
                     modal.querySelectorAll('.paid_logo').forEach(e => { e.classList.remove('active') });
                 }
             });

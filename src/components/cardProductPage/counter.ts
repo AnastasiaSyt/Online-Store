@@ -1,6 +1,10 @@
 import './counter.css';
 
-export default class Counter {
+interface ICounter {
+    getCounter: () => HTMLElement
+}
+
+export default class Counter implements ICounter {
     getCounter(): HTMLElement {
         const counter = document.createElement('div');
         counter.classList.add('counter');

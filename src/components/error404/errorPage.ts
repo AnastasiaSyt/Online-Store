@@ -1,7 +1,6 @@
 import { IPage } from '../IPage';
 import './errorPage.css';
 
-
 export default class ErrorPage implements IPage {
     getPage() {
         const item = document.createElement('div');
