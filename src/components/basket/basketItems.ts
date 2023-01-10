@@ -38,7 +38,6 @@ export default class BasketItems implements IBasketItems {
 
     if(localStorage.getItem('basketFlowers')){
       const storagedItems = JSON.parse(localStorage.getItem('basketFlowers') ?? '');
-      console.log(storagedItems)
       for(let i=0;i<storagedItems.length;i++){
         basketItems.push(new BItem().getItem(storagedItems[i]));
       }

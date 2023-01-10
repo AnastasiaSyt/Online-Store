@@ -86,7 +86,6 @@ export default class Filter implements IFilter {
         const flower = filter.querySelector('.num-4');
         const flowerItems = ['роза', 'гербера', 'тюльпан', 'гвоздика', 'лилия', 'хризантема', 'пион'];
         const flowerName = flower?.className;
-        console.log(`flowerName${flowerName}`);
 
         if (flower && !!flowerName) {
             this.getBodyItems(flowerItems, flower, flowerName, this.filtration.changeFlower.bind(this.filtration), 'flower');
@@ -199,9 +198,8 @@ export default class Filter implements IFilter {
     selectCheckboxes(type: string, items: string[]): void {
         items.forEach(item => {
             const checkbox = document.querySelector(`[itemType="${type}"][item="${item}"]`);
-            if (checkbox){
+            if (checkbox) {
                 (checkbox as HTMLInputElement).checked = true;
-                console.log((checkbox as HTMLInputElement).checked);
             }
         });
     }
@@ -220,7 +218,6 @@ export default class Filter implements IFilter {
         this.uncheckColors();
         if (color) {
             const currentColor = document.querySelector(`.${color}`);
-            console.log(currentColor);
             currentColor?.classList.add('active');
         }
     }

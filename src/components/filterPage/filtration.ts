@@ -126,7 +126,6 @@ export default class Filtration implements IFiltration {
     }
 
     addCount(container: HTMLDivElement) {
-        console.log(`count - ${this.count}`)
         const currentCount = document.createElement('p');
         if (this.count !== 0) {
             currentCount.textContent = `Найдено: ${this.count} товаров`;
