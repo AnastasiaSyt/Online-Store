@@ -52,7 +52,7 @@ export default class Filter implements IFilter {
         this.getAccordion(filter);
 
         const type = filter.querySelector('.num-1');
-        const typeItems = ['Все', 'цветы', 'букеты', 'композиция', 'свадебные букеты', 'подарки с цветами'];
+        const typeItems = ['Все', 'цветы', 'букеты', 'композиция'];
         const typeName = type?.className;
 
         if (type && !!typeName) {
@@ -60,7 +60,7 @@ export default class Filter implements IFilter {
         }
 
         const occasion = filter.querySelector('.num-2');
-        const typeOccasion = ['свадьба', 'юбилей', '8 марта', 'день рождения', '14 февраля', 'свидание'];
+        const typeOccasion = ['свадьба', 'юбилей', '8 марта', 'день рождения', '14 февраля', 'свидание', 'выпускной', 'рождество'];
         const occasionName = occasion?.className;
 
         if (occasion && !!occasionName) {
