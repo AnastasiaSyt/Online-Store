@@ -14,7 +14,21 @@ interface IFiltration {
     changeType: (type: string) => void,
     changeOccasion: (occasion: string) => void,
     changeFlower: (flower: string) => void,
-
+    changeColor: (color: string) => void,
+    changePrice: (min: number, max: number) => void,
+    changeSize: (min: number, max: number) => void,
+    filter: () => IFlower[],
+    typeFilter: (currentFlowers: IFlower[], type: { [type: string]: string }) => void,
+    occasionFilter: (currentFlowers: IFlower[], type: { [type: string]: string }) => void,
+    colorFilter: (currentFlowers: IFlower[], color: string) => void,
+    flowerFilter: (currentFlowers: IFlower[], type: { [type: string]: string }) => void,
+    priceFilter: (currentFlowers: IFlower[], min?: number, max?: number) => void,
+    sizeFilter: (currentFlowers: IFlower[], min?: number, max?: number) => void,
+    removeFilters: () => void,
+    addCount: (container: HTMLDivElement) => void,
+    onRemove: (item: string) => void,
+    generateTags: () => HTMLDivElement[],
+    getSelectedFilterForTags: () => TagItem[]
 }
 
 export default class Filtration implements IFiltration {

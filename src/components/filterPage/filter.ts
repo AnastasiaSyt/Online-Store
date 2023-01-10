@@ -9,6 +9,7 @@ import { SelectedFilter } from "../types";
 interface IFilter {
     filtration: Filtration,
     callback: Function,
+    parent: HTMLElement,
     priceSlider: Slider,
     sizeSlider: Slider,
     minPrice: string,
@@ -16,9 +17,15 @@ interface IFilter {
     minHeight: string,
     maxHeight: string,
     getFilter: () => HTMLElement,
+    redrawSliders: (selectedFilters: SelectedFilter) => void,
     resetFilters: () => void,
+    uncheckCheckbox: () => void,
+    uncheckColors: () => void,
     getAccordion: (node: HTMLElement) => void,
-    getBodyItems: (arr: string[], target: Element, name: string, callback: Function, type: string) => void
+    getBodyItems: (arr: string[], target: Element, name: string, callback: Function, type: string) => void,
+    selectCheckboxes: (type: string, items: string[]) => void,
+    redrawCheckboxes: (selectedFilter: SelectedFilter) => void,
+    redrawColors: (color?: string) => void
 }
 
 export default class Filter implements IFilter {
@@ -220,7 +227,5 @@ export default class Filter implements IFilter {
             const currentColor = document.querySelector(`.${color}`);
             currentColor?.classList.add('active');
         }
-    }
-
-    
+    }  
 }

@@ -1,7 +1,7 @@
 import "./button.css";
 
 interface IButton {
-    node: HTMLElement,
+    node: HTMLButtonElement,
     getButton: (target: Node) => HTMLButtonElement
 }
 
